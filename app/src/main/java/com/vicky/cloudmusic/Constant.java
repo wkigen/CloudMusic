@@ -12,5 +12,6 @@ public class Constant {
     }
 
     public static final int MaxHistroy = 10;
+    public static final String SreachHistroy = "Ssreach_histroy";
 
 }

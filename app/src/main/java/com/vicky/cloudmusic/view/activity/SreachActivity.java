@@ -2,7 +2,9 @@ package com.vicky.cloudmusic.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,6 @@ import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.SreachBean;
-import com.vicky.cloudmusic.bean.SreachHistroyBean;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.SreachAdapter;
 import com.vicky.cloudmusic.view.adapter.SreachHistroyAdapter;
@@ -119,6 +120,25 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
                 return false;
             }
         });
+
+        etKeyWord.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0){
+                    showSreachOrHistroy(false);
+                }
+            }
+        });
     }
 
     @Override
@@ -134,8 +154,18 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mAdapter.setDatas(data);
     }
 
-    public void setHistroyData(List<SreachHistroyBean> data){
+    public void setHistroyData(List<String> data){
         mHistroyAdapter.setDatas(data);
+    }
+
+    public void showSreachOrHistroy(boolean isSreach){
+        if (isSreach){
+            mListview.setVisibility(View.VISIBLE);
+            lvHistroyListview.setVisibility(View.GONE);
+        }else {
+            mListview.setVisibility(View.GONE);
+            lvHistroyListview.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick({R.id.tv_cancel})
