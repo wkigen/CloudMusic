@@ -1,4 +1,4 @@
-package com.vicky.cloudmusic.view.activity.main;
+package com.vicky.cloudmusic.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,14 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vicky.android.baselib.ActivityManager;
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
-import com.vicky.cloudmusic.view.adapter.main.SreachAdapter;
-import com.vicky.cloudmusic.viewmodel.main.SreachVM;
+import com.vicky.cloudmusic.view.adapter.SreachAdapter;
+import com.vicky.cloudmusic.viewmodel.SreachVM;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,7 +53,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
 
     @Override
     protected int tellMeLayout() {
-        return R.layout.main_activity_sreach;
+        return R.layout.activity_sreach;
     }
 
     @Override

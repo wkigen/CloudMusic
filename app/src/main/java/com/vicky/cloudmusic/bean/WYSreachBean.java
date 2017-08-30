@@ -1,4 +1,4 @@
-package com.vicky.cloudmusic.bean.main;
+package com.vicky.cloudmusic.bean;
 
 import java.util.List;
 

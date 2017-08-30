@@ -1,15 +1,15 @@
-package com.vicky.cloudmusic.viewmodel.main;
+package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.cloudmusic.Constant;
-import com.vicky.cloudmusic.bean.main.SreachBean;
-import com.vicky.cloudmusic.bean.main.WYSreachBean;
+import com.vicky.cloudmusic.bean.SreachBean;
+import com.vicky.cloudmusic.bean.WYSreachBean;
 import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.net.callback.WYCallback;
-import com.vicky.cloudmusic.view.activity.main.SreachActivity;
+import com.vicky.cloudmusic.view.activity.SreachActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 

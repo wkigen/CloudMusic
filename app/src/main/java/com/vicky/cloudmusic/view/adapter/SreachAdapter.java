@@ -1,9 +1,9 @@
-package com.vicky.cloudmusic.view.adapter.main;
+package com.vicky.cloudmusic.view.adapter;
 
 import android.content.Context;
 
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.main.SreachBean;
+import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.android.baselib.adapter.core.AdapterViewAdapter;
 import com.vicky.android.baselib.adapter.core.ViewHolderHelper;
 

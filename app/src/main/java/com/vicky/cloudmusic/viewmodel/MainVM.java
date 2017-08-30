@@ -1,9 +1,9 @@
-package com.vicky.cloudmusic.viewmodel.main;
+package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.vicky.cloudmusic.view.activity.main.MainActivity;
+import com.vicky.cloudmusic.view.activity.MainActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 
 

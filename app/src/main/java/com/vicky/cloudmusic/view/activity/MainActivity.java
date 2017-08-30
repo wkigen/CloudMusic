@@ -1,4 +1,4 @@
-package com.vicky.cloudmusic.view.activity.main;
+package com.vicky.cloudmusic.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
-import com.vicky.cloudmusic.viewmodel.main.MainVM;
+import com.vicky.cloudmusic.viewmodel.MainVM;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
 
     @Override
     protected int tellMeLayout() {
-        return R.layout.main_activity_main;
+        return R.layout.activity_main;
     }
 
     @Override
