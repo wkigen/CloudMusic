@@ -27,8 +27,6 @@ public class SreachHistroyAdapter extends AdapterViewAdapter<String> {
      */
     @Override
     protected void setItemChildListener(ViewHolderHelper viewHolderHelper) {
-        /**
-         viewHolderHelper.setItemChildClickListener(R.id.tv_item_normal_title);
-         viewHolderHelper.setItemChildLongClickListener(R.id.tv_item_normal_title);*/
+         viewHolderHelper.setItemChildClickListener(R.id.im_delete);
     }
 }

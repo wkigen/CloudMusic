@@ -86,7 +86,9 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mHistroyAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
-
+                if (childView.getId() == R.id.im_delete){
+                    getViewModel().deleteHistroy(position);
+                }
             }
         });
 

@@ -25,8 +25,10 @@ import okhttp3.Call;
  ************************************************************/
 public class SreachVM extends AbstractViewModel<SreachActivity> {
 
-    //对应网易
-    public int limit = 10;
+    public Constant.CloudType reachType = Constant.CloudType.WANGYI;
+
+    //网易参数
+    public int limit = 20;
     public int offest = 0;
     public int type = 1;// 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002)
 
@@ -36,6 +38,14 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
         addHistroy(keyWord);
 
+        switch (reachType){
+            case WANGYI:
+                sreachWY(keyWord);
+                break;
+        }
+    }
+
+    private void sreachWY(String keyWord){
         Net.getWyApi().getApi().sreach(keyWord,limit,offest,"true",type).showProgress(getView()).execute(new WYCallback() {
 
             @Override
@@ -52,7 +62,13 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
                     getView().setData(sreachBeans);
             }
         });
+    }
 
+    public void selectHistroy(int position){
+        List<String> sreachHistroyBeanList = CacheManager.getImstance().getSreachHistroy();
+        if (position < 0  || position >= sreachHistroyBeanList.size())
+            return;
+        sreach(sreachHistroyBeanList.get(position));
     }
 
     public void addHistroy(String keyWord){
@@ -67,9 +83,10 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
     public void deleteHistroy(int position){
         List<String> sreachHistroyBeanList = CacheManager.getImstance().getSreachHistroy();
-        if (position >0 && position <sreachHistroyBeanList.size()){
-            sreachHistroyBeanList.remove(position);
-        }
+        if (position < 0  || position >= sreachHistroyBeanList.size())
+            return;
+
+        sreachHistroyBeanList.remove(position);
         if (getView() != null)
             getView().setHistroyData(sreachHistroyBeanList);
     }
