@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CloudMusic</string>
+
+    <string name="sreach_song">搜索歌曲</string>
 </resources>

@@ -22,7 +22,7 @@ public class WYUtils {
     static {
         headers.put("Referer", "http://music.163.com");
         headers.put("Origin", "http://music.163.com");
-        headers.put("cookie", "appver=1.5.0.75771");
+        headers.put("cookie", "appver=1.5.21");
         headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
         headers.put("Content-Type", "application/x-www-form-urlencoded");
     }

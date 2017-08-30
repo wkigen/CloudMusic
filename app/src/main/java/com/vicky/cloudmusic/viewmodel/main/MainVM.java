@@ -24,17 +24,20 @@ public class MainVM extends AbstractViewModel<MainActivity> {
         super.onBindView(view);
 
 
-        Net.getWyApi().getApi().sreach("我",0,0,"true","",1).execute(new NetCallback(getView()) {
+        Net.getWyApi().getApi().sreach("我",10,0,"true",1).execute(new NetCallback(getView()) {
+
             @Override
             public void onError(Call call, Exception e, int i) {
-                Log.e("fff","fff");
+
             }
 
             @Override
             public void onResponse(String s, int i) {
                 Log.e("fff",s);
             }
+
         });
+
     }
 
 }

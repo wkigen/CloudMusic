@@ -13,7 +13,8 @@ import java.util.List;
  */
 public interface IWYApi {
 
-    @POST("http://music.163.com/weapi/cloudsearch/get/web?csrf_token=")
-    RequestCall sreach(@PARAMS("s")String s,@PARAMS("limit")int limit,@PARAMS("offset")int offset,@PARAMS("total")String total,@PARAMS("csrf_token")String csrf_token,@PARAMS("type")int type);
+    @POST("http://music.163.com/api/search/get")
+    RequestCall sreach(@PARAMS("s")String s,@PARAMS("limit")int limit,@PARAMS("offset")int offset,@PARAMS("total")String total,@PARAMS("type")int type);
+
 
 }

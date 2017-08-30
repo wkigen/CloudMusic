@@ -10,7 +10,7 @@ import com.vicky.cloudmusic.utils.WYUtils;
 public class WYApi extends HttpApi<IWYApi> {
 
     public IWYApi getApi(){
-        return ApiHelper.get(IWYApi.class, WYUtils.handleHttpParams,WYUtils.headers);
+        return ApiHelper.get(IWYApi.class,null,WYUtils.headers);
     }
 
 }
