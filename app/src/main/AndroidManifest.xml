@@ -5,12 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".view.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".view.Application">
+        android:theme="@style/AppTheme">
         <activity android:name=".view.activity.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.main.SreachActivity"></activity>
     </application>
 
 </manifest>

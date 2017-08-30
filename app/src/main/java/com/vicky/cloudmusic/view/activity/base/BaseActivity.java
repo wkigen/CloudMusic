@@ -20,11 +20,12 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStatusBar();
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置竖屏
+
     }
 
     @TargetApi(19)

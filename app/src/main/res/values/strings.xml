@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">CloudMusic</string>
 
+    <string name="cancel">取消</string>
+
+    <string name="request_error">请求错误</string>
+
+    <string name="input_key_word">请输入关键字</string>
+
     <string name="sreach_song">搜索歌曲</string>
+
+
 </resources>
