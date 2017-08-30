@@ -11,6 +11,6 @@ public class Constant {
         BAIDU,
     }
 
-
+    public static final int MaxHistroy = 10;
 
 }

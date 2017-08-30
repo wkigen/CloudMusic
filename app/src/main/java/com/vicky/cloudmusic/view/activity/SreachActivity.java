@@ -18,9 +18,14 @@ import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
 import com.vicky.cloudmusic.R;
+import com.vicky.cloudmusic.bean.SreachBean;
+import com.vicky.cloudmusic.bean.SreachHistroyBean;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.SreachAdapter;
+import com.vicky.cloudmusic.view.adapter.SreachHistroyAdapter;
 import com.vicky.cloudmusic.viewmodel.SreachVM;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,11 +46,14 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     EditText etKeyWord;
     @Bind(R.id.rl_sreach_toolbar)
     RelativeLayout rlSreachToolbar;
+    @Bind(R.id.lv_histroy_listview)
+    ListView lvHistroyListview;
 
     private SreachAdapter mAdapter;
+    private SreachHistroyAdapter mHistroyAdapter;
 
     @Override
-    protected void setActivityTransition(){
+    protected void setActivityTransition() {
         enterTransition = R.transition.fade;
         reenterTransition = R.transition.fade;
         exitTransition = R.transition.fade;
@@ -65,25 +73,37 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         mAdapter = new SreachAdapter(this);
-        /**
-         * 对item的child添加点击事件
-         */
+        mHistroyAdapter = new SreachHistroyAdapter(this);
+
         mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
-                /**if (childView.getId() == R.id.tv_item_normal_title) {
-                 }*/
+
             }
         });
-        /**
-         * Add clickevent for the item
-         */
+
+        mHistroyAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(ViewGroup parent, View childView, int position) {
+
+            }
+        });
+
+
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             }
         });
+
+        lvHistroyListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
+
         mListview.setAdapter(mAdapter);
+        lvHistroyListview.setAdapter(mHistroyAdapter);
 
         etKeyWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -91,7 +111,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     SystemTool.hideKeyboardSafe(context);
                     if (TextUtils.isEmpty(etKeyWord.getText().toString())) {
-                        Toast.makeText(context,getString(R.string.input_key_word),Toast.LENGTH_SHORT);
+                        Toast.makeText(context, getString(R.string.input_key_word), Toast.LENGTH_SHORT);
                         return false;
                     }
                     getViewModel().sreach(etKeyWord.getText().toString());
@@ -110,8 +130,12 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         return null;
     }
 
-    public void setData(){
+    public void setData(List<SreachBean> data) {
+        mAdapter.setDatas(data);
+    }
 
+    public void setHistroyData(List<SreachHistroyBean> data){
+        mHistroyAdapter.setDatas(data);
     }
 
     @OnClick({R.id.tv_cancel})

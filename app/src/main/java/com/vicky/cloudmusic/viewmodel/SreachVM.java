@@ -48,4 +48,13 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
             }
         });
     }
+
+    public void addHistroy(String keyWord){
+
+    }
+
+    public void deleteHistroy(int position){
+
+    }
+
 }
