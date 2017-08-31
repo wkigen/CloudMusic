@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        setStatusBar();
     }
 
     @Override
@@ -45,15 +46,6 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     protected View getStatusTargetView() {
         return null;
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
 
     @OnClick({R.id.iv_sreach})
     @Override

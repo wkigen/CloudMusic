@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SreachActivity"></activity>
+        <activity android:name=".view.activity.SreachActivity" />
+        <activity android:name=".view.activity.PlayActivity"></activity>
     </application>
 
 </manifest>

@@ -8,13 +8,13 @@ import java.util.List;
 public class WYSreachBean {
 
     /**
-     * songs : [{"id":468517666,"name":"失恋重修手册","artists":[{"id":12122233,"name":"税子洺","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1032247,"name":"赵钶","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":12050057,"name":"G.G(张思源）","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":5549,"name":"王睿","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35314420,"name":"失恋重修手册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1490976000007,"size":1,"copyrightId":0,"status":0,"picId":19231557881482168},"duration":204485,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":28838178,"name":"青春修炼手册","artists":[{"id":827728,"name":"TFBOYS","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":2901207,"name":"青春修炼手册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1416153600007,"size":4,"copyrightId":379011,"status":0,"picId":3228166140022488},"duration":263059,"copyrightId":379011,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":319076,"fee":8,"rUrl":null},{"id":362450,"name":"青春纪念册","artists":[{"id":12056,"name":"可米小子","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35827,"name":"青春纪念册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1070208000000,"size":10,"copyrightId":7001,"status":1,"picId":800444465021251},"duration":310230,"copyrightId":7001,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":5293607,"fee":8,"rUrl":null},{"id":501298542,"name":"册那","artists":[{"id":12147170,"name":"澄海伯伯","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":36046040,"name":"册那","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1503585415109,"size":1,"copyrightId":0,"status":0,"picId":109951163010713312},"duration":211395,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":41651196,"name":"青春叛逆手冊","artists":[{"id":1204010,"name":"Tizzy T","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":3452066,"name":"你的男孩","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1453996800000,"size":16,"copyrightId":431010,"status":3,"picId":16570739742644010},"duration":164947,"copyrightId":431010,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":8,"rUrl":null},{"id":490160488,"name":"纪念册","artists":[{"id":12174521,"name":"音阙诗听","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":0,"name":"王梓钰","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35732586,"name":"纪念册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1499832903306,"size":1,"copyrightId":0,"status":0,"picId":109951162973172722},"duration":258352,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":502379202,"name":"纪念册","artists":[{"id":0,"name":"史岩","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":36067677,"name":"黑白乐园","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1503967183132,"size":10,"copyrightId":0,"status":0,"picId":109951163014122314},"duration":212222,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":469066289,"name":"【首张中日合辑】NEW WORLD ORDER crossfade","artists":[{"id":12172466,"name":"月蝕原创音乐","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":97822,"name":"Nero","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":908132,"name":"赤ティン","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":191295,"name":"柿チョコ","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":14345,"name":"蛇足","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":15947,"name":"ゆう十","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":9026,"name":"冥月","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1047064,"name":"KBShinya","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":0,"name":"阿册","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1003026,"name":"茶理理","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":3249,"name":"河图","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":189577,"name":"祈Inory","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":12148226,"name":"月狸","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1047065,"name":"佑可猫","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":34978570,"name":"串烧试听","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1478589485098,"size":11,"copyrightId":0,"status":0,"picId":109951162895109055},"duration":401064,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":208928,"name":"纪念册","artists":[{"id":7215,"name":"曹方","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":21254,"name":"哼一首歌 等日落","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1257868800000,"size":11,"copyrightId":0,"status":1,"picId":97856534884213},"duration":254276,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":31912001,"name":"孑然妒火","artists":[{"id":0,"name":"阿册","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":3120093,"name":"最新热歌慢摇97","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1388505600004,"size":118,"copyrightId":0,"status":2,"picId":3397490931055597},"duration":202000,"copyrightId":0,"status":-1,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null}]
-     * songCount : 600
+     * songs : [{"name":"Funky Town","id":491188488,"pst":0,"t":0,"ar":[{"id":0,"name":"Greenberg","tns":[],"alias":[]},{"id":0,"name":"Stone Wash","tns":[],"alias":[]}],"alia":[],"pop":0,"st":0,"rt":null,"fee":8,"v":6,"crbt":null,"cf":"","al":{"id":35764562,"name":"Dance Mania '80, Vol. 2","picUrl":"http://p1.music.126.net/YxLWLBwlILqXQ29Y4eZTgg==/18223305719318572.jpg","tns":[],"pic_str":"18223305719318572","pic":18223305719318572},"dt":250066,"h":{"br":320000,"fid":0,"size":10004942,"vd":0},"m":{"br":192000,"fid":0,"size":6002982,"vd":0},"l":{"br":128000,"fid":0,"size":4002003,"vd":0},"a":null,"cd":"1","no":9,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":405025,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":491188488,"fee":8,"payed":0,"st":0,"pl":128000,"dl":0,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":999000,"fl":128000,"toast":false,"flag":0}},{"name":"The Right Path","id":2061452,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":100,"st":0,"rt":"","fee":0,"v":4,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":148454,"h":{"br":320000,"fid":0,"size":5959082,"vd":2.12665},"m":{"br":160000,"fid":0,"size":2992618,"vd":2.48262},"l":{"br":96000,"fid":0,"size":1805614,"vd":2.43372},"a":null,"cd":"1","no":9,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":5337453,"rtype":0,"rurl":null,"privilege":{"id":2061452,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Wondrous","id":2061444,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":169000,"h":{"br":320000,"fid":0,"size":6824246,"vd":0.339766},"m":{"br":160000,"fid":0,"size":3425194,"vd":0.639841},"l":{"br":96000,"fid":0,"size":2065154,"vd":0.422023},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061444,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Dream for Today","id":29207819,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":100000,"h":{"br":320000,"fid":0,"size":4017644,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":2008844,"vd":-2.65076E-4},"l":{"br":96000,"fid":0,"size":1205324,"vd":-2.65076E-4},"a":null,"cd":"1","no":3,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207819,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Easy Breeze","id":29207817,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":100,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":102000,"h":{"br":320000,"fid":0,"size":4116635,"vd":0},"m":{"br":160000,"fid":0,"size":2058395,"vd":0.407287},"l":{"br":96000,"fid":0,"size":1235099,"vd":0.0132641},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207817,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Green for Go","id":29207833,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":85,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":93000,"h":{"br":320000,"fid":0,"size":3752684,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":1876364,"vd":0.219045},"l":{"br":96000,"fid":0,"size":1125836,"vd":0.222035},"a":null,"cd":"1","no":17,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207833,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Just the Beginning","id":29207828,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":90,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":98000,"h":{"br":320000,"fid":0,"size":3947564,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":1973804,"vd":0.077483},"l":{"br":96000,"fid":0,"size":1184300,"vd":0.00344673},"a":null,"cd":"1","no":12,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207828,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Happy Place","id":2061462,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":196000,"h":{"br":320000,"fid":0,"size":7895272,"vd":0.0111405},"m":{"br":160000,"fid":0,"size":3960710,"vd":0.316366},"l":{"br":96000,"fid":0,"size":2386466,"vd":0.299338},"a":null,"cd":"1","no":15,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061462,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Springtime Affair","id":2061450,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":80,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":169000,"h":{"br":320000,"fid":0,"size":6788737,"vd":0.0481126},"m":{"br":160000,"fid":0,"size":3407448,"vd":0.402566},"l":{"br":96000,"fid":0,"size":2054514,"vd":0},"a":null,"cd":"1","no":7,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061450,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Hopeful Hearts","id":29207826,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":90,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":122000,"h":{"br":320000,"fid":0,"size":4913324,"vd":-0.28},"m":{"br":160000,"fid":0,"size":2456684,"vd":-2.65076E-4},"l":{"br":96000,"fid":0,"size":1474028,"vd":-2.65076E-4},"a":null,"cd":"1","no":10,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207826,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}}]
+     * songCount : 460
      */
 
     private ResultBean result;
     /**
-     * result : {"songs":[{"id":468517666,"name":"失恋重修手册","artists":[{"id":12122233,"name":"税子洺","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1032247,"name":"赵钶","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":12050057,"name":"G.G(张思源）","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":5549,"name":"王睿","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35314420,"name":"失恋重修手册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1490976000007,"size":1,"copyrightId":0,"status":0,"picId":19231557881482168},"duration":204485,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":28838178,"name":"青春修炼手册","artists":[{"id":827728,"name":"TFBOYS","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":2901207,"name":"青春修炼手册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1416153600007,"size":4,"copyrightId":379011,"status":0,"picId":3228166140022488},"duration":263059,"copyrightId":379011,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":319076,"fee":8,"rUrl":null},{"id":362450,"name":"青春纪念册","artists":[{"id":12056,"name":"可米小子","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35827,"name":"青春纪念册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1070208000000,"size":10,"copyrightId":7001,"status":1,"picId":800444465021251},"duration":310230,"copyrightId":7001,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":5293607,"fee":8,"rUrl":null},{"id":501298542,"name":"册那","artists":[{"id":12147170,"name":"澄海伯伯","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":36046040,"name":"册那","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1503585415109,"size":1,"copyrightId":0,"status":0,"picId":109951163010713312},"duration":211395,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":41651196,"name":"青春叛逆手冊","artists":[{"id":1204010,"name":"Tizzy T","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":3452066,"name":"你的男孩","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1453996800000,"size":16,"copyrightId":431010,"status":3,"picId":16570739742644010},"duration":164947,"copyrightId":431010,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":8,"rUrl":null},{"id":490160488,"name":"纪念册","artists":[{"id":12174521,"name":"音阙诗听","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":0,"name":"王梓钰","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":35732586,"name":"纪念册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1499832903306,"size":1,"copyrightId":0,"status":0,"picId":109951162973172722},"duration":258352,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":502379202,"name":"纪念册","artists":[{"id":0,"name":"史岩","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":36067677,"name":"黑白乐园","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1503967183132,"size":10,"copyrightId":0,"status":0,"picId":109951163014122314},"duration":212222,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":469066289,"name":"【首张中日合辑】NEW WORLD ORDER crossfade","artists":[{"id":12172466,"name":"月蝕原创音乐","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":97822,"name":"Nero","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":908132,"name":"赤ティン","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":191295,"name":"柿チョコ","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":14345,"name":"蛇足","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":15947,"name":"ゆう十","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":9026,"name":"冥月","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1047064,"name":"KBShinya","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":0,"name":"阿册","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1003026,"name":"茶理理","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":3249,"name":"河图","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":189577,"name":"祈Inory","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":12148226,"name":"月狸","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1047065,"name":"佑可猫","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":34978570,"name":"串烧试听","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1478589485098,"size":11,"copyrightId":0,"status":0,"picId":109951162895109055},"duration":401064,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":208928,"name":"纪念册","artists":[{"id":7215,"name":"曹方","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":21254,"name":"哼一首歌 等日落","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1257868800000,"size":11,"copyrightId":0,"status":1,"picId":97856534884213},"duration":254276,"copyrightId":0,"status":0,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null},{"id":31912001,"name":"孑然妒火","artists":[{"id":0,"name":"阿册","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}],"album":{"id":3120093,"name":"最新热歌慢摇97","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1388505600004,"size":118,"copyrightId":0,"status":2,"picId":3397490931055597},"duration":202000,"copyrightId":0,"status":-1,"alias":[],"rtype":0,"ftype":0,"mvid":0,"fee":0,"rUrl":null}],"songCount":600}
+     * result : {"songs":[{"name":"Funky Town","id":491188488,"pst":0,"t":0,"ar":[{"id":0,"name":"Greenberg","tns":[],"alias":[]},{"id":0,"name":"Stone Wash","tns":[],"alias":[]}],"alia":[],"pop":0,"st":0,"rt":null,"fee":8,"v":6,"crbt":null,"cf":"","al":{"id":35764562,"name":"Dance Mania '80, Vol. 2","picUrl":"http://p1.music.126.net/YxLWLBwlILqXQ29Y4eZTgg==/18223305719318572.jpg","tns":[],"pic_str":"18223305719318572","pic":18223305719318572},"dt":250066,"h":{"br":320000,"fid":0,"size":10004942,"vd":0},"m":{"br":192000,"fid":0,"size":6002982,"vd":0},"l":{"br":128000,"fid":0,"size":4002003,"vd":0},"a":null,"cd":"1","no":9,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":405025,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":491188488,"fee":8,"payed":0,"st":0,"pl":128000,"dl":0,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":999000,"fl":128000,"toast":false,"flag":0}},{"name":"The Right Path","id":2061452,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":100,"st":0,"rt":"","fee":0,"v":4,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":148454,"h":{"br":320000,"fid":0,"size":5959082,"vd":2.12665},"m":{"br":160000,"fid":0,"size":2992618,"vd":2.48262},"l":{"br":96000,"fid":0,"size":1805614,"vd":2.43372},"a":null,"cd":"1","no":9,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":5337453,"rtype":0,"rurl":null,"privilege":{"id":2061452,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Wondrous","id":2061444,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":169000,"h":{"br":320000,"fid":0,"size":6824246,"vd":0.339766},"m":{"br":160000,"fid":0,"size":3425194,"vd":0.639841},"l":{"br":96000,"fid":0,"size":2065154,"vd":0.422023},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061444,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Dream for Today","id":29207819,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":100000,"h":{"br":320000,"fid":0,"size":4017644,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":2008844,"vd":-2.65076E-4},"l":{"br":96000,"fid":0,"size":1205324,"vd":-2.65076E-4},"a":null,"cd":"1","no":3,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207819,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Easy Breeze","id":29207817,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":100,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":102000,"h":{"br":320000,"fid":0,"size":4116635,"vd":0},"m":{"br":160000,"fid":0,"size":2058395,"vd":0.407287},"l":{"br":96000,"fid":0,"size":1235099,"vd":0.0132641},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207817,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Green for Go","id":29207833,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":85,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":93000,"h":{"br":320000,"fid":0,"size":3752684,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":1876364,"vd":0.219045},"l":{"br":96000,"fid":0,"size":1125836,"vd":0.222035},"a":null,"cd":"1","no":17,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207833,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Just the Beginning","id":29207828,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":90,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":98000,"h":{"br":320000,"fid":0,"size":3947564,"vd":-2.65076E-4},"m":{"br":160000,"fid":0,"size":1973804,"vd":0.077483},"l":{"br":96000,"fid":0,"size":1184300,"vd":0.00344673},"a":null,"cd":"1","no":12,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207828,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Happy Place","id":2061462,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":196000,"h":{"br":320000,"fid":0,"size":7895272,"vd":0.0111405},"m":{"br":160000,"fid":0,"size":3960710,"vd":0.316366},"l":{"br":96000,"fid":0,"size":2386466,"vd":0.299338},"a":null,"cd":"1","no":15,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061462,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Springtime Affair","id":2061450,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":80,"st":0,"rt":"","fee":0,"v":3,"crbt":null,"cf":"","al":{"id":207725,"name":"Age of Innocence","picUrl":"http://p1.music.126.net/_Nzg2JzIjaBy38rSSdfFig==/851021999952100.jpg","tns":[],"pic":851021999952100},"dt":169000,"h":{"br":320000,"fid":0,"size":6788737,"vd":0.0481126},"m":{"br":160000,"fid":0,"size":3407448,"vd":0.402566},"l":{"br":96000,"fid":0,"size":2054514,"vd":0},"a":null,"cd":"1","no":7,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":2061450,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}},{"name":"Hopeful Hearts","id":29207826,"pst":0,"t":0,"ar":[{"id":45319,"name":"Thomas Greenberg","tns":[],"alias":[]}],"alia":[],"pop":90,"st":0,"rt":null,"fee":0,"v":1,"crbt":null,"cf":"","al":{"id":2996816,"name":"Something Simple","picUrl":"http://p1.music.126.net/gt1N74Q6aj8GmCJLJZuGuA==/2908208257356071.jpg","tns":[],"pic":2908208257356071},"dt":122000,"h":{"br":320000,"fid":0,"size":4913324,"vd":-0.28},"m":{"br":160000,"fid":0,"size":2456684,"vd":-2.65076E-4},"l":{"br":96000,"fid":0,"size":1474028,"vd":-2.65076E-4},"a":null,"cd":"1","no":10,"rtUrl":null,"ftype":0,"rtUrls":[],"mst":9,"cp":0,"mv":0,"rtype":0,"rurl":null,"privilege":{"id":29207826,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}}],"songCount":460}
      * code : 200
      */
 
@@ -39,19 +39,36 @@ public class WYSreachBean {
     public static class ResultBean {
         private int songCount;
         /**
-         * id : 468517666
-         * name : 失恋重修手册
-         * artists : [{"id":12122233,"name":"税子洺","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":1032247,"name":"赵钶","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":12050057,"name":"G.G(张思源）","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},{"id":5549,"name":"王睿","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}]
-         * album : {"id":35314420,"name":"失恋重修手册","artist":{"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null},"publishTime":1490976000007,"size":1,"copyrightId":0,"status":0,"picId":19231557881482168}
-         * duration : 204485
-         * copyrightId : 0
-         * status : 0
-         * alias : []
-         * rtype : 0
+         * name : Funky Town
+         * id : 491188488
+         * pst : 0
+         * t : 0
+         * ar : [{"id":0,"name":"Greenberg","tns":[],"alias":[]},{"id":0,"name":"Stone Wash","tns":[],"alias":[]}]
+         * alia : []
+         * pop : 0.0
+         * st : 0
+         * rt : null
+         * fee : 8
+         * v : 6
+         * crbt : null
+         * cf :
+         * al : {"id":35764562,"name":"Dance Mania '80, Vol. 2","picUrl":"http://p1.music.126.net/YxLWLBwlILqXQ29Y4eZTgg==/18223305719318572.jpg","tns":[],"pic_str":"18223305719318572","pic":18223305719318572}
+         * dt : 250066
+         * h : {"br":320000,"fid":0,"size":10004942,"vd":0}
+         * m : {"br":192000,"fid":0,"size":6002982,"vd":0}
+         * l : {"br":128000,"fid":0,"size":4002003,"vd":0}
+         * a : null
+         * cd : 1
+         * no : 9
+         * rtUrl : null
          * ftype : 0
-         * mvid : 0
-         * fee : 0
-         * rUrl : null
+         * rtUrls : []
+         * mst : 9
+         * cp : 405025
+         * mv : 0
+         * rtype : 0
+         * rurl : null
+         * privilege : {"id":491188488,"fee":8,"payed":0,"st":0,"pl":128000,"dl":0,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":999000,"fl":128000,"toast":false,"flag":0}
          */
 
         private List<SongsBean> songs;
@@ -73,50 +90,90 @@ public class WYSreachBean {
         }
 
         public static class SongsBean {
-            private String id;
             private String name;
-            /**
-             * id : 35314420
-             * name : 失恋重修手册
-             * artist : {"id":0,"name":"","picUrl":null,"alias":[],"albumSize":0,"picId":0,"img1v1Url":"http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg","img1v1":0,"trans":null}
-             * publishTime : 1490976000007
-             * size : 1
-             * copyrightId : 0
-             * status : 0
-             * picId : 19231557881482168
-             */
-
-            private AlbumBean album;
-            private int duration;
-            private int copyrightId;
-            private int status;
-            private int rtype;
-            private int ftype;
-            private int mvid;
+            private String id;
+            private int pst;
+            private int t;
+            private double pop;
+            private int st;
+            private Object rt;
             private int fee;
-            private Object rUrl;
+            private int v;
+            private Object crbt;
+            private String cf;
             /**
-             * id : 12122233
-             * name : 税子洺
-             * picUrl : null
-             * alias : []
-             * albumSize : 0
-             * picId : 0
-             * img1v1Url : http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg
-             * img1v1 : 0
-             * trans : null
+             * id : 35764562
+             * name : Dance Mania '80, Vol. 2
+             * picUrl : http://p1.music.126.net/YxLWLBwlILqXQ29Y4eZTgg==/18223305719318572.jpg
+             * tns : []
+             * pic_str : 18223305719318572
+             * pic : 18223305719318572
              */
 
-            private List<ArtistsBean> artists;
-            private List<?> alias;
+            private AlBean al;
+            private int dt;
+            /**
+             * br : 320000
+             * fid : 0
+             * size : 10004942
+             * vd : 0.0
+             */
 
-            public String getId() {
-                return id;
-            }
+            private HBean h;
+            /**
+             * br : 192000
+             * fid : 0
+             * size : 6002982
+             * vd : 0.0
+             */
 
-            public void setId(String id) {
-                this.id = id;
-            }
+            private MBean m;
+            /**
+             * br : 128000
+             * fid : 0
+             * size : 4002003
+             * vd : 0.0
+             */
+
+            private LBean l;
+            private Object a;
+            private String cd;
+            private int no;
+            private Object rtUrl;
+            private int ftype;
+            private int mst;
+            private int cp;
+            private int mv;
+            private int rtype;
+            private Object rurl;
+            /**
+             * id : 491188488
+             * fee : 8
+             * payed : 0
+             * st : 0
+             * pl : 128000
+             * dl : 0
+             * sp : 7
+             * cp : 1
+             * subp : 1
+             * cs : false
+             * maxbr : 999000
+             * fl : 128000
+             * toast : false
+             * flag : 0
+             */
+
+            private PrivilegeBean privilege;
+            /**
+             * id : 0
+             * name : Greenberg
+             * tns : []
+             * alias : []
+             */
+
+            private List<ArBean> ar;
+            private List<?> alia;
+            private List<?> rtUrls;
 
             public String getName() {
                 return name;
@@ -126,60 +183,52 @@ public class WYSreachBean {
                 this.name = name;
             }
 
-            public AlbumBean getAlbum() {
-                return album;
+            public String getId() {
+                return id;
             }
 
-            public void setAlbum(AlbumBean album) {
-                this.album = album;
+            public void setId(String id) {
+                this.id = id;
             }
 
-            public int getDuration() {
-                return duration;
+            public int getPst() {
+                return pst;
             }
 
-            public void setDuration(int duration) {
-                this.duration = duration;
+            public void setPst(int pst) {
+                this.pst = pst;
             }
 
-            public int getCopyrightId() {
-                return copyrightId;
+            public int getT() {
+                return t;
             }
 
-            public void setCopyrightId(int copyrightId) {
-                this.copyrightId = copyrightId;
+            public void setT(int t) {
+                this.t = t;
             }
 
-            public int getStatus() {
-                return status;
+            public double getPop() {
+                return pop;
             }
 
-            public void setStatus(int status) {
-                this.status = status;
+            public void setPop(double pop) {
+                this.pop = pop;
             }
 
-            public int getRtype() {
-                return rtype;
+            public int getSt() {
+                return st;
             }
 
-            public void setRtype(int rtype) {
-                this.rtype = rtype;
+            public void setSt(int st) {
+                this.st = st;
             }
 
-            public int getFtype() {
-                return ftype;
+            public Object getRt() {
+                return rt;
             }
 
-            public void setFtype(int ftype) {
-                this.ftype = ftype;
-            }
-
-            public int getMvid() {
-                return mvid;
-            }
-
-            public void setMvid(int mvid) {
-                this.mvid = mvid;
+            public void setRt(Object rt) {
+                this.rt = rt;
             }
 
             public int getFee() {
@@ -190,51 +239,189 @@ public class WYSreachBean {
                 this.fee = fee;
             }
 
-            public Object getRUrl() {
-                return rUrl;
+            public int getV() {
+                return v;
             }
 
-            public void setRUrl(Object rUrl) {
-                this.rUrl = rUrl;
+            public void setV(int v) {
+                this.v = v;
             }
 
-            public List<ArtistsBean> getArtists() {
-                return artists;
+            public Object getCrbt() {
+                return crbt;
             }
 
-            public void setArtists(List<ArtistsBean> artists) {
-                this.artists = artists;
+            public void setCrbt(Object crbt) {
+                this.crbt = crbt;
             }
 
-            public List<?> getAlias() {
-                return alias;
+            public String getCf() {
+                return cf;
             }
 
-            public void setAlias(List<?> alias) {
-                this.alias = alias;
+            public void setCf(String cf) {
+                this.cf = cf;
             }
 
-            public static class AlbumBean {
+            public AlBean getAl() {
+                return al;
+            }
+
+            public void setAl(AlBean al) {
+                this.al = al;
+            }
+
+            public int getDt() {
+                return dt;
+            }
+
+            public void setDt(int dt) {
+                this.dt = dt;
+            }
+
+            public HBean getH() {
+                return h;
+            }
+
+            public void setH(HBean h) {
+                this.h = h;
+            }
+
+            public MBean getM() {
+                return m;
+            }
+
+            public void setM(MBean m) {
+                this.m = m;
+            }
+
+            public LBean getL() {
+                return l;
+            }
+
+            public void setL(LBean l) {
+                this.l = l;
+            }
+
+            public Object getA() {
+                return a;
+            }
+
+            public void setA(Object a) {
+                this.a = a;
+            }
+
+            public String getCd() {
+                return cd;
+            }
+
+            public void setCd(String cd) {
+                this.cd = cd;
+            }
+
+            public int getNo() {
+                return no;
+            }
+
+            public void setNo(int no) {
+                this.no = no;
+            }
+
+            public Object getRtUrl() {
+                return rtUrl;
+            }
+
+            public void setRtUrl(Object rtUrl) {
+                this.rtUrl = rtUrl;
+            }
+
+            public int getFtype() {
+                return ftype;
+            }
+
+            public void setFtype(int ftype) {
+                this.ftype = ftype;
+            }
+
+            public int getMst() {
+                return mst;
+            }
+
+            public void setMst(int mst) {
+                this.mst = mst;
+            }
+
+            public int getCp() {
+                return cp;
+            }
+
+            public void setCp(int cp) {
+                this.cp = cp;
+            }
+
+            public int getMv() {
+                return mv;
+            }
+
+            public void setMv(int mv) {
+                this.mv = mv;
+            }
+
+            public int getRtype() {
+                return rtype;
+            }
+
+            public void setRtype(int rtype) {
+                this.rtype = rtype;
+            }
+
+            public Object getRurl() {
+                return rurl;
+            }
+
+            public void setRurl(Object rurl) {
+                this.rurl = rurl;
+            }
+
+            public PrivilegeBean getPrivilege() {
+                return privilege;
+            }
+
+            public void setPrivilege(PrivilegeBean privilege) {
+                this.privilege = privilege;
+            }
+
+            public List<ArBean> getAr() {
+                return ar;
+            }
+
+            public void setAr(List<ArBean> ar) {
+                this.ar = ar;
+            }
+
+            public List<?> getAlia() {
+                return alia;
+            }
+
+            public void setAlia(List<?> alia) {
+                this.alia = alia;
+            }
+
+            public List<?> getRtUrls() {
+                return rtUrls;
+            }
+
+            public void setRtUrls(List<?> rtUrls) {
+                this.rtUrls = rtUrls;
+            }
+
+            public static class AlBean {
                 private int id;
                 private String name;
-                /**
-                 * id : 0
-                 * name :
-                 * picUrl : null
-                 * alias : []
-                 * albumSize : 0
-                 * picId : 0
-                 * img1v1Url : http://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg
-                 * img1v1 : 0
-                 * trans : null
-                 */
-
-                private ArtistBean artist;
-                private long publishTime;
-                private int size;
-                private int copyrightId;
-                private int status;
-                private long picId;
+                private String picUrl;
+                private String pic_str;
+                private long pic;
+                private List<?> tns;
 
                 public int getId() {
                     return id;
@@ -252,20 +439,59 @@ public class WYSreachBean {
                     this.name = name;
                 }
 
-                public ArtistBean getArtist() {
-                    return artist;
+                public String getPicUrl() {
+                    return picUrl;
                 }
 
-                public void setArtist(ArtistBean artist) {
-                    this.artist = artist;
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
                 }
 
-                public long getPublishTime() {
-                    return publishTime;
+                public String getPic_str() {
+                    return pic_str;
                 }
 
-                public void setPublishTime(long publishTime) {
-                    this.publishTime = publishTime;
+                public void setPic_str(String pic_str) {
+                    this.pic_str = pic_str;
+                }
+
+                public long getPic() {
+                    return pic;
+                }
+
+                public void setPic(long pic) {
+                    this.pic = pic;
+                }
+
+                public List<?> getTns() {
+                    return tns;
+                }
+
+                public void setTns(List<?> tns) {
+                    this.tns = tns;
+                }
+            }
+
+            public static class HBean {
+                private int br;
+                private int fid;
+                private int size;
+                private double vd;
+
+                public int getBr() {
+                    return br;
+                }
+
+                public void setBr(int br) {
+                    this.br = br;
+                }
+
+                public int getFid() {
+                    return fid;
+                }
+
+                public void setFid(int fid) {
+                    this.fid = fid;
                 }
 
                 public int getSize() {
@@ -276,124 +502,226 @@ public class WYSreachBean {
                     this.size = size;
                 }
 
-                public int getCopyrightId() {
-                    return copyrightId;
+                public double getVd() {
+                    return vd;
                 }
 
-                public void setCopyrightId(int copyrightId) {
-                    this.copyrightId = copyrightId;
-                }
-
-                public int getStatus() {
-                    return status;
-                }
-
-                public void setStatus(int status) {
-                    this.status = status;
-                }
-
-                public long getPicId() {
-                    return picId;
-                }
-
-                public void setPicId(long picId) {
-                    this.picId = picId;
-                }
-
-                public static class ArtistBean {
-                    private int id;
-                    private String name;
-                    private Object picUrl;
-                    private int albumSize;
-                    private int picId;
-                    private String img1v1Url;
-                    private int img1v1;
-                    private Object trans;
-                    private List<?> alias;
-
-                    public int getId() {
-                        return id;
-                    }
-
-                    public void setId(int id) {
-                        this.id = id;
-                    }
-
-                    public String getName() {
-                        return name;
-                    }
-
-                    public void setName(String name) {
-                        this.name = name;
-                    }
-
-                    public Object getPicUrl() {
-                        return picUrl;
-                    }
-
-                    public void setPicUrl(Object picUrl) {
-                        this.picUrl = picUrl;
-                    }
-
-                    public int getAlbumSize() {
-                        return albumSize;
-                    }
-
-                    public void setAlbumSize(int albumSize) {
-                        this.albumSize = albumSize;
-                    }
-
-                    public int getPicId() {
-                        return picId;
-                    }
-
-                    public void setPicId(int picId) {
-                        this.picId = picId;
-                    }
-
-                    public String getImg1v1Url() {
-                        return img1v1Url;
-                    }
-
-                    public void setImg1v1Url(String img1v1Url) {
-                        this.img1v1Url = img1v1Url;
-                    }
-
-                    public int getImg1v1() {
-                        return img1v1;
-                    }
-
-                    public void setImg1v1(int img1v1) {
-                        this.img1v1 = img1v1;
-                    }
-
-                    public Object getTrans() {
-                        return trans;
-                    }
-
-                    public void setTrans(Object trans) {
-                        this.trans = trans;
-                    }
-
-                    public List<?> getAlias() {
-                        return alias;
-                    }
-
-                    public void setAlias(List<?> alias) {
-                        this.alias = alias;
-                    }
+                public void setVd(double vd) {
+                    this.vd = vd;
                 }
             }
 
-            public static class ArtistsBean {
+            public static class MBean {
+                private int br;
+                private int fid;
+                private int size;
+                private double vd;
+
+                public int getBr() {
+                    return br;
+                }
+
+                public void setBr(int br) {
+                    this.br = br;
+                }
+
+                public int getFid() {
+                    return fid;
+                }
+
+                public void setFid(int fid) {
+                    this.fid = fid;
+                }
+
+                public int getSize() {
+                    return size;
+                }
+
+                public void setSize(int size) {
+                    this.size = size;
+                }
+
+                public double getVd() {
+                    return vd;
+                }
+
+                public void setVd(double vd) {
+                    this.vd = vd;
+                }
+            }
+
+            public static class LBean {
+                private int br;
+                private int fid;
+                private int size;
+                private double vd;
+
+                public int getBr() {
+                    return br;
+                }
+
+                public void setBr(int br) {
+                    this.br = br;
+                }
+
+                public int getFid() {
+                    return fid;
+                }
+
+                public void setFid(int fid) {
+                    this.fid = fid;
+                }
+
+                public int getSize() {
+                    return size;
+                }
+
+                public void setSize(int size) {
+                    this.size = size;
+                }
+
+                public double getVd() {
+                    return vd;
+                }
+
+                public void setVd(double vd) {
+                    this.vd = vd;
+                }
+            }
+
+            public static class PrivilegeBean {
+                private int id;
+                private int fee;
+                private int payed;
+                private int st;
+                private int pl;
+                private int dl;
+                private int sp;
+                private int cp;
+                private int subp;
+                private boolean cs;
+                private int maxbr;
+                private int fl;
+                private boolean toast;
+                private int flag;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public int getFee() {
+                    return fee;
+                }
+
+                public void setFee(int fee) {
+                    this.fee = fee;
+                }
+
+                public int getPayed() {
+                    return payed;
+                }
+
+                public void setPayed(int payed) {
+                    this.payed = payed;
+                }
+
+                public int getSt() {
+                    return st;
+                }
+
+                public void setSt(int st) {
+                    this.st = st;
+                }
+
+                public int getPl() {
+                    return pl;
+                }
+
+                public void setPl(int pl) {
+                    this.pl = pl;
+                }
+
+                public int getDl() {
+                    return dl;
+                }
+
+                public void setDl(int dl) {
+                    this.dl = dl;
+                }
+
+                public int getSp() {
+                    return sp;
+                }
+
+                public void setSp(int sp) {
+                    this.sp = sp;
+                }
+
+                public int getCp() {
+                    return cp;
+                }
+
+                public void setCp(int cp) {
+                    this.cp = cp;
+                }
+
+                public int getSubp() {
+                    return subp;
+                }
+
+                public void setSubp(int subp) {
+                    this.subp = subp;
+                }
+
+                public boolean isCs() {
+                    return cs;
+                }
+
+                public void setCs(boolean cs) {
+                    this.cs = cs;
+                }
+
+                public int getMaxbr() {
+                    return maxbr;
+                }
+
+                public void setMaxbr(int maxbr) {
+                    this.maxbr = maxbr;
+                }
+
+                public int getFl() {
+                    return fl;
+                }
+
+                public void setFl(int fl) {
+                    this.fl = fl;
+                }
+
+                public boolean isToast() {
+                    return toast;
+                }
+
+                public void setToast(boolean toast) {
+                    this.toast = toast;
+                }
+
+                public int getFlag() {
+                    return flag;
+                }
+
+                public void setFlag(int flag) {
+                    this.flag = flag;
+                }
+            }
+
+            public static class ArBean {
                 private int id;
                 private String name;
-                private Object picUrl;
-                private int albumSize;
-                private int picId;
-                private String img1v1Url;
-                private int img1v1;
-                private Object trans;
+                private List<?> tns;
                 private List<?> alias;
 
                 public int getId() {
@@ -412,52 +740,12 @@ public class WYSreachBean {
                     this.name = name;
                 }
 
-                public Object getPicUrl() {
-                    return picUrl;
+                public List<?> getTns() {
+                    return tns;
                 }
 
-                public void setPicUrl(Object picUrl) {
-                    this.picUrl = picUrl;
-                }
-
-                public int getAlbumSize() {
-                    return albumSize;
-                }
-
-                public void setAlbumSize(int albumSize) {
-                    this.albumSize = albumSize;
-                }
-
-                public int getPicId() {
-                    return picId;
-                }
-
-                public void setPicId(int picId) {
-                    this.picId = picId;
-                }
-
-                public String getImg1v1Url() {
-                    return img1v1Url;
-                }
-
-                public void setImg1v1Url(String img1v1Url) {
-                    this.img1v1Url = img1v1Url;
-                }
-
-                public int getImg1v1() {
-                    return img1v1;
-                }
-
-                public void setImg1v1(int img1v1) {
-                    this.img1v1 = img1v1;
-                }
-
-                public Object getTrans() {
-                    return trans;
-                }
-
-                public void setTrans(Object trans) {
-                    this.trans = trans;
+                public void setTns(List<?> tns) {
+                    this.tns = tns;
                 }
 
                 public List<?> getAlias() {

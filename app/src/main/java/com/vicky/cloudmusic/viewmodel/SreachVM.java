@@ -1,5 +1,6 @@
 package com.vicky.cloudmusic.viewmodel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -26,15 +27,14 @@ import okhttp3.Call;
  ************************************************************/
 public class SreachVM extends AbstractViewModel<SreachActivity> {
 
-    public Constant.CloudType reachType = Constant.CloudType.WANGYI;
+    public int reachType = Constant.CloudType_WANGYI;
 
     //网易参数
-    public int limit = 20;
-    public int offest = 0;
-    public int type = 1;// 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002)
+    public String limit = "10";
+    public String offest ="0";
+    public String type = "1";// 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002)
 
     public List<SreachBean> sreachBeans = new LinkedList<>();
-
 
     @Override
     public void onBindView(@NonNull SreachActivity view) {
@@ -51,7 +51,7 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
         addHistroy(keyWord);
 
         switch (reachType){
-            case WANGYI:
+            case Constant.CloudType_WANGYI:
                 sreachWY(keyWord);
                 break;
         }
@@ -63,18 +63,18 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
             @Override
             public void onRequestSuccess(String result) {
                 WYSreachBean wyBean = JSON.parseObject(result, WYSreachBean.class);
-                if(wyBean != null){
+                if (wyBean != null) {
                     sreachBeans.clear();
                     for (WYSreachBean.ResultBean.SongsBean song : wyBean.getResult().getSongs()) {
                         SreachBean sreachBean = new SreachBean();
-                        sreachBean.setCloudType(Constant.CloudType.WANGYI);
+                        sreachBean.setCloudType(Constant.CloudType_WANGYI);
                         sreachBean.setName(song.getName());
                         sreachBean.setId(song.getId());
                         StringBuilder des = new StringBuilder();
-                        for (WYSreachBean.ResultBean.SongsBean.ArtistsBean artistsBean:song.getArtists()){
-                            des.append(artistsBean.getName()+" ");
+                        for (WYSreachBean.ResultBean.SongsBean.ArBean arBean : song.getAr()) {
+                            des.append(arBean.getName() + " ");
                         }
-                        des.append(song.getAlbum().getName());
+                        des.append(song.getAl().getName());
                         sreachBean.setDes(des.toString());
                         sreachBeans.add(sreachBean);
                     }
@@ -125,4 +125,14 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
             getView().setHistroyData(sreachHistroyBeanList);
     }
 
+    public void selectSong(int position){
+        if (position < 0 || position >= sreachBeans.size())
+            return;
+
+        SreachBean sreachBean = sreachBeans.get(position);
+
+        if (getView()!=null){
+            getView().goPlay(sreachBean);
+        }
+    }
 }

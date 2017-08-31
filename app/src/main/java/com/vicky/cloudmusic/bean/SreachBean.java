@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class SreachBean implements Serializable {
 
-    private Constant.CloudType  cloudType;
+    private int  cloudType;
     private String name;
     private String des;
     private String id;
@@ -24,11 +24,11 @@ public class SreachBean implements Serializable {
         this.des = des;
     }
 
-    public Constant.CloudType getCloudType() {
+    public int getCloudType() {
         return cloudType;
     }
 
-    public void setCloudType(Constant.CloudType cloudType) {
+    public void setCloudType(int cloudType) {
         this.cloudType = cloudType;
     }
 

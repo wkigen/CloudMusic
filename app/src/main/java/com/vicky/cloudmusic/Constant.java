@@ -5,11 +5,9 @@ package com.vicky.cloudmusic;
  */
 public class Constant {
 
-    public enum  CloudType{
-        WANGYI,
-        QQ,
-        BAIDU,
-    }
+    public static final int CloudType_WANGYI = 0;
+    public static final int CloudType_QQ = 0;
+    public static final int CloudType_BAIDU = 0;
 
     public static final int MaxHistroy = 10;
     public static final String SreachHistroy = "Ssreach_histroy";

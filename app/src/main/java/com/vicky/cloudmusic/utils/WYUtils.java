@@ -8,9 +8,14 @@ import com.vicky.android.baselib.utils.AES;
 import com.vicky.android.baselib.utils.StringUtils;
 
 import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by vicky on 2017/8/29.
@@ -22,7 +27,7 @@ public class WYUtils {
     static {
         headers.put("Referer", "http://music.163.com");
         headers.put("Origin", "http://music.163.com");
-        headers.put("cookie", "appver=1.5.21");
+        headers.put("cookie", "appver=1.5.2");
         headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
         headers.put("Content-Type", "application/x-www-form-urlencoded");
     }
@@ -44,11 +49,11 @@ public class WYUtils {
             StringBuilder encSecKey = new StringBuilder();
             getParamJson(map,params,encSecKey);
 
-            Map<String,String> finslParams = new HashMap<>();
-            finslParams.put("params",params.toString());
-            finslParams.put("encSecKey",encSecKey.toString());
+            Map<String,String> finalParams = new HashMap<>();
+            finalParams.put("params",params.toString());
+            finalParams.put("encSecKey",encSecKey.toString());
 
-            return finslParams;
+            return finalParams;
         }
     };
 
@@ -56,23 +61,45 @@ public class WYUtils {
 
         String paramJson = JSON.toJSONString(data);
 
-        String aesKey = StringUtils.getRandomString(16);
-        String enData = encryptAES(paramJson,aesKey);
+        String secKey = getRandomString();
+        String encText = aesEncrypt(aesEncrypt(paramJson, nonce),secKey );
 
-        outParams.append(enData);
-        outEncSecKey.append(encryptRSA(aesKey,pubKey,modulus));
+        outParams.append(encText);
+        outEncSecKey.append(rsaEncrypt(secKey,pubKey,modulus));
     }
 
+    public static String getRandomString() {
+        String base = "0123456789abcde";
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder();
 
-    public static String encryptAES(String data,String key){
-        byte[] enData =  AES.encrypt(data.getBytes(),nonce.getBytes(),AES.AES_CBC_PKCS5_ALGORITHM,"0102030405060708");
-        enData = AES.encrypt(enData,key.getBytes(),AES.AES_CBC_PKCS5_ALGORITHM,"0102030405060708");
-        return  Base64.encodeToString(enData, Base64.DEFAULT);
+        for(int ii = 0; ii < 16; ++ii) {
+            int number = random.nextInt(base.length());
+            builder.append(base.charAt(number));
+        }
+
+        return builder.toString();
     }
 
-    public static String encryptRSA(String data, String pubKey, String modulus) {
-        data = new StringBuilder(data).reverse().toString();
-        BigInteger rs = new BigInteger(String.format("%x", new BigInteger(1, data.getBytes())), 16)
+    private static String aesEncrypt(String text, String key) {
+        try {
+            IvParameterSpec iv = new IvParameterSpec("0102030405060708".getBytes("UTF-8"));
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+
+            byte[] encrypted = cipher.doFinal(text.getBytes());
+
+            return Base64.encodeToString(encrypted,Base64.DEFAULT);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private static String rsaEncrypt(String text, String pubKey, String modulus) {
+        text = new StringBuilder(text).reverse().toString();
+        BigInteger rs = new BigInteger(String.format("%x", new BigInteger(1, text.getBytes())), 16)
                 .modPow(new BigInteger(pubKey, 16), new BigInteger(modulus, 16));
         String r = rs.toString(16);
         if (r.length() >= 256) {
@@ -83,6 +110,32 @@ public class WYUtils {
             }
             return r;
         }
+    }
+
+
+    // 歌曲加密算法
+    public static String encrypted_id(String id){
+        try
+        {
+            byte[] magic = "3go8&$8*3*3h0k(2)2".getBytes("UTF-8");
+            byte[] songId = id.getBytes("UTF-8");
+            int magicLen = magic.length;
+            int songIdLen = songId.length;
+            for (int ii = 0;ii<songIdLen;ii++){
+                songId[ii] = (byte)(songId[ii] ^ magic[ii % magicLen]);
+            }
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(songId);
+            byte[] resultByteArray = messageDigest.digest();
+            String result = new String(Base64.encode(resultByteArray,Base64.DEFAULT));
+            result.replace('/', '_');
+            result.replace('+', '-');
+            return result;
+        }catch (Exception e){
+
+        }
+
+        return "";
     }
 
 }

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -64,6 +65,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        setStatusBar();
         mAdapter = new SreachAdapter(this);
         mHistroyAdapter = new SreachHistroyAdapter(this);
 
@@ -87,6 +89,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getViewModel().selectSong(position);
             }
         });
 
@@ -106,7 +109,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     SystemTool.hideKeyboardSafe(context);
                     if (TextUtils.isEmpty(etKeyWord.getText().toString())) {
-                        Toast.makeText(context, getString(R.string.input_key_word), Toast.LENGTH_SHORT);
+                        Toast.makeText(SreachActivity.this, getString(R.string.input_key_word), Toast.LENGTH_SHORT);
                         return false;
                     }
                     getViewModel().sreach(etKeyWord.getText().toString());
@@ -147,20 +150,21 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         }
     }
 
+    public void goPlay(SreachBean sreachBean){
+        Bundle bundle = new Bundle();
+        bundle.putInt(PlayActivity.CLOUD_TYPE, sreachBean.getCloudType());
+        bundle.putString(PlayActivity.SONG_ID,sreachBean.getId());
+        readyGo(PlayActivity.class, bundle);
+    }
+
     @OnClick({R.id.iv_back})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_back:
-                finish();
+                onBackPressed();
                 break;
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
