@@ -21,10 +21,6 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity<MainActivity, MainVM> implements IView, View.OnClickListener  {
 
-    @Bind(R.id.rl_sreach)
-    RelativeLayout rlSreach;
-    @Bind(R.id.rl_sreach_toolbar)
-    RelativeLayout rlSreachToolbar;
 
     @Override
     protected int tellMeLayout() {
@@ -59,12 +55,12 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     }
 
 
-    @OnClick({R.id.rl_sreach})
+    @OnClick({R.id.iv_sreach})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.rl_sreach:
-                readyGoForTransitionAnimation(SreachActivity.class);
+            case R.id.iv_sreach:
+                readyGo(SreachActivity.class);
                 break;
         }
     }

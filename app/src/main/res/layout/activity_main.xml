@@ -12,38 +12,25 @@
         android:id="@+id/rl_sreach_toolbar"
         android:background="@color/red_main">
 
-        <RelativeLayout
-            android:id="@+id/rl_sreach"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingTop="@dimen/dimen_5dp"
-            android:paddingBottom="@dimen/dimen_5dp"
-            android:layout_marginLeft="@dimen/dimen_100dp"
-            android:background="@drawable/white_ellipse">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/dimen_14sp"
-                android:textColor="@color/text_color_1"
-                android:drawablePadding="@dimen/dimen_10dp"
-                android:drawableLeft="@drawable/sreach"
-                android:text="@string/sreach_song"/>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+        <ImageView
+            android:layout_width="@dimen/dimen_26dp"
+            android:layout_height="@dimen/dimen_26dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/dimen_13dp"
+            android:src="@drawable/titlebar_menu"/>
 
 
+        <ImageView
+            android:layout_width="@dimen/dimen_26dp"
+            android:layout_height="@dimen/dimen_26dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_sreach"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_13dp"
+            android:src="@drawable/actionbar_search"/>
 
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_50dp"
-        android:layout_alignParentBottom="true">
 
     </RelativeLayout>
 

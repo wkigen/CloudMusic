@@ -13,8 +13,16 @@ public class SreachBean implements Serializable {
 
     private Constant.CloudType  cloudType;
     private String name;
+    private String des;
     private String id;
 
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
 
     public Constant.CloudType getCloudType() {
         return cloudType;

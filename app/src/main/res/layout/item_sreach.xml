@@ -6,22 +6,33 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="@dimen/dimen_10dp">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dimen_18sp"
-        android:layout_centerVertical="true"
-        android:textColor="@color/text_color_main"
-        android:drawableLeft="@drawable/srch_icn_clock"
-        android:drawablePadding="@dimen/dimen_10dp"
+        android:textSize="@dimen/dimen_16sp"
         android:text=""
-        android:id="@+id/tv_histroy"/>
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/dimen_4dp"
+        android:id="@+id/tv_name"
+        android:textColor="@color/text_color_main"/>
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/list_icn_delete"/>
+        android:textSize="@dimen/dimen_12sp"
+        android:text=""
+        android:layout_below="@id/tv_name"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/dimen_4dp"
+        android:id="@+id/tv_des"
+        android:textColor="@color/text_color_4"/>
+
+    <View
+        android:layout_alignParentBottom="true"
+        style="@style/DivideLineHorizontal"></View>
 
 </RelativeLayout>

@@ -20,7 +20,8 @@ public class SreachAdapter extends AdapterViewAdapter<SreachBean> {
 
     @Override
     protected void fillData(ViewHolderHelper viewHolderHelper, int position, SreachBean model) {
-         viewHolderHelper.setText(R.id.tv_histroy, model.getName());
+         viewHolderHelper.setText(R.id.tv_name, model.getName());
+        viewHolderHelper.setText(R.id.tv_des, model.getDes());
     }
 
     /**

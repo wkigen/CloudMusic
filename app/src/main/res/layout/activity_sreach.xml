@@ -10,16 +10,13 @@
         android:id="@+id/rl_sreach_toolbar"
         android:background="@color/red_main">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="@dimen/dimen_26dp"
+            android:layout_height="@dimen/dimen_26dp"
             android:layout_centerVertical="true"
-            android:id="@+id/tv_cancel"
-            android:textSize="@dimen/dimen_18sp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimen_10dp"
-            android:textColor="@color/white"
-            android:text="@string/cancel"/>
+            android:id="@+id/iv_back"
+            android:layout_marginLeft="@dimen/dimen_13dp"
+            android:src="@drawable/title_back"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -28,19 +25,18 @@
             android:layout_centerVertical="true"
             android:paddingTop="@dimen/dimen_5dp"
             android:paddingBottom="@dimen/dimen_5dp"
-            android:textSize="@dimen/dimen_14sp"
+            android:textSize="@dimen/dimen_18sp"
             android:singleLine="true"
             android:id="@+id/et_key_word"
             android:paddingLeft="@dimen/dimen_10dp"
             android:paddingRight="@dimen/dimen_10dp"
             android:imeOptions="actionSearch"
             android:layout_marginRight="@dimen/dimen_10dp"
-            android:textColorHint="@color/text_color_1"
-            android:textColor="@color/text_color_main"
+            android:textColorHint="@color/text_color_3"
+            android:layout_toRightOf="@id/iv_back"
+            android:background="@null"
+            android:textColor="@color/text_color_2"
             android:drawablePadding="@dimen/dimen_10dp"
-            android:background="@drawable/white_ellipse"
-            android:drawableLeft="@drawable/sreach"
-            android:layout_toLeftOf="@id/tv_cancel"
             android:hint="@string/sreach_song" />
 
     </RelativeLayout>
@@ -51,13 +47,19 @@
         android:background="@color/white"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:padding="5dp" />
+        android:paddingTop="@dimen/dimen_10dp"
+        android:divider="@null"
+        android:paddingRight="@dimen/dimen_10dp"
+        android:paddingLeft="@dimen/dimen_10dp"/>
 
     <ListView
         android:id="@+id/lv_histroy_listview"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="match_parent"
-        android:padding="5dp" />
+        android:divider="@null"
+        android:paddingTop="@dimen/dimen_10dp"
+        android:paddingRight="@dimen/dimen_10dp"
+        android:paddingLeft="@dimen/dimen_10dp" />
 
 </LinearLayout>

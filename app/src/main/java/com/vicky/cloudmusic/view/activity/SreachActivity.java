@@ -41,8 +41,6 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
 
     @Bind(R.id.lv_listview)
     ListView mListview;
-    @Bind(R.id.tv_cancel)
-    TextView tvCancel;
     @Bind(R.id.et_key_word)
     EditText etKeyWord;
     @Bind(R.id.rl_sreach_toolbar)
@@ -52,13 +50,6 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
 
     private SreachAdapter mAdapter;
     private SreachHistroyAdapter mHistroyAdapter;
-
-    @Override
-    protected void setActivityTransition() {
-        enterTransition = R.transition.fade;
-        reenterTransition = R.transition.fade;
-        exitTransition = R.transition.fade;
-    }
 
     @Override
     protected int tellMeLayout() {
@@ -86,7 +77,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mHistroyAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
-                if (childView.getId() == R.id.im_delete){
+                if (childView.getId() == R.id.im_delete) {
                     getViewModel().deleteHistroy(position);
                 }
             }
@@ -102,6 +93,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         lvHistroyListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getViewModel().selectHistroy(position);
             }
         });
 
@@ -122,25 +114,6 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
                 return false;
             }
         });
-
-        etKeyWord.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editable.length() == 0){
-                    showSreachOrHistroy(false);
-                }
-            }
-        });
     }
 
     @Override
@@ -150,6 +123,10 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     @Override
     protected View getStatusTargetView() {
         return null;
+    }
+
+    public void setSreachKeyWord(String keyWord){
+        etKeyWord.setText(keyWord);
     }
 
     public void setData(List<SreachBean> data) {
@@ -170,11 +147,11 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         }
     }
 
-    @OnClick({R.id.tv_cancel})
+    @OnClick({R.id.iv_back})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_cancel:
+            case R.id.iv_back:
                 finish();
                 break;
         }

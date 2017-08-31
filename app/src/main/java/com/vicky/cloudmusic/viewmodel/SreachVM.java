@@ -1,6 +1,7 @@
 package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -34,6 +35,17 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
     public List<SreachBean> sreachBeans = new LinkedList<>();
 
+
+    @Override
+    public void onBindView(@NonNull SreachActivity view) {
+        super.onBindView(view);
+        List<String> sreachHistroyBeanList = CacheManager.getImstance().getSreachHistroy();
+
+        if (getView() != null){
+            getView().setHistroyData(sreachHistroyBeanList);
+        }
+    }
+
     public void sreach(String keyWord){
 
         addHistroy(keyWord);
@@ -50,16 +62,27 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
             @Override
             public void onRequestSuccess(String result) {
-                WYSreachBean wyBean = JSON.parseObject(result,WYSreachBean.class);
-                for (WYSreachBean.ResultBean.SongsBean song:wyBean.getResult().getSongs()){
-                    SreachBean sreachBean = new SreachBean();
-                    sreachBean.setCloudType(Constant.CloudType.WANGYI);
-                    sreachBean.setName(song.getName());
-                    sreachBean.setId(song.getId());
-                    sreachBeans.add(sreachBean);
+                WYSreachBean wyBean = JSON.parseObject(result, WYSreachBean.class);
+                if(wyBean != null){
+                    sreachBeans.clear();
+                    for (WYSreachBean.ResultBean.SongsBean song : wyBean.getResult().getSongs()) {
+                        SreachBean sreachBean = new SreachBean();
+                        sreachBean.setCloudType(Constant.CloudType.WANGYI);
+                        sreachBean.setName(song.getName());
+                        sreachBean.setId(song.getId());
+                        StringBuilder des = new StringBuilder();
+                        for (WYSreachBean.ResultBean.SongsBean.ArtistsBean artistsBean:song.getArtists()){
+                            des.append(artistsBean.getName()+" ");
+                        }
+                        des.append(song.getAlbum().getName());
+                        sreachBean.setDes(des.toString());
+                        sreachBeans.add(sreachBean);
+                    }
+                    if (getView() != null) {
+                        getView().showSreachOrHistroy(true);
+                        getView().setData(sreachBeans);
+                    }
                 }
-                if (getView() != null)
-                    getView().setData(sreachBeans);
             }
         });
     }
@@ -68,17 +91,28 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
         List<String> sreachHistroyBeanList = CacheManager.getImstance().getSreachHistroy();
         if (position < 0  || position >= sreachHistroyBeanList.size())
             return;
-        sreach(sreachHistroyBeanList.get(position));
+        String keyWord = sreachHistroyBeanList.get(position);
+        if (getView() != null)
+            getView().setSreachKeyWord(keyWord);
+        sreach(keyWord);
     }
 
     public void addHistroy(String keyWord){
         List<String> sreachHistroyBeanList = CacheManager.getImstance().getSreachHistroy();
+        for (String str : sreachHistroyBeanList){
+            if (str.equals(keyWord)) {
+                sreachHistroyBeanList.remove(str);
+                break;
+            }
+        }
         if (sreachHistroyBeanList.size() >= Constant.MaxHistroy){
             sreachHistroyBeanList.remove(sreachHistroyBeanList.size()-1);
         }
         sreachHistroyBeanList.add(0,keyWord);
         if (getView() != null)
             getView().setHistroyData(sreachHistroyBeanList);
+
+        CacheManager.getImstance().saveSreachHistroy();
     }
 
     public void deleteHistroy(int position){
