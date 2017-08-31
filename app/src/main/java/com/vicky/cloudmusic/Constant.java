@@ -5,6 +5,8 @@ package com.vicky.cloudmusic;
  */
 public class Constant {
 
+    public static final String dir_name = "CloudMusic";
+
     public static final int CloudType_WANGYI = 0;
     public static final int CloudType_QQ = 0;
     public static final int CloudType_BAIDU = 0;

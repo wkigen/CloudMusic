@@ -5,8 +5,9 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.Constant;
-import com.vicky.cloudmusic.view.Application;
+import com.vicky.cloudmusic.Application;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CacheManager {
     SharedPreferences sharedPreferences;
 
     List<String> sreachHistroyBeens; //搜索历史
+    String dirPath;
 
     private CacheManager(){
         sharedPreferences = Application.getInstance().getSharedPreferences(SHARENAME, Context.MODE_PRIVATE); //
@@ -57,6 +59,14 @@ public class CacheManager {
             String json = JSON.toJSONString(sreachHistroyBeens);
             sharedPreferences.edit().putString(Constant.SreachHistroy,json).commit();
         }
+    }
+
+    public String getDirPath(){
+        if (dirPath == null) {
+            dirPath = FileUtils.getAbsoulutePath(Application.getInstance(), Constant.dir_name);
+            FileUtils.createDirectory(dirPath);
+        }
+        return dirPath;
     }
 
 }

@@ -1,6 +1,7 @@
-package com.vicky.cloudmusic.view;
+package com.vicky.cloudmusic;
 
 import com.vicky.android.baselib.BaseApplication;
+import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.net.Net;
 
 /**
@@ -12,6 +13,11 @@ public class Application extends BaseApplication {
     public void onCreate(){
         super.onCreate();
 
+        init();
+    }
+
+    private void init(){
         Net.init();
+
     }
 }
