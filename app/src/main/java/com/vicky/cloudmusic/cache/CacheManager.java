@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.Application;
+import com.vicky.cloudmusic.bean.SongPlayBean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class CacheManager {
 
     SharedPreferences sharedPreferences;
 
-    List<String> sreachHistroyBeens; //搜索历史
-    String dirPath;
+    private List<String> sreachHistroyBeens; //搜索历史
+    private String dirPath;
 
     private CacheManager(){
         sharedPreferences = Application.getInstance().getSharedPreferences(SHARENAME, Context.MODE_PRIVATE); //
@@ -68,5 +69,4 @@ public class CacheManager {
         }
         return dirPath;
     }
-
 }

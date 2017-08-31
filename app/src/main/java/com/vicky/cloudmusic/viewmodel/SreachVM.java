@@ -30,7 +30,7 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
     public int reachType = Constant.CloudType_WANGYI;
 
     //网易参数
-    public String limit = "10";
+    public String limit = "20";
     public String offest ="0";
     public String type = "1";// 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002)
 
@@ -67,15 +67,16 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
                     sreachBeans.clear();
                     for (WYSreachBean.ResultBean.SongsBean song : wyBean.getResult().getSongs()) {
                         SreachBean sreachBean = new SreachBean();
-                        sreachBean.setCloudType(Constant.CloudType_WANGYI);
-                        sreachBean.setName(song.getName());
-                        sreachBean.setId(song.getId());
-                        StringBuilder des = new StringBuilder();
+                        sreachBean.cloudType = Constant.CloudType_WANGYI;
+                        sreachBean.name = song.getName();
+                        sreachBean.id = song.getId();
+                        StringBuilder art = new StringBuilder();
                         for (WYSreachBean.ResultBean.SongsBean.ArBean arBean : song.getAr()) {
-                            des.append(arBean.getName() + " ");
+                            art.append(arBean.getName() + " ");
                         }
-                        des.append(song.getAl().getName());
-                        sreachBean.setDes(des.toString());
+                        art.substring(art.length()-2,art.length()-1);
+                        sreachBean.album = song.getAl().getName();
+                        sreachBean.artist = art.toString();
                         sreachBeans.add(sreachBean);
                     }
                     if (getView() != null) {

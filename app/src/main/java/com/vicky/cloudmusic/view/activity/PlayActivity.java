@@ -25,8 +25,6 @@ import butterknife.OnClick;
  */
 public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements IView,View.OnClickListener {
 
-    public static final String CLOUD_TYPE= "clode_type";
-    public static final String SONG_ID = "song_id";
 
     @Override
     protected int tellMeLayout() {
@@ -48,8 +46,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
     @Override
     protected void getBundleExtras(@NonNull Bundle extras) {
-        getViewModel().cloudType = extras.getInt(CLOUD_TYPE);
-        getViewModel().id = extras.getString(SONG_ID);
+
     }
 
     @Override
@@ -58,12 +55,15 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     }
 
 
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.im_play})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_back:
                 onBackPressed();
+                break;
+            case R.id.im_play:
+                getViewModel().play();
                 break;
         }
     }

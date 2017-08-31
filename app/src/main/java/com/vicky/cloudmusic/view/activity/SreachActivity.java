@@ -2,9 +2,7 @@ package com.vicky.cloudmusic.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +17,19 @@ import android.widget.Toast;
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
-import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.SreachBean;
+import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.SreachAdapter;
 import com.vicky.cloudmusic.view.adapter.SreachHistroyAdapter;
 import com.vicky.cloudmusic.viewmodel.SreachVM;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -151,10 +150,8 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     }
 
     public void goPlay(SreachBean sreachBean){
-        Bundle bundle = new Bundle();
-        bundle.putInt(PlayActivity.CLOUD_TYPE, sreachBean.getCloudType());
-        bundle.putString(PlayActivity.SONG_ID,sreachBean.getId());
-        readyGo(PlayActivity.class, bundle);
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id));
+        readyGo(PlayActivity.class);
     }
 
     @OnClick({R.id.iv_back})

@@ -11,42 +11,11 @@ import java.io.Serializable;
  */
 public class SreachBean implements Serializable {
 
-    private int  cloudType;
-    private String name;
-    private String des;
-    private String id;
-
-    public String getDes() {
-        return des;
-    }
-
-    public void setDes(String des) {
-        this.des = des;
-    }
-
-    public int getCloudType() {
-        return cloudType;
-    }
-
-    public void setCloudType(int cloudType) {
-        this.cloudType = cloudType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    public int  cloudType;
+    public String name;
+    public String album;
+    public String id;
+    public String pic;
+    public String artist;
 
 }

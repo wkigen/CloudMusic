@@ -1,5 +1,6 @@
 package com.vicky.cloudmusic.net;
 
+import com.vicky.android.baselib.http.annotation.FILE;
 import com.vicky.android.baselib.http.annotation.GET;
 import com.vicky.android.baselib.http.annotation.PARAMS;
 import com.vicky.android.baselib.http.annotation.POST;
@@ -17,11 +18,12 @@ public interface IWYApi {
     @POSTENCRYPT("http://music.163.com/weapi/cloudsearch/get/web")
     RequestCall sreach(@PARAMS("s")String s,@PARAMS("limit")String limit,@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("type")String type);
 
-
     @POSTENCRYPT("http://music.163.com/weapi/v3/song/detail")
     RequestCall detail(@PARAMS("c")String c);
 
     @POSTENCRYPT("http://music.163.com/weapi/song/enhance/player/url?csrf_token=")
     RequestCall songRes(@PARAMS("ids")String ids,@PARAMS("br")String br,@PARAMS("csrf_token")String csrf_token);
 
+    @FILE("")
+    RequestCall downFile(@PARAMS("url")String url);
 }

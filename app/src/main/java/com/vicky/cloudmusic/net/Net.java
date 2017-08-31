@@ -17,4 +17,7 @@ public class Net {
         return wyApi;
     }
 
+    public static void downFile(){
+
+    }
 }
