@@ -91,6 +91,7 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
         switch (event.what) {
             case MessageEvent.ID_REFRESH_DOWN_LIST_MUSIC:
                 List<MusicBean>  musicBeanList = CacheManager.getImstance().getMusicList();
+                tvLocalMusicCount.setText("("+musicBeanList.size()+")");
                 break;
         }
     }

@@ -3,71 +3,110 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_50dp">
+        android:layout_height="match_parent"
+        android:id="@+id/iv_background"
+        android:scaleType="fitXY" />
 
-        <ImageView
-            android:layout_width="@dimen/dimen_26dp"
-            android:layout_height="@dimen/dimen_26dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/iv_back"
-            android:layout_marginLeft="@dimen/dimen_13dp"
-            android:src="@drawable/title_back"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_25dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_21sp"
-            android:textColor="@color/text_color_2"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/iv_back"
-            android:text=""/>
-
-
-        <View
-            android:layout_alignParentBottom="true"
-            style="@style/DivideLineHorizontal"></View>
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="@dimen/dimen_280dp"
-        android:layout_height="@dimen/dimen_280dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_100dp"
-        android:id="@+id/rl_disc"
-        android:background="@drawable/play_disc">
-
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dimen_87dp"
-            android:layout_marginTop="@dimen/dimen_87dp"
-            android:id="@+id/iv_song_picture"
-            android:layout_centerInParent="true"/>
+            android:layout_height="@dimen/dimen_50dp">
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="@dimen/dimen_26dp"
+                android:layout_height="@dimen/dimen_26dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/iv_back"
+                android:layout_marginLeft="@dimen/dimen_13dp"
+                android:src="@drawable/title_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimen_18sp"
+                android:textColor="@color/text_color_2"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:layout_toRightOf="@id/iv_back"
+                android:id="@+id/tv_music_name"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimen_13sp"
+                android:textColor="@color/text_color_2"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:layout_toRightOf="@id/iv_back"
+                android:id="@+id/tv_artist"
+                android:layout_below="@id/tv_music_name"
+                android:text=""/>
+
+            <View
+                android:layout_alignParentBottom="true"
+                style="@style/DivideLineHorizontal"></View>
+
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dimen_20dp"
-        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:id="@+id/rl_disc">
 
-        <ImageView
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
-            android:id="@+id/im_play"
-            android:src="@drawable/note_btn_play"/>
+            <ImageView
+                android:layout_width="@dimen/dimen_220dp"
+                android:layout_height="@dimen/dimen_220dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/placeholder_disk_play_song"
+                android:id="@+id/iv_song_picture" />
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_disc"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:id="@+id/im_play"
+                    android:src="@drawable/note_btn_play"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

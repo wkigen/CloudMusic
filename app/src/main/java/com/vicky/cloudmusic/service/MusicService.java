@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.lang.ref.PhantomReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Call;
@@ -76,20 +77,25 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             case MessageEvent.ID_STOP_MUSIC:
                 stop();
                 break;
+            case MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC:
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
+                break;
         }
     }
 
     private void readyPlay(int cloudType,String songId){
-        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
-
-        }else {
-            switch (cloudType){
-                case Constant.CloudType_WANGYI:
-                    readPlayFormNetWY(songId);
-                    break;
-            }
-        }
+//        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
+//
+//        }else {
+//            switch (cloudType){
+//                case Constant.CloudType_WANGYI:
+//                    readPlayFormNetWY(songId);
+//                    break;
+//            }
+//        }
+        readPlayFormNetWY(songId);
     }
+
 
     private void readPlayFormNetWY(final String songId){
         Net.getWyApi().getApi().detail("[{\"id\":\""+songId+"\"}]").execute(new WYCallback() {
@@ -144,9 +150,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             mediaPlayer.prepare();
             mediaPlayer.start();
 
-            String filName = downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
+
+            //加上网易标示
+            String filName = Constant.CloudType_WANGYI+"_"+downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
             downMusicBean.path = dirPath+"/"+filName;
-            downMusicMap.put(downMusicBean.path,downMusicBean);
+            downMusicMap.put(downMusicBean.path, downMusicBean);
             Net.getWyApi().getApi().downFile(playingMusic.path).execute(new FileCallBack(dirPath+"/",filName) {
                 @Override
                 public void onError(Call call, Exception e, int i) {
@@ -162,6 +171,16 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     }
                 }
             });
+
+            if (playingMusic.picture != null){
+                String[] temp = playingMusic.picture.split("/");
+                if (temp.length > 0){
+                    String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
+                    
+                }
+            }
+
+
 
         }catch (Exception e) {
 
