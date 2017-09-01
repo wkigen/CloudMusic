@@ -79,6 +79,16 @@ public class CacheManager {
         return musicList;
     }
 
+    public MusicBean getMusic(int cloudType,String readId){
+        if (musicList == null)
+            return null;
+        for (MusicBean music : musicList){
+            if (music.cloudType == cloudType && music.readId.equals(readId))
+                return music;
+        }
+        return null;
+    }
+
     public boolean hasMusic(int cloudType,String readId){
         if (musicList == null)
             return false;

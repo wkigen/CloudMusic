@@ -1,6 +1,7 @@
 package com.vicky.cloudmusic.view.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,8 @@ import com.vicky.cloudmusic.viewmodel.PlayVM;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.FileInputStream;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -66,6 +69,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+
     }
 
     @Override
@@ -82,6 +87,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC));
     }
 
     @Override
@@ -112,13 +119,28 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 tvMusicName.setText(musicBean.name);
                 tvArtist.setText(musicBean.artist);
                 //Net.imageLoader(this, musicBean.picture, ivSongPicture, R.drawable.placeholder_disk_play_program, R.drawable.placeholder_disk_play_program);
-                Net.imageLoader(this, musicBean.picture, new Net.ImageLoaderCallBack() {
-                    @Override
-                    public void getBitmap(Bitmap bitmap) {
+                if (musicBean.mid ==MusicBean.Invalid_ID){
+                    Net.imageLoader(this, musicBean.picture, new Net.ImageLoaderCallBack() {
+                        @Override
+                        public void getBitmap(Bitmap bitmap) {
+                            ivSongPicture.setImageBitmap(bitmap);
+                            ivBackground.setImageBitmap(FastBlurUtil.doBlur(bitmap,8,false));
+                        }
+                    });
+                }else {
+                    try {
+                        FileInputStream inputStream = new FileInputStream(musicBean.picture);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         ivSongPicture.setImageBitmap(bitmap);
                         ivBackground.setImageBitmap(FastBlurUtil.doBlur(bitmap,8,false));
+                        inputStream.close();
+                    }catch (Exception e){
+
                     }
-                });
+
+                }
+
+
                 break;
         }
     }

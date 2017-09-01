@@ -84,16 +84,35 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void readyPlay(int cloudType,String songId){
-//        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
-//
-//        }else {
-//            switch (cloudType){
-//                case Constant.CloudType_WANGYI:
-//                    readPlayFormNetWY(songId);
-//                    break;
-//            }
-//        }
-        readPlayFormNetWY(songId);
+        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
+            readPlayFormLocal(cloudType,songId);
+        }else {
+            switch (cloudType){
+                case Constant.CloudType_WANGYI:
+                    readPlayFormNetWY(songId);
+                    break;
+            }
+        }
+    }
+
+    private void readPlayFormLocal(int cloudType,String songId){
+        try
+        {
+            MusicBean musicBean = CacheManager.getImstance().getMusic(cloudType,songId);
+            if (musicBean != null){
+                mediaPlayer.reset();
+                mediaPlayer.setDataSource(musicBean.path);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+
+                playingMusic = musicBean;
+
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
+            }
+
+        }catch (Exception e){
+
+        }
     }
 
 
@@ -175,12 +194,21 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             if (playingMusic.picture != null){
                 String[] temp = playingMusic.picture.split("/");
                 if (temp.length > 0){
+                    //加上网易标示
                     String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
-                    
+                    downMusicBean.picture =  dirPath+"/"+pictureName;
+                    Net.getWyApi().getApi().downFile(playingMusic.picture).execute(new FileCallBack(dirPath+"/",pictureName) {
+                        @Override
+                        public void onError(Call call, Exception e, int i) {
+                        }
+
+                        @Override
+                        public void onResponse(File file, int i) {
+                            
+                        }
+                    });
                 }
             }
-
-
 
         }catch (Exception e) {
 
