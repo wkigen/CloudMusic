@@ -8,18 +8,18 @@ import java.util.List;
 public class WYSongDetailBean {
 
     /**
-     * songs : [{"name":"A","id":5389958,"pst":0,"t":0,"ar":[{"id":127524,"name":"Rainbow","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":4,"crbt":null,"cf":"","al":{"id":528982,"name":"A","picUrl":"http://p1.music.126.net/-12f00C3qYZOtFEMKzDwrw==/756463999913844.jpg","tns":[],"pic":756463999913844},"dt":201404,"h":{"br":320000,"fid":0,"size":8068435,"vd":-3.88},"m":{"br":160000,"fid":0,"size":4043489,"vd":-3.46},"l":{"br":96000,"fid":0,"size":2433093,"vd":-3.57},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"djId":0,"copyright":2,"s_id":0,"cp":0,"rtype":0,"rurl":null,"mst":9,"mv":235235}]
-     * privileges : [{"id":5389958,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}]
+     * songs : [{"name":"A","readId":5389958,"pst":0,"t":0,"ar":[{"readId":127524,"name":"Rainbow","tns":[],"alias":[]}],"alia":[],"pop":95,"st":0,"rt":"","fee":0,"v":4,"crbt":null,"cf":"","al":{"readId":528982,"name":"A","picUrl":"http://p1.music.126.net/-12f00C3qYZOtFEMKzDwrw==/756463999913844.jpg","tns":[],"picture":756463999913844},"dt":201404,"h":{"br":320000,"fid":0,"size":8068435,"vd":-3.88},"m":{"br":160000,"fid":0,"size":4043489,"vd":-3.46},"l":{"br":96000,"fid":0,"size":2433093,"vd":-3.57},"a":null,"cd":"1","no":1,"rtUrl":null,"ftype":0,"rtUrls":[],"djId":0,"copyright":2,"s_id":0,"cp":0,"rtype":0,"rurl":null,"mst":9,"mv":235235}]
+     * privileges : [{"readId":5389958,"fee":0,"payed":0,"st":0,"pl":320000,"dl":320000,"sp":7,"cp":1,"subp":1,"cs":false,"maxbr":320000,"fl":320000,"toast":false,"flag":0}]
      * code : 200
      */
 
     private int code;
     /**
      * name : A
-     * id : 5389958
+     * readId : 5389958
      * pst : 0
      * t : 0
-     * ar : [{"id":127524,"name":"Rainbow","tns":[],"alias":[]}]
+     * ar : [{"readId":127524,"name":"Rainbow","tns":[],"alias":[]}]
      * alia : []
      * pop : 95.0
      * st : 0
@@ -28,7 +28,7 @@ public class WYSongDetailBean {
      * v : 4
      * crbt : null
      * cf :
-     * al : {"id":528982,"name":"A","picUrl":"http://p1.music.126.net/-12f00C3qYZOtFEMKzDwrw==/756463999913844.jpg","tns":[],"pic":756463999913844}
+     * al : {"readId":528982,"name":"A","picUrl":"http://p1.music.126.net/-12f00C3qYZOtFEMKzDwrw==/756463999913844.jpg","tns":[],"picture":756463999913844}
      * dt : 201404
      * h : {"br":320000,"fid":0,"size":8068435,"vd":-3.88}
      * m : {"br":160000,"fid":0,"size":4043489,"vd":-3.46}
@@ -51,7 +51,7 @@ public class WYSongDetailBean {
 
     private List<SongsBean> songs;
     /**
-     * id : 5389958
+     * readId : 5389958
      * fee : 0
      * payed : 0
      * st : 0
@@ -106,11 +106,11 @@ public class WYSongDetailBean {
         private Object crbt;
         private String cf;
         /**
-         * id : 528982
+         * readId : 528982
          * name : A
          * picUrl : http://p1.music.126.net/-12f00C3qYZOtFEMKzDwrw==/756463999913844.jpg
          * tns : []
-         * pic : 756463999913844
+         * picture : 756463999913844
          */
 
         private AlBean al;
@@ -153,7 +153,7 @@ public class WYSongDetailBean {
         private int mst;
         private int mv;
         /**
-         * id : 127524
+         * readId : 127524
          * name : Rainbow
          * tns : []
          * alias : []

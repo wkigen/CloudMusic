@@ -8,8 +8,8 @@ public class Constant {
     public static final String dir_name = "CloudMusic";
 
     public static final int CloudType_WANGYI = 0;
-    public static final int CloudType_QQ = 0;
-    public static final int CloudType_BAIDU = 0;
+    public static final int CloudType_QQ = 1;
+    public static final int CloudType_BAIDU = 2;
 
     public static final int MaxHistroy = 10;
     public static final String SreachHistroy = "Sreach_histroy";

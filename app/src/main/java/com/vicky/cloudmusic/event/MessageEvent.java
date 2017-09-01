@@ -16,6 +16,7 @@ public class MessageEvent {
     public static final int ID_STOP_MUSIC = 4;
     public static final int ID_REQUEST_STATUS_MUSIC = 5;
     public static final int ID_RESPONSE_STATUS_MUSIC = 6;
+    public static final int ID_REFRESH_DOWN_LIST_MUSIC = 7;
 
     public int what;
     public Object object1;

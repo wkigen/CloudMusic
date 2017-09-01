@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.http.callback.FileCallBack;
 import com.vicky.cloudmusic.Constant;
-import com.vicky.cloudmusic.bean.SongPlayBean;
+import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.WYSongDetailBean;
 import com.vicky.cloudmusic.bean.WYSongUrlBean;
 import com.vicky.cloudmusic.cache.CacheManager;
@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Call;
 
@@ -31,7 +32,8 @@ import okhttp3.Call;
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener,MediaPlayer.OnErrorListener {
 
     private MediaPlayer mediaPlayer;
-    private SongPlayBean playingSong = new SongPlayBean();
+    private MusicBean playingMusic = new MusicBean();
+    private ConcurrentHashMap<String,MusicBean> downMusicMap = new ConcurrentHashMap<>();
 
     @Nullable
     @Override
@@ -78,10 +80,14 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void readyPlay(int cloudType,String songId){
-        switch (cloudType){
-            case Constant.CloudType_WANGYI:
-                readPlayFormNetWY(songId);
-                break;
+        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
+
+        }else {
+            switch (cloudType){
+                case Constant.CloudType_WANGYI:
+                    readPlayFormNetWY(songId);
+                    break;
+            }
         }
     }
 
@@ -91,44 +97,69 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             public void onRequestSuccess(String result) {
                 final WYSongDetailBean wySongDetailBean = JSON.parseObject(result, WYSongDetailBean.class);
 
-                Net.getWyApi().getApi().songRes("[" + songId + "]", "999000", "").execute(new WYCallback() {
-                    @Override
-                    public void onRequestSuccess(String result) {
-                        WYSongUrlBean songUrlBean = JSON.parseObject(result,WYSongUrlBean.class);
+                if (wySongDetailBean.getSongs().size() > 0){
+                    Net.getWyApi().getApi().songRes("[" + songId + "]", "999000", "").execute(new WYCallback() {
+                        @Override
+                        public void onRequestSuccess(String result) {
+                            WYSongUrlBean songUrlBean = JSON.parseObject(result, WYSongUrlBean.class);
+                            if ( songUrlBean.getData().size() > 0){
+                                WYSongDetailBean.SongsBean songsBean = wySongDetailBean.getSongs().get(0);
 
-                        playingSong.name = wySongDetailBean.getSongs().get(0).getName();
-                        playingSong.pic = wySongDetailBean.getSongs().get(0).getAl().getPicUrl();
-                        StringBuilder art = new StringBuilder();
-                        for (WYSongDetailBean.SongsBean.ArBean arBean : wySongDetailBean.getSongs().get(0).getAr()) {
-                            art.append(arBean.getName() + " ");
+                                StringBuilder art = new StringBuilder();
+                                for (WYSongDetailBean.SongsBean.ArBean arBean : songsBean.getAr()) {
+                                    art.append(arBean.getName() + " ");
+                                }
+
+                                //图片  歌词  资源 在后面下载后再保存
+                                MusicBean musicBean = new MusicBean();
+                                musicBean.name = songsBean.getName();
+                                musicBean.cloudType = Constant.CloudType_WANGYI;
+                                musicBean.readId = songId;
+                                musicBean.artist = art.toString().substring(0, art.length() - 1);
+
+                                playingMusic.cloudType = Constant.CloudType_WANGYI;
+                                playingMusic.readId = songId;
+                                playingMusic.name = songsBean.getName();
+                                playingMusic.picture = songsBean.getAl().getPicUrl();
+                                playingMusic.artist = art.toString().substring(0, art.length() - 1);
+                                playingMusic.path = songUrlBean.getData().get(0).getUrl();
+
+                                readyPlayFormNet(musicBean);
+                            }
                         }
-                        playingSong.artist = art.toString();
-                        playingSong.id = songId;
-                        playingSong.url = songUrlBean.getData().get(0).getUrl();
-
-                        readyPlayFormNet();
-                    }
-                });
+                    });
+                }
             }
         });
     }
 
-    private void readyPlayFormNet(){
+    private void readyPlayFormNet(MusicBean downMusicBean){
 
         final String dirPath = CacheManager.getImstance().getDirPath();
+
         try{
+
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(playingSong.url);
+            mediaPlayer.setDataSource(playingMusic.path);
             mediaPlayer.prepare();
             mediaPlayer.start();
 
-            Net.getWyApi().getApi().downFile(playingSong.url).execute(new FileCallBack(dirPath+"/",playingSong.name+".mp3") {
+            String filName = downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
+            downMusicBean.path = dirPath+"/"+filName;
+            downMusicMap.put(downMusicBean.path,downMusicBean);
+            Net.getWyApi().getApi().downFile(playingMusic.path).execute(new FileCallBack(dirPath+"/",filName) {
                 @Override
                 public void onError(Call call, Exception e, int i) {
                 }
 
                 @Override
                 public void onResponse(File file, int i) {
+                    String path = file.getAbsolutePath();
+                    MusicBean finshMusic = downMusicMap.get(path);
+                    if (finshMusic != null){
+                        CacheManager.getImstance().insertMusic(finshMusic);
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_DOWN_LIST_MUSIC));
+                    }
                 }
             });
 
@@ -138,8 +169,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     public void play(int cloudType,String songId){
-        if (songId.equals(playingSong.id) &&
-                cloudType == playingSong.cloudType){
+        if (songId.equals(playingMusic.readId) &&
+                cloudType == playingMusic.cloudType){
             if (!mediaPlayer.isPlaying())
                 mediaPlayer.start();
         }else {

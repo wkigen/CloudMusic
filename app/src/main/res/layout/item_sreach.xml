@@ -6,8 +6,6 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="@dimen/dimen_10dp">
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

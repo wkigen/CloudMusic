@@ -74,9 +74,8 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
                         for (WYSreachBean.ResultBean.SongsBean.ArBean arBean : song.getAr()) {
                             art.append(arBean.getName() + " ");
                         }
-                        art.substring(art.length()-2,art.length()-1);
                         sreachBean.album = song.getAl().getName();
-                        sreachBean.artist = art.toString();
+                        sreachBean.artist = art.toString().substring(0, art.length() - 1);
                         sreachBeans.add(sreachBean);
                     }
                     if (getView() != null) {

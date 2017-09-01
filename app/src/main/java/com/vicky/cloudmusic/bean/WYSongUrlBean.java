@@ -7,14 +7,14 @@ import java.util.List;
  */
 public class WYSongUrlBean {
     /**
-     * data : [{"id":2061444,"url":"http://m10.music.126.net/20170831180027/6f34e6093d35c1e345d4217c0a417be8/ymusic/6eeb/58fa/4173/c95fbd73af3f882818fdab70e5e792ab.mp3","br":320000,"size":6799330,"md5":"c95fbd73af3f882818fdab70e5e792ab","code":200,"expi":1200,"type":"mp3","gain":0.3397,"fee":0,"uf":null,"payed":0,"flag":0,"canExtend":false}]
+     * data : [{"readId":2061444,"path":"http://m10.music.126.net/20170831180027/6f34e6093d35c1e345d4217c0a417be8/ymusic/6eeb/58fa/4173/c95fbd73af3f882818fdab70e5e792ab.mp3","br":320000,"size":6799330,"md5":"c95fbd73af3f882818fdab70e5e792ab","code":200,"expi":1200,"type":"mp3","gain":0.3397,"fee":0,"uf":null,"payed":0,"flag":0,"canExtend":false}]
      * code : 200
      */
 
     private int code;
     /**
-     * id : 2061444
-     * url : http://m10.music.126.net/20170831180027/6f34e6093d35c1e345d4217c0a417be8/ymusic/6eeb/58fa/4173/c95fbd73af3f882818fdab70e5e792ab.mp3
+     * readId : 2061444
+     * path : http://m10.music.126.net/20170831180027/6f34e6093d35c1e345d4217c0a417be8/ymusic/6eeb/58fa/4173/c95fbd73af3f882818fdab70e5e792ab.mp3
      * br : 320000
      * size : 6799330
      * md5 : c95fbd73af3f882818fdab70e5e792ab

@@ -8,7 +8,8 @@ import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.Application;
-import com.vicky.cloudmusic.bean.SongPlayBean;
+import com.vicky.cloudmusic.batabase.MusicDataBase;
+import com.vicky.cloudmusic.bean.MusicBean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CacheManager {
     SharedPreferences sharedPreferences;
 
     private List<String> sreachHistroyBeens; //搜索历史
+    private List<MusicBean> musicList;//本地歌曲列表
     private String dirPath;
 
     private CacheManager(){
@@ -45,7 +47,7 @@ public class CacheManager {
     //获取搜索历史
     public List<String> getSreachHistroy(){
         if (sreachHistroyBeens == null){
-            String json = sharedPreferences.getString(Constant.SreachHistroy,"");
+            String json = sharedPreferences.getString(Constant.SreachHistroy, "");
             if (TextUtils.isEmpty(json))
                 sreachHistroyBeens =  new LinkedList<>();
             else
@@ -69,4 +71,37 @@ public class CacheManager {
         }
         return dirPath;
     }
+
+    public synchronized List<MusicBean> getMusicList(){
+        if (musicList == null){
+            musicList = MusicDataBase.getInstance().getAllMusic();
+        }
+        return musicList;
+    }
+
+    public boolean hasMusic(int cloudType,String readId){
+        if (musicList == null)
+            return false;
+
+        for (MusicBean music : musicList){
+            if (music.cloudType == cloudType && music.readId.equals(readId))
+                return true;
+        }
+        return false;
+    }
+
+    public synchronized void insertMusic(MusicBean musicBean){
+        if (musicBean != null){
+            if (!hasMusic(musicBean.cloudType,musicBean.readId))
+                MusicDataBase.getInstance().insertMusic(musicBean);
+        }
+    }
+
+    public synchronized void deleteMusic(MusicBean musicBean){
+        if (musicBean != null){
+            if (hasMusic(musicBean.cloudType,musicBean.readId))
+                MusicDataBase.getInstance().deleteMusic(musicBean);
+        }
+    }
+
 }

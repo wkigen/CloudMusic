@@ -30,7 +30,7 @@ public class SreachAdapter extends AdapterViewAdapter<SreachBean> {
     @Override
     protected void setItemChildListener(ViewHolderHelper viewHolderHelper) {
         /**
-         viewHolderHelper.setItemChildClickListener(R.id.tv_item_normal_title);
-         viewHolderHelper.setItemChildLongClickListener(R.id.tv_item_normal_title);*/
+         viewHolderHelper.setItemChildClickListener(R.readId.tv_item_normal_title);
+         viewHolderHelper.setItemChildLongClickListener(R.readId.tv_item_normal_title);*/
     }
 }
