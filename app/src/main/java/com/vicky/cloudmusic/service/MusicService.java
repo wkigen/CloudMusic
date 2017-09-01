@@ -173,7 +173,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
             //加上网易标示
             String filName = Constant.CloudType_WANGYI+"_"+downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
+
+            String[] temp = playingMusic.picture.split("/");
+            String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
+            downMusicBean.picture =  dirPath+"/"+pictureName;
             downMusicBean.path = dirPath+"/"+filName;
+
             downMusicMap.put(downMusicBean.path, downMusicBean);
             Net.getWyApi().getApi().downFile(playingMusic.path).execute(new FileCallBack(dirPath+"/",filName) {
                 @Override
@@ -192,24 +197,18 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             });
 
             if (playingMusic.picture != null){
-                String[] temp = playingMusic.picture.split("/");
-                if (temp.length > 0){
-                    //加上网易标示
-                    String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
-                    downMusicBean.picture =  dirPath+"/"+pictureName;
-                    Net.getWyApi().getApi().downFile(playingMusic.picture).execute(new FileCallBack(dirPath+"/",pictureName) {
-                        @Override
-                        public void onError(Call call, Exception e, int i) {
-                        }
 
-                        @Override
-                        public void onResponse(File file, int i) {
-                            
-                        }
-                    });
-                }
+                Net.getWyApi().getApi().downFile(playingMusic.picture).execute(new FileCallBack(dirPath+"/",pictureName) {
+                    @Override
+                    public void onError(Call call, Exception e, int i) {
+                    }
+
+                    @Override
+                    public void onResponse(File file, int i) {
+
+                    }
+                });
             }
-
         }catch (Exception e) {
 
         }
