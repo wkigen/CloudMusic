@@ -150,8 +150,8 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     }
 
     public void goPlay(SreachBean sreachBean){
-        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id));
         readyGo(PlayActivity.class);
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id));
     }
 
     @OnClick({R.id.iv_back})

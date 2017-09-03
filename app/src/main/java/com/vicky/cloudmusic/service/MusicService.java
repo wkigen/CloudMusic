@@ -22,8 +22,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.lang.ref.PhantomReference;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 import okhttp3.Call;
 
@@ -33,8 +37,9 @@ import okhttp3.Call;
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener,MediaPlayer.OnErrorListener {
 
     private MediaPlayer mediaPlayer;
-    private MusicBean playingMusic = new MusicBean();
+    private volatile MusicBean playingMusic = new MusicBean();
     private ConcurrentHashMap<String,MusicBean> downMusicMap = new ConcurrentHashMap<>();
+    private Timer timer = new Timer();
 
     @Nullable
     @Override
@@ -52,6 +57,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         super.onCreate();
         mediaPlayer = new MediaPlayer();
         EventBus.getDefault().register(this);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        },1000);
     }
 
     @Override
@@ -65,26 +77,51 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-        switch (event.what){
-            case MessageEvent.ID_PLAY_MUSIC:
-                play((int) event.object1,(String)event.object2);
-                break;
-            case MessageEvent.ID_PAUSE_MUSIC:
-                pause();
-                break;
-            case MessageEvent.ID_STOP_MUSIC:
-                stop();
-                break;
-            case MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC:
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
-                break;
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void onMessageEvent(final MessageEvent event) {
+        synchronized (MusicService.class){
+            switch (event.what){
+                case MessageEvent.ID_REQUEST_PLAY_MUSIC:
+                    play((int) event.object1,(String)event.object2);
+                    break;
+                case MessageEvent.ID_REQUEST_PAUSE_MUSIC:
+                    pause();
+                    break;
+                case MessageEvent.ID_REQUEST_STOP_MUSIC:
+                    stop();
+                    break;
+                case MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC:
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
+                    break;
+            }
         }
     }
 
+
+    public synchronized void play(int cloudType,String songId){
+        if ( cloudType == Constant.CloudType_NULL
+                ||( cloudType == playingMusic.cloudType && songId.equals(playingMusic.readId))){
+            if (!mediaPlayer.isPlaying()){
+                mediaPlayer.start();
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
+            }
+        }else {
+            readyPlay(cloudType,songId);
+        }
+    }
+
+    public synchronized void pause(){
+        mediaPlayer.pause();
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
+    }
+
+    public synchronized void stop(){
+        mediaPlayer.stop();
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
+    }
+
     private void readyPlay(int cloudType,String songId){
-        if (CacheManager.getImstance().hasMusic(cloudType,songId)){
+        if (CacheManager.getImstance().hasDownMusic(cloudType,songId)){
             readPlayFormLocal(cloudType,songId);
         }else {
             switch (cloudType){
@@ -98,7 +135,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private void readPlayFormLocal(int cloudType,String songId){
         try
         {
-            MusicBean musicBean = CacheManager.getImstance().getMusic(cloudType,songId);
+            MusicBean musicBean = CacheManager.getImstance().getDownMusic(cloudType,songId);
             if (musicBean != null){
                 mediaPlayer.reset();
                 mediaPlayer.setDataSource(musicBean.path);
@@ -107,7 +144,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
                 playingMusic = musicBean;
 
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
             }
 
         }catch (Exception e){
@@ -141,11 +178,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                                 musicBean.cloudType = Constant.CloudType_WANGYI;
                                 musicBean.readId = songId;
                                 musicBean.artist = art.toString().substring(0, art.length() - 1);
+                                musicBean.album = songsBean.getAl().getName();
 
                                 playingMusic.cloudType = Constant.CloudType_WANGYI;
                                 playingMusic.readId = songId;
                                 playingMusic.name = songsBean.getName();
                                 playingMusic.picture = songsBean.getAl().getPicUrl();
+                                playingMusic.album= songsBean.getAl().getName();
                                 playingMusic.artist = art.toString().substring(0, art.length() - 1);
                                 playingMusic.path = songUrlBean.getData().get(0).getUrl();
 
@@ -169,11 +208,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             mediaPlayer.prepare();
             mediaPlayer.start();
 
-            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_PLAYING_INFO_MUSIC).Object1(playingMusic));
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
 
             //加上网易标示
             String filName = Constant.CloudType_WANGYI+"_"+downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
-
             String[] temp = playingMusic.picture.split("/");
             String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
             downMusicBean.picture =  dirPath+"/"+pictureName;
@@ -190,46 +228,26 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     String path = file.getAbsolutePath();
                     MusicBean finshMusic = downMusicMap.get(path);
                     if (finshMusic != null){
-                        CacheManager.getImstance().insertMusic(finshMusic);
-                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_DOWN_LIST_MUSIC));
+                        CacheManager.getImstance().insertDownMusic(finshMusic);
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC));
                     }
                 }
             });
 
-            if (playingMusic.picture != null){
+            Net.getWyApi().getApi().downFile(playingMusic.picture).execute(new FileCallBack(dirPath+"/",pictureName) {
+                @Override
+                public void onError(Call call, Exception e, int i) {
+                }
 
-                Net.getWyApi().getApi().downFile(playingMusic.picture).execute(new FileCallBack(dirPath+"/",pictureName) {
-                    @Override
-                    public void onError(Call call, Exception e, int i) {
-                    }
+                @Override
+                public void onResponse(File file, int i) {
 
-                    @Override
-                    public void onResponse(File file, int i) {
+                }
+            });
 
-                    }
-                });
-            }
         }catch (Exception e) {
 
         }
-    }
-
-    public void play(int cloudType,String songId){
-        if (songId.equals(playingMusic.readId) &&
-                cloudType == playingMusic.cloudType){
-            if (!mediaPlayer.isPlaying())
-                mediaPlayer.start();
-        }else {
-            readyPlay(cloudType,songId);
-        }
-    }
-
-    public void pause(){
-        mediaPlayer.pause();
-    }
-
-    public void stop(){
-        mediaPlayer.stop();
     }
 
     @Override

@@ -13,6 +13,7 @@ public class MusicBean {
     public String name;
     public String artist;
     public String readId;
+    public String album;
     public String path;
     public String picture;
     public String lyr;

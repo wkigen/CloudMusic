@@ -16,14 +16,11 @@ import org.greenrobot.eventbus.EventBus;
  ************************************************************/
 public class PlayVM extends AbstractViewModel<PlayActivity> {
 
+    public boolean isPlaying ;
+
     @Override
     public void onBindView(@NonNull PlayActivity view) {
         super.onBindView(view);
-
-    }
-
-
-    public void play(){
 
     }
 

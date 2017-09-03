@@ -58,49 +58,114 @@
 
         </RelativeLayout>
 
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2.5"
-            android:layout_marginLeft="@dimen/dimen_20dp"
-            android:layout_marginRight="@dimen/dimen_20dp"
-            android:id="@+id/rl_disc">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_220dp"
-                android:layout_height="@dimen/dimen_220dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/placeholder_disk_play_song"
-                android:id="@+id/iv_song_picture" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/play_disc"/>
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/dimen_20dp"
-                android:layout_height="wrap_content">
+                android:id="@+id/rl_bottom"
+                android:layout_marginBottom="@dimen/dimen_20dp">
 
-                <ImageView
-                    android:layout_width="@dimen/dimen_40dp"
-                    android:layout_height="@dimen/dimen_40dp"
-                    android:id="@+id/im_play"
-                    android:src="@drawable/note_btn_play"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/dimen_50dp">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:id="@+id/im_pre"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/note_btn_pre"
+                            android:layout_centerInParent="true" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:id="@+id/im_play"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/note_btn_play"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_40dp"
+                            android:id="@+id/im_next"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/note_btn_next"
+                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_bottom">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_300dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/rl_disc">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="@dimen/dimen_200dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/placeholder_disk_play_song"
+                        android:scaleType="fitXY"
+                        android:id="@+id/iv_song_picture" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/play_disc"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

@@ -26,7 +26,7 @@ public class CacheManager {
     SharedPreferences sharedPreferences;
 
     private List<String> sreachHistroyBeens; //搜索历史
-    private List<MusicBean> musicList;//本地歌曲列表
+    private List<MusicBean> downMusicList;//下载歌曲列表
     private String dirPath;
 
     private CacheManager(){
@@ -72,45 +72,52 @@ public class CacheManager {
         return dirPath;
     }
 
-    public synchronized List<MusicBean> getMusicList(){
-        if (musicList == null){
-            musicList = MusicDataBase.getInstance().getAllMusic();
+    public synchronized List<MusicBean> getDownMusicList(){
+        if (downMusicList == null){
+            downMusicList = MusicDataBase.getInstance().getAllMusic();
         }
-        return musicList;
+        return downMusicList;
     }
 
-    public MusicBean getMusic(int cloudType,String readId){
-        if (musicList == null)
+    public synchronized MusicBean getDownMusic(int cloudType, String readId){
+        if (downMusicList == null)
             return null;
-        for (MusicBean music : musicList){
+        for (MusicBean music : downMusicList){
             if (music.cloudType == cloudType && music.readId.equals(readId))
                 return music;
         }
         return null;
     }
 
-    public boolean hasMusic(int cloudType,String readId){
-        if (musicList == null)
+    public synchronized boolean hasDownMusic(int cloudType, String readId){
+        if (downMusicList == null)
             return false;
 
-        for (MusicBean music : musicList){
+        for (MusicBean music : downMusicList){
             if (music.cloudType == cloudType && music.readId.equals(readId))
                 return true;
         }
         return false;
     }
 
-    public synchronized void insertMusic(MusicBean musicBean){
+    public synchronized void insertDownMusic(MusicBean musicBean){
         if (musicBean != null){
-            if (!hasMusic(musicBean.cloudType,musicBean.readId))
+            if (!hasDownMusic(musicBean.cloudType,musicBean.readId)) {
+                downMusicList.add(musicBean);
                 MusicDataBase.getInstance().insertMusic(musicBean);
+            }
         }
     }
 
-    public synchronized void deleteMusic(MusicBean musicBean){
+    public synchronized void deleteDownMusic(MusicBean musicBean){
         if (musicBean != null){
-            if (hasMusic(musicBean.cloudType,musicBean.readId))
-                MusicDataBase.getInstance().deleteMusic(musicBean);
+            for (MusicBean music : downMusicList){
+                if (music.cloudType == musicBean.cloudType && music.readId.equals(musicBean.readId)){
+                    downMusicList.remove(music);
+                    MusicDataBase.getInstance().deleteMusic(musicBean);
+                    break;
+                }
+            }
         }
     }
 

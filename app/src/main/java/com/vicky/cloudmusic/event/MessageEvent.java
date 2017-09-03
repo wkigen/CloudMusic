@@ -10,15 +10,22 @@ import com.vicky.cloudmusic.net.Net;
 public class MessageEvent {
 
     public static final int ID_NULL = 0;
-    public static final int ID_READY_MUSIC = 1;
-    public static final int ID_PLAY_MUSIC = 2;
-    public static final int ID_PAUSE_MUSIC = 3;
-    public static final int ID_STOP_MUSIC = 4;
-    public static final int ID_REQUEST_STATUS_MUSIC = 5;
-    public static final int ID_RESPONSE_STATUS_MUSIC = 6;
-    public static final int ID_REFRESH_DOWN_LIST_MUSIC = 7;
-    public static final int ID_REQUEST_PLAYING_INFO_MUSIC = 8;
-    public static final int ID_REFRESH_PLAYING_INFO_MUSIC = 9;
+
+    public static final int ID_REQUEST_PLAY_MUSIC = 1;      //请求播放音乐
+    public static final int ID_RESPONSE_PLAY_MUSIC = 2;     //回应播放音乐
+
+    public static final int ID_REQUEST_PAUSE_MUSIC = 3;     //请求暂停音乐
+    public static final int ID_RESPONSE_PAUSE_MUSIC = 4;     //回应暂停音乐
+
+    public static final int ID_REQUEST_STOP_MUSIC = 5;       //请求停止音乐
+    public static final int ID_RESPONSE_STOP_MUSIC = 6;     //回应停止音乐
+
+    public static final int ID_RESPONSE_DOWN_LIST_MUSIC = 11;    //请求下载列表状态
+
+    public static final int ID_REQUEST_PLAYING_INFO_MUSIC = 12; //请求当前音乐状态
+    public static final int ID_RESPONSE_PLAYING_INFO_MUSIC = 13; //回应当前音乐状态
+
+
 
     public int what;
     public Object object1;

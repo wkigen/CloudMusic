@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.service.MusicService;
@@ -60,8 +59,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                CacheManager.getImstance().getMusicList();
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REFRESH_DOWN_LIST_MUSIC));
+                CacheManager.getImstance().getDownMusicList();
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC));
             }
         }).start();
     }

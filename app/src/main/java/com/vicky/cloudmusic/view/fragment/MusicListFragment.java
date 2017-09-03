@@ -5,12 +5,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
+import com.vicky.cloudmusic.view.activity.LocalMusicActivity;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
 import com.vicky.cloudmusic.viewmodel.MusicListVM;
 
@@ -22,13 +25,14 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Author:   vicky
  * Description:
  * Date:
  */
-public class MusicListFragment extends BaseFragment<MusicListFragment, MusicListVM> {
+public class MusicListFragment extends BaseFragment<MusicListFragment, MusicListVM> implements View.OnClickListener {
 
     @Bind(R.id.tv_local_music_count)
     TextView tvLocalMusicCount;
@@ -36,6 +40,24 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
     TextView tvLateyMusicCount;
     @Bind(R.id.tv_down_music_count)
     TextView tvDownMusicCount;
+    @Bind(R.id.iv_ico_local)
+    ImageView ivIcoLocal;
+    @Bind(R.id.tv_local)
+    TextView tvLocal;
+    @Bind(R.id.rl_local_music)
+    RelativeLayout rlLocalMusic;
+    @Bind(R.id.iv_ico_lately)
+    ImageView ivIcoLately;
+    @Bind(R.id.tv_latey)
+    TextView tvLatey;
+    @Bind(R.id.rl_lately_play)
+    RelativeLayout rlLatelyPlay;
+    @Bind(R.id.iv_ico_down)
+    ImageView ivIcoDown;
+    @Bind(R.id.tv_down)
+    TextView tvDown;
+    @Bind(R.id.rl_down_music)
+    RelativeLayout rlDownMusic;
 
     @Override
     protected int tellMeLayout() {
@@ -44,6 +66,9 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
+        tvLocalMusicCount.setText("(" + musicBeanList.size() + ")");
+        tvDownMusicCount.setText("(" + musicBeanList.size() + ")");
     }
 
     @Override
@@ -89,9 +114,20 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
     public void onMessageEvent(MessageEvent event) {
 
         switch (event.what) {
-            case MessageEvent.ID_REFRESH_DOWN_LIST_MUSIC:
-                List<MusicBean>  musicBeanList = CacheManager.getImstance().getMusicList();
-                tvLocalMusicCount.setText("("+musicBeanList.size()+")");
+            case MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC:
+                List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
+                tvLocalMusicCount.setText("(" + musicBeanList.size() + ")");
+                tvDownMusicCount.setText("(" + musicBeanList.size() + ")");
+                break;
+        }
+    }
+
+    @OnClick({R.id.rl_local_music})
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_local_music:
+                readyGo(LocalMusicActivity.class);
                 break;
         }
     }

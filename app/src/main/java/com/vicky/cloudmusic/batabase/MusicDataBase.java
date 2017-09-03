@@ -41,6 +41,7 @@ public class MusicDataBase {
             musicBean.cloudType = cursor.getInt(MusicDBHelper.CLOUDTYPE);
             musicBean.readId = cursor.getString(MusicDBHelper.READID);
             musicBean.artist = cursor.getString(MusicDBHelper.ARTIST);
+            musicBean.album = cursor.getString(MusicDBHelper.ALBUM);
             musicBean.picture = cursor.getString(MusicDBHelper.PICTURE);
             musicBean.path = cursor.getString(MusicDBHelper.PATH);
             musicBean.lyr = cursor.getString(MusicDBHelper.LYR);
@@ -52,7 +53,7 @@ public class MusicDataBase {
 
     public void insertMusic(MusicBean musicBean){
         if (musicBean != null){
-            musicDBHelper.insert(musicBean.name,musicBean.cloudType,musicBean.readId,musicBean.artist,musicBean.picture,musicBean.path,musicBean.lyr);
+            musicDBHelper.insert(musicBean.name,musicBean.cloudType,musicBean.readId,musicBean.artist,musicBean.album,musicBean.picture,musicBean.path,musicBean.lyr);
         }
     }
 

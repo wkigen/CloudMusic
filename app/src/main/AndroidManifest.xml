@@ -13,7 +13,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.SreachActivity" />
-        <activity android:name=".view.activity.PlayActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".view.activity.PlayActivity"
+            android:launchMode="singleTop" />
 
         <service android:name=".service.MusicService" />
 
+        <activity android:name=".view.activity.LocalMusicActivity"></activity>
     </application>
 
 </manifest>
