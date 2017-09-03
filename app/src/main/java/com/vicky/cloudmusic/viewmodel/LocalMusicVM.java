@@ -41,7 +41,7 @@ public class LocalMusicVM extends AbstractViewModel<LocalMusicActivity> {
         if (position >= 0 && position < localMusicBeanList.size()){
             LocalMusicBean localMusicBean = localMusicBeanList.get(position);
             if (!localMusicBean.isPlaying)
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(localMusicBean.musicBean.cloudType).Object2(localMusicBean.musicBean.readId));
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(localMusicBean.musicBean.cloudType).Object2(localMusicBean.musicBean.readId).Object3(true));
             else{
                 if (getView() != null)
                     getView().readyGo(PlayActivity.class);

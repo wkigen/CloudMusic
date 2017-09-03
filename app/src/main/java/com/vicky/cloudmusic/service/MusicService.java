@@ -22,8 +22,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,9 +39,12 @@ import okhttp3.Call;
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener,MediaPlayer.OnErrorListener {
 
     private MediaPlayer mediaPlayer;
+    private Timer timer = new Timer();
+
     private volatile MusicBean playingMusic = new MusicBean();
     private ConcurrentHashMap<String,MusicBean> downMusicMap = new ConcurrentHashMap<>();
-    private Timer timer = new Timer();
+
+    private int playPosition = 0;
 
     @Nullable
     @Override
@@ -64,6 +69,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
             }
         },1000);
+
+        List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
+
+        if (musicBeanList.size() > 0){
+            readyPlay(musicBeanList.get(0).cloudType,musicBeanList.get(0).readId,false);
+        }
+
     }
 
     @Override
@@ -82,7 +94,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         synchronized (MusicService.class){
             switch (event.what){
                 case MessageEvent.ID_REQUEST_PLAY_MUSIC:
-                    play((int) event.object1,(String)event.object2);
+                    play((int) event.object1,(String)event.object2,(boolean)event.object3);
                     break;
                 case MessageEvent.ID_REQUEST_PAUSE_MUSIC:
                     pause();
@@ -98,7 +110,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
 
-    public synchronized void play(int cloudType,String songId){
+    public synchronized void play(int cloudType,String songId,boolean play){
         if ( cloudType == Constant.CloudType_NULL
                 ||( cloudType == playingMusic.cloudType && songId.equals(playingMusic.readId))){
             if (!mediaPlayer.isPlaying()){
@@ -106,7 +118,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
             }
         }else {
-            readyPlay(cloudType,songId);
+            readyPlay(cloudType,songId,play);
         }
     }
 
@@ -120,19 +132,27 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
     }
 
-    private void readyPlay(int cloudType,String songId){
+    public synchronized  void next(){
+
+    }
+
+    private void setPlayListPosition(MusicBean dst){
+
+    }
+
+    private void readyPlay(int cloudType,String songId,boolean play){
         if (CacheManager.getImstance().hasDownMusic(cloudType,songId)){
-            readPlayFormLocal(cloudType,songId);
+            readPlayFormLocal(cloudType,songId,play);
         }else {
             switch (cloudType){
                 case Constant.CloudType_WANGYI:
-                    readPlayFormNetWY(songId);
+                    readPlayFormNetWY(songId,play);
                     break;
             }
         }
     }
 
-    private void readPlayFormLocal(int cloudType,String songId){
+    private void readPlayFormLocal(int cloudType,String songId,boolean play){
         try
         {
             MusicBean musicBean = CacheManager.getImstance().getDownMusic(cloudType,songId);
@@ -140,7 +160,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 mediaPlayer.reset();
                 mediaPlayer.setDataSource(musicBean.path);
                 mediaPlayer.prepare();
-                mediaPlayer.start();
+                if (play)
+                    mediaPlayer.start();
 
                 playingMusic = musicBean;
 
@@ -153,7 +174,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
 
-    private void readPlayFormNetWY(final String songId){
+    private void readPlayFormNetWY(final String songId,final boolean play){
         Net.getWyApi().getApi().detail("[{\"id\":\""+songId+"\"}]").execute(new WYCallback() {
             @Override
             public void onRequestSuccess(String result) {
@@ -188,7 +209,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                                 playingMusic.artist = art.toString().substring(0, art.length() - 1);
                                 playingMusic.path = songUrlBean.getData().get(0).getUrl();
 
-                                readyPlayFormNet(musicBean);
+                                readyPlayFormNet(musicBean,play);
                             }
                         }
                     });
@@ -197,16 +218,16 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         });
     }
 
-    private void readyPlayFormNet(MusicBean downMusicBean){
+    private void readyPlayFormNet(MusicBean downMusicBean,final boolean play){
 
         final String dirPath = CacheManager.getImstance().getDirPath();
 
         try{
 
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(playingMusic.path);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
+            mediaPlayer.stop();
+            //mediaPlayer.setDataSource(playingMusic.path);
+            //mediaPlayer.prepare();
+            //mediaPlayer.start();
 
             EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
 
@@ -218,6 +239,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             downMusicBean.path = dirPath+"/"+filName;
 
             downMusicMap.put(downMusicBean.path, downMusicBean);
+
             Net.getWyApi().getApi().downFile(playingMusic.path).execute(new FileCallBack(dirPath+"/",filName) {
                 @Override
                 public void onError(Call call, Exception e, int i) {
@@ -231,6 +253,17 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                         CacheManager.getImstance().insertDownMusic(finshMusic);
                         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC));
                     }
+                    //要播放的歌曲已经下载完了
+                    if (finshMusic.cloudType == playingMusic.cloudType &&
+                            finshMusic.readId.equals(playingMusic.readId))
+                        readPlayFormLocal(playingMusic.cloudType,playingMusic.readId,play);
+
+                    downMusicMap.remove(path);
+                }
+
+                @Override
+                public void inProgress(float progress, long total, int id){
+
                 }
             });
 

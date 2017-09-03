@@ -35,7 +35,7 @@
             android:textColorHint="@color/text_color_3"
             android:layout_toRightOf="@id/iv_back"
             android:background="@null"
-            android:textColor="@color/text_color_2"
+            android:textColor="@color/white"
             android:drawablePadding="@dimen/dimen_10dp"
             android:hint="@string/sreach_song" />
 

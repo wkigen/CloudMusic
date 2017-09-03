@@ -78,18 +78,20 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
     }
 
     protected void setBottomMusic(boolean isPlaying,MusicBean music){
-        if (music.mid == MusicBean.Invalid_ID ){
-            if (ivBottomMusicPicture != null)
-                Net.imageLoader(this,music.picture,ivBottomMusicPicture,R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
-        }else {
-            if (ivBottomMusicPicture != null)
-                ivBottomMusicPicture.setImageBitmap(BitmapManager.getInstance().getBitmap(music.picture));
+        if (music != null){
+            if (music.mid == MusicBean.Invalid_ID ){
+                if (ivBottomMusicPicture != null)
+                    Net.imageLoader(this,music.picture,ivBottomMusicPicture,R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
+            }else {
+                if (ivBottomMusicPicture != null)
+                    ivBottomMusicPicture.setImageBitmap(BitmapManager.getInstance().getBitmap(music.picture));
 
+            }
+            if (tvBottomMusicName != null)
+                tvBottomMusicName.setText(music.name);
+            if (tvBottomMusicDes != null)
+                tvBottomMusicDes.setText(music.artist);
         }
-        if (tvBottomMusicName != null)
-            tvBottomMusicName.setText(music.name);
-        if (tvBottomMusicDes != null)
-            tvBottomMusicDes.setText(music.artist);
     }
 
 }

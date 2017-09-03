@@ -64,6 +64,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC));
             }
         }).start();
+
+
     }
 
     @Override

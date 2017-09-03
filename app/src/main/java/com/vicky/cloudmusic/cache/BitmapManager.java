@@ -27,7 +27,7 @@ public class BitmapManager {
     private static BitmapManager mInstance;
 
     private LruCache<String, Bitmap> mBitapCache;
-
+    private static final String BlurPre = "blur_";
     private BitmapManager(){
         int MAXMEMONRY = (int) (Runtime.getRuntime() .maxMemory() / 1024);
         mBitapCache = new LruCache<>(MAXMEMONRY / 4);
@@ -41,6 +41,18 @@ public class BitmapManager {
             }
         }
         return mInstance;
+    }
+
+    public synchronized  Bitmap getBitmapBlur(String key){
+        Bitmap bm = getBitmap(BlurPre+key);
+        if (bm == null){
+            bm = getBitmap(key);
+            if (bm != null) {
+                bm =FastBlurUtil.doBlur(bm, 100, false);
+                mBitapCache.put(BlurPre+key,bm);
+            }
+        }
+        return bm;
     }
 
     public synchronized Bitmap getBitmap(String key) {

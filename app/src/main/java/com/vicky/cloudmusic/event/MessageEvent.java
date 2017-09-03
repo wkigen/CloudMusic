@@ -30,6 +30,7 @@ public class MessageEvent {
     public int what;
     public Object object1;
     public Object object2;
+    public Object object3;
 
     public MessageEvent(int what){
         this.what = what;
@@ -42,6 +43,11 @@ public class MessageEvent {
 
     public MessageEvent Object2(Object object){
         this.object2 = object;
+        return this;
+    }
+
+    public MessageEvent Object3(Object object){
+        this.object3 = object;
         return this;
     }
 }

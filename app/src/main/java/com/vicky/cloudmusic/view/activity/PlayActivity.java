@@ -106,7 +106,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 break;
             case R.id.im_play:
                 if (!getViewModel().isPlaying)
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(Constant.CloudType_NULL));
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(Constant.CloudType_NULL).Object3(true));
                 else
                     EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PAUSE_MUSIC));
                 break;
@@ -153,11 +153,10 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
         @Override
         protected Bitmap[] doInBackground(String... strings) {
-            Bitmap bitmap = null ;
-            Bitmap blur = null ;
+            Bitmap bitmap;
+            Bitmap blur;
             bitmap = BitmapManager.getInstance().getBitmap(strings[0]);
-            if (bitmap != null)
-                blur = FastBlurUtil.doBlur(bitmap,100,false);
+            blur = BitmapManager.getInstance().getBitmapBlur(strings[0]);
             return  new Bitmap[]{bitmap,blur};
         }
 
