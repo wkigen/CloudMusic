@@ -41,25 +41,42 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_listview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:paddingTop="@dimen/dimen_10dp"
-        android:divider="@null"
-        android:paddingRight="@dimen/dimen_10dp"
-        android:paddingLeft="@dimen/dimen_10dp"/>
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/lv_histroy_listview"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:paddingTop="@dimen/dimen_10dp"
-        android:paddingRight="@dimen/dimen_10dp"
-        android:paddingLeft="@dimen/dimen_10dp" />
+        <include layout="@layout/item_bottom_play"
+            android:id="@+id/rl_bottom_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+
+        <ListView
+            android:id="@+id/lv_listview"
+            android:layout_width="match_parent"
+            android:background="@color/bg_color_main"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:paddingTop="@dimen/dimen_10dp"
+            android:divider="@null"
+            android:layout_above="@id/rl_bottom_play"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:paddingLeft="@dimen/dimen_10dp"/>
+
+        <ListView
+            android:id="@+id/lv_histroy_listview"
+            android:layout_width="match_parent"
+            android:background="@color/bg_color_main"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:layout_above="@id/rl_bottom_play"
+            android:paddingTop="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:paddingLeft="@dimen/dimen_10dp" />
+
+    </RelativeLayout>
+
+
+
 
 </LinearLayout>

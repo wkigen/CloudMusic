@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dimen_21sp"
-            android:textColor="@color/text_color_2"
+            android:textColor="@color/white"
             android:layout_marginLeft="@dimen/dimen_10dp"
             android:layout_toRightOf="@id/iv_back"
             android:id="@+id/tv_music_name"
@@ -30,10 +30,24 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_listview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <include layout="@layout/item_bottom_play"
+            android:id="@+id/rl_bottom_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+
+        <ListView
+            android:id="@+id/lv_listview"
+            android:layout_width="match_parent"
+            android:layout_above="@id/rl_bottom_play"
+            android:background="@color/bg_color_main"
+            android:divider="@null"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

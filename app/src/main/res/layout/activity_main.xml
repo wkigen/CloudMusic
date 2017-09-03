@@ -53,10 +53,17 @@
 
     </RelativeLayout>
 
+    <include layout="@layout/item_bottom_play"
+        android:id="@+id/rl_bottom_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
     <android.support.v4.view.ViewPager
         android:layout_below="@id/rl_sreach_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom_play"
         android:id="@+id/vp_main">
 
     </android.support.v4.view.ViewPager>

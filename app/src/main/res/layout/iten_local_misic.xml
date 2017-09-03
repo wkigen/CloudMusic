@@ -39,4 +39,9 @@
         android:id="@+id/tv_des"
         android:textColor="@color/text_color_4"/>
 
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        style="@style/DivideLineHorizontal"></View>
+
 </RelativeLayout>

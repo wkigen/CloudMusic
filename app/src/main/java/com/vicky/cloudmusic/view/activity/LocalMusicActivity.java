@@ -89,24 +89,10 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
         return null;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
         mAdapter.setDatas(getViewModel().getLocalMusic());
-        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC));
     }
 
     public void refresh(){
@@ -130,6 +116,7 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
                 boolean isPlaying = (boolean) event.object2;
                 final MusicBean musicBean = (MusicBean) event.object1;
                 getViewModel().setPlayIco(musicBean.cloudType,musicBean.readId);
+                setBottomMusic(isPlaying,musicBean);
                 break;
         }
     }

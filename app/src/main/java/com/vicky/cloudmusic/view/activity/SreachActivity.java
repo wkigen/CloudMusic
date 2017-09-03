@@ -18,6 +18,7 @@ import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
 import com.vicky.cloudmusic.R;
+import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -26,6 +27,8 @@ import com.vicky.cloudmusic.view.adapter.SreachHistroyAdapter;
 import com.vicky.cloudmusic.viewmodel.SreachVM;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -160,6 +163,17 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         switch (v.getId()) {
             case R.id.iv_back:
                 onBackPressed();
+                break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        switch (event.what) {
+            case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
+                boolean isPlaying = (boolean) event.object2;
+                final MusicBean musicBean = (MusicBean) event.object1;
+                setBottomMusic(isPlaying,musicBean);
                 break;
         }
     }

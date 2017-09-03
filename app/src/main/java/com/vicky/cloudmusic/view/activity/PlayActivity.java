@@ -80,8 +80,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
-
     }
 
     @Override
@@ -95,23 +93,9 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
-        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_INFO_MUSIC));
     }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
-    }
-
 
     @OnClick({R.id.iv_back, R.id.im_play})
     @Override

@@ -26,6 +26,7 @@ public class LocalMusicVM extends AbstractViewModel<LocalMusicActivity> {
     private List<LocalMusicBean> localMusicBeanList = new LinkedList<>();
 
     public List<LocalMusicBean> getLocalMusic(){
+        localMusicBeanList.clear();
         List<MusicBean> musicBeenList = CacheManager.getImstance().getDownMusicList();
         for (MusicBean musicBean : musicBeenList){
             LocalMusicBean localMusicBean = new LocalMusicBean();
@@ -37,7 +38,7 @@ public class LocalMusicVM extends AbstractViewModel<LocalMusicActivity> {
     }
 
     public void playMusic(int position){
-        if (position > 0 && position < localMusicBeanList.size()){
+        if (position >= 0 && position < localMusicBeanList.size()){
             LocalMusicBean localMusicBean = localMusicBeanList.get(position);
             if (!localMusicBean.isPlaying)
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(localMusicBean.musicBean.cloudType).Object2(localMusicBean.musicBean.readId));

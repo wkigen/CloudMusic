@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/dimen_13dp"
-    android:paddingRight="@dimen/dimen_13dp"
+    android:background="@color/bg_color_main"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
+        android:paddingLeft="@dimen/dimen_13dp"
+        android:paddingRight="@dimen/dimen_13dp"
         android:id="@+id/rl_local_music">
 
         <ImageView
@@ -53,6 +54,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
+        android:paddingLeft="@dimen/dimen_13dp"
+        android:paddingRight="@dimen/dimen_13dp"
         android:id="@+id/rl_lately_play">
 
         <ImageView
@@ -96,6 +99,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
+        android:paddingLeft="@dimen/dimen_13dp"
+        android:paddingRight="@dimen/dimen_13dp"
         android:id="@+id/rl_down_music">
 
         <ImageView
