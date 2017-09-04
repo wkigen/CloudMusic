@@ -59,9 +59,7 @@
             android:visibility="gone"
             android:paddingTop="@dimen/dimen_10dp"
             android:divider="@null"
-            android:layout_above="@id/rl_bottom_play"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:paddingLeft="@dimen/dimen_10dp"/>
+            android:layout_above="@id/rl_bottom_play"/>
 
         <ListView
             android:id="@+id/lv_histroy_listview"
@@ -70,9 +68,7 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:layout_above="@id/rl_bottom_play"
-            android:paddingTop="@dimen/dimen_10dp"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:paddingLeft="@dimen/dimen_10dp" />
+            android:paddingTop="@dimen/dimen_10dp" />
 
     </RelativeLayout>
 

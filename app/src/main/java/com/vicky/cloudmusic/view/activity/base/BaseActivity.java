@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.mvvm.base.BaseLibActivity;
+import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
@@ -63,6 +64,14 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
                 }
             });
         }
+        if (ivBottomMusicPlay != null){
+            ivBottomMusicPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC));
+                }
+            });
+        }
     }
 
     @Override
@@ -78,14 +87,15 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
     }
 
     protected void setBottomMusic(boolean isPlaying,MusicBean music){
+        if (isPlaying){
+            ivBottomMusicPlay.setImageResource(R.drawable.playbar_btn_pause);
+        }else {
+            ivBottomMusicPlay.setImageResource(R.drawable.playbar_btn_play);
+        }
         if (music != null){
-            if (music.mid == MusicBean.Invalid_ID ){
-                if (ivBottomMusicPicture != null)
-                    Net.imageLoader(this,music.picture,ivBottomMusicPicture,R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
-            }else {
+            if (music.picture != null &&!StringUtils.hasHttpPrefix(music.picture)){
                 if (ivBottomMusicPicture != null)
                     ivBottomMusicPicture.setImageBitmap(BitmapManager.getInstance().getBitmap(music.picture));
-
             }
             if (tvBottomMusicName != null)
                 tvBottomMusicName.setText(music.name);

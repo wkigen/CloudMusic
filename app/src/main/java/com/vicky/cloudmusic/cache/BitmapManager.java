@@ -64,17 +64,13 @@ public class BitmapManager {
     }
 
     private Bitmap readBitmap(String key){
-        FileInputStream inputStream = null;
         Bitmap bitmap = null;
         try {
-            inputStream = new FileInputStream(key);
-            bitmap = BitmapFactory.decodeStream(inputStream);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 2;
+            bitmap = BitmapFactory.decodeFile(key, options);
         } catch (Exception e) {
         }finally {
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-            }catch (Exception e){}
             return bitmap;
         }
     }

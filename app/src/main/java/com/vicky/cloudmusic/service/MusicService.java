@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.http.callback.FileCallBack;
+import com.vicky.android.baselib.runtimepermission.PermissionsManager;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.WYSongDetailBean;
@@ -61,6 +63,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public void onCreate() {
         super.onCreate();
         mediaPlayer = new MediaPlayer();
+        mediaPlayer.reset();
         EventBus.getDefault().register(this);
 
         timer.schedule(new TimerTask() {
@@ -94,7 +97,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         synchronized (MusicService.class){
             switch (event.what){
                 case MessageEvent.ID_REQUEST_PLAY_MUSIC:
-                    play((int) event.object1,(String)event.object2,(boolean)event.object3);
+                    play((int) event.object1, (String) event.object2, (boolean) event.object3);
+                    break;
+                case MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC:
+                    if (mediaPlayer.isPlaying())
+                        pause();
+                    else
+                        play(Constant.CloudType_NULL,null,true);
                     break;
                 case MessageEvent.ID_REQUEST_PAUSE_MUSIC:
                     pause();
@@ -128,7 +137,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     public synchronized void stop(){
-        mediaPlayer.stop();
+        mediaPlayer.pause();
         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object2(mediaPlayer.isPlaying()));
     }
 
@@ -157,15 +166,21 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         {
             MusicBean musicBean = CacheManager.getImstance().getDownMusic(cloudType,songId);
             if (musicBean != null){
-                mediaPlayer.reset();
-                mediaPlayer.setDataSource(musicBean.path);
-                mediaPlayer.prepare();
-                if (play)
-                    mediaPlayer.start();
 
-                playingMusic = musicBean;
+                try{
+                    playingMusic = (MusicBean)musicBean.clone();
 
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(playingMusic.path);
+                    mediaPlayer.prepare();
+                    if (play)
+                        mediaPlayer.start();
+
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
+
+                }catch (CloneNotSupportedException e){
+
+                }
             }
 
         }catch (Exception e){
@@ -193,7 +208,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                                     art.append(arBean.getName() + " ");
                                 }
 
-                                //图片  歌词  资源 在后面下载后再保存
                                 MusicBean musicBean = new MusicBean();
                                 musicBean.name = songsBean.getName();
                                 musicBean.cloudType = Constant.CloudType_WANGYI;
@@ -218,21 +232,18 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         });
     }
 
-    private void readyPlayFormNet(MusicBean downMusicBean,final boolean play){
+    private void readyPlayFormNet(final MusicBean downMusicBean,final boolean play){
 
         final String dirPath = CacheManager.getImstance().getDirPath();
 
         try{
 
-            mediaPlayer.stop();
-            //mediaPlayer.setDataSource(playingMusic.path);
-            //mediaPlayer.prepare();
-            //mediaPlayer.start();
+            mediaPlayer.pause();
 
             EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
 
             //加上网易标示
-            String filName = Constant.CloudType_WANGYI+"_"+downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
+            final String filName = Constant.CloudType_WANGYI+"_"+downMusicBean.artist+"-"+ downMusicBean.name+".mp3";
             String[] temp = playingMusic.picture.split("/");
             String pictureName = Constant.CloudType_WANGYI+"_"+temp[temp.length-1];
             downMusicBean.picture =  dirPath+"/"+pictureName;
@@ -255,15 +266,18 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     }
                     //要播放的歌曲已经下载完了
                     if (finshMusic.cloudType == playingMusic.cloudType &&
-                            finshMusic.readId.equals(playingMusic.readId))
-                        readPlayFormLocal(playingMusic.cloudType,playingMusic.readId,play);
+                            finshMusic.readId.equals(playingMusic.readId)) {
+                        playingMusic.path = finshMusic.path;
+                        readPlayFormLocal(playingMusic.cloudType, playingMusic.readId, play);
+                    }
 
                     downMusicMap.remove(path);
                 }
 
                 @Override
                 public void inProgress(float progress, long total, int id){
-
+                    Log.e("inProgress",filName+" "+progress+" "+total);
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_DOWN_PROGRESS_MUSIC).Object1(filName).Object2(progress).Object3(total));
                 }
             });
 
@@ -274,7 +288,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
                 @Override
                 public void onResponse(File file, int i) {
-
+                    if (downMusicBean.cloudType == playingMusic.cloudType &&
+                            downMusicBean.readId.equals(playingMusic.readId)){
+                        playingMusic.picture = file.getAbsolutePath();
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()));
+                    }
                 }
             });
 
@@ -285,7 +303,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-
+        mediaPlayer.reset();
         return true;
     }
 

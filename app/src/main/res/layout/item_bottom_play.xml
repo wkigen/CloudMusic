@@ -22,9 +22,18 @@
         <ImageView
             android:layout_width="@dimen/dimen_40dp"
             android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_6dp"
-            android:src="@drawable/lay_icn_alb"
+            android:src="@drawable/lay_icn_manage"
             android:layout_alignParentRight="true"
+            android:id="@+id/iv_bottom_music_list"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_6dp"
+            android:src="@drawable/playbar_btn_play"
+            android:layout_toLeftOf="@id/iv_bottom_music_list"
             android:id="@+id/iv_bottom_music_play"
             android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_centerVertical="true"/>

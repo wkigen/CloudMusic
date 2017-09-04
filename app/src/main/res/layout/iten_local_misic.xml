@@ -12,7 +12,7 @@
         android:id="@+id/iv_ico_play"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/dimen_10dp"
-        android:src="@drawable/lay_icn_upquality"/>
+        android:src="@drawable/song_play_icon"/>
 
     <TextView
         android:layout_width="wrap_content"

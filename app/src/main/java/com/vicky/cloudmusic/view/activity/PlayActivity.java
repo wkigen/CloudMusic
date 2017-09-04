@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.FastBlurUtil;
+import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
@@ -105,10 +106,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 onBackPressed();
                 break;
             case R.id.im_play:
-                if (!getViewModel().isPlaying)
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(Constant.CloudType_NULL).Object3(true));
-                else
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PAUSE_MUSIC));
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC));
                 break;
         }
     }
@@ -132,18 +130,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 if (musicBean != null){
                     tvMusicName.setText(musicBean.name);
                     tvArtist.setText(musicBean.artist);
-                    if (musicBean.mid == MusicBean.Invalid_ID) {
-                        Net.imageLoader(this, musicBean.picture, new Net.ImageLoaderCallBack() {
-                            @Override
-                            public void getBitmap(Bitmap bitmap) {
-                                ivSongPicture.setImageBitmap(bitmap);
-                                ivBackground.setImageBitmap(FastBlurUtil.doBlur(bitmap, 8, false));
-                            }
-                        });
-                    } else {
-                        upActivityTask = new UpActivityTask();
-                        upActivityTask.execute(musicBean.picture);
-                    }
+                    upActivityTask = new UpActivityTask();
+                    upActivityTask.execute(musicBean.picture);
                 }
                 break;
         }
@@ -153,10 +141,13 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
         @Override
         protected Bitmap[] doInBackground(String... strings) {
-            Bitmap bitmap;
-            Bitmap blur;
-            bitmap = BitmapManager.getInstance().getBitmap(strings[0]);
-            blur = BitmapManager.getInstance().getBitmapBlur(strings[0]);
+            Bitmap bitmap = null;
+            Bitmap blur = null;
+            if (strings[0] != null && !StringUtils.hasHttpPrefix(strings[0])){
+                bitmap = BitmapManager.getInstance().getBitmap(strings[0]);
+                if (bitmap != null)
+                    blur = BitmapManager.getInstance().getBitmapBlur(strings[0]);
+            }
             return  new Bitmap[]{bitmap,blur};
         }
 
