@@ -69,6 +69,7 @@ public class BitmapManager {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 2;
             bitmap = BitmapFactory.decodeFile(key, options);
+            mBitapCache.put(key,bitmap);
         } catch (Exception e) {
         }finally {
             return bitmap;

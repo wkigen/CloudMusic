@@ -10,5 +10,6 @@
     <string name="local_music">本地音乐</string>
     <string name="latey_play">最近播放</string>
     <string name="down_manager">下载管理</string>
+    <string name="play_list">播放列表</string>
 
 </resources>

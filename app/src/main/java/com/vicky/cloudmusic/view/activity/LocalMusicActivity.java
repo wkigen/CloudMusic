@@ -12,19 +12,17 @@ import android.widget.TextView;
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.LocalMusicBean;
 import com.vicky.cloudmusic.bean.MusicBean;
+import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.LocalMusicAdapter;
 import com.vicky.cloudmusic.viewmodel.LocalMusicVM;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -92,7 +90,7 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
     @Override
     public void onResume() {
         super.onResume();
-        mAdapter.setDatas(getViewModel().getLocalMusic());
+        mAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
     }
 
     public void refresh(){
@@ -115,8 +113,7 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
                 boolean isPlaying = (boolean) event.object2;
                 final MusicBean musicBean = (MusicBean) event.object1;
-                if (musicBean!=null )
-                    getViewModel().setPlayIco(musicBean.cloudType,musicBean.readId);
+                refresh();
                 setBottomMusic(isPlaying,musicBean);
                 break;
         }

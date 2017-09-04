@@ -61,9 +61,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         EventBus.getDefault().register(this);
 
         List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
-
+        CacheManager.getImstance().getPlayMusicList();
         if (musicBeanList.size() > 0){
-            readyPlay(musicBeanList.get(0).cloudType,musicBeanList.get(0).readId,false);
+            readyPlay(musicBeanList.get(0).cloudType, musicBeanList.get(0).readId, false);
         }
 
     }
@@ -150,7 +150,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         if (musicBean != null){
             try{
                 playingMusic = (MusicBean)musicBean.clone();
-                mediaPlayerPlay(musicBean.path,true);
+                mediaPlayerPlay(musicBean,true);
             }catch (Exception E){}
         }else {
             stop();
@@ -162,22 +162,24 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         if (musicBean != null){
             try{
                 playingMusic = (MusicBean)musicBean.clone();
-                mediaPlayerPlay(musicBean.path,true);
+                mediaPlayerPlay(musicBean,true);
             }catch (Exception E){}
         }else {
             stop();
         }
     }
 
-    private void mediaPlayerPlay(String path,boolean play){
+    private void mediaPlayerPlay(MusicBean musicBean,boolean play){
         try{
-            if (path != null){
+            if (musicBean != null){
                 mediaPlayer.reset();
-                mediaPlayer.setDataSource(path);
+                mediaPlayer.setDataSource(musicBean.path);
                 mediaPlayer.prepare();
             }
             if (play)
                 mediaPlayer.start();
+            if (musicBean != null)
+                CacheManager.getImstance().selectPlayMusicList(musicBean.cloudType,musicBean.readId);
             EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC)
                     .Object1(playingMusic).Object2(mediaPlayer.isPlaying()).Object3(mediaPlayer.getDuration()));
         }catch (Exception e){
@@ -202,7 +204,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             MusicBean musicBean = CacheManager.getImstance().getDownMusic(cloudType,songId);
             if (musicBean != null){
                 playingMusic = (MusicBean)musicBean.clone();
-                mediaPlayerPlay(playingMusic.path, play);
+                mediaPlayerPlay(playingMusic, play);
             }else {
                 stop();
             }

@@ -10,7 +10,9 @@ import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.Application;
 import com.vicky.cloudmusic.batabase.MusicDataBase;
 import com.vicky.cloudmusic.bean.MusicBean;
+import com.vicky.cloudmusic.bean.PlayMusicStausBean;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class CacheManager {
 
     private List<String> sreachHistroyBeens; //搜索历史
     private List<MusicBean> downMusicList;//下载歌曲列表
+    private List<PlayMusicStausBean> playMusicStausBeanList;    //播放列表
     private String dirPath;
 
     private CacheManager(){
@@ -157,6 +160,33 @@ public class CacheManager {
                     MusicDataBase.getInstance().deleteMusic(musicBean);
                     break;
                 }
+            }
+        }
+    }
+
+    public synchronized List<PlayMusicStausBean> getPlayMusicList(){
+        if (playMusicStausBeanList == null){
+            playMusicStausBeanList = new ArrayList<>();
+            List<MusicBean> downMusicList = getDownMusicList();
+            for (MusicBean musicBean : downMusicList){
+                PlayMusicStausBean playMusicStausBean = new PlayMusicStausBean();
+                playMusicStausBean.musicBean = musicBean;
+                playMusicStausBean.isSelect = false;
+                playMusicStausBeanList.add(playMusicStausBean);
+            }
+        }
+        return playMusicStausBeanList;
+    }
+
+    public synchronized void selectPlayMusicList(int cludeType,String readId){
+        if (playMusicStausBeanList == null && cludeType >0 && !TextUtils.isEmpty(readId))
+            return;
+        for (PlayMusicStausBean playMusicStausBean : playMusicStausBeanList){
+            if (playMusicStausBean.musicBean.cloudType == cludeType &&
+                    playMusicStausBean.musicBean.readId.equals(readId)){
+                playMusicStausBean.isSelect = true;
+            }else {
+                playMusicStausBean.isSelect = false;
             }
         }
     }

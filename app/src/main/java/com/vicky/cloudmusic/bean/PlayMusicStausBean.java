@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Description:
  * Date:
  */
-public class LocalMusicBean implements Serializable {
+public class PlayMusicStausBean implements Serializable {
 
     public MusicBean musicBean;
-    public boolean isPlaying;
+    public boolean isSelect;
 }
