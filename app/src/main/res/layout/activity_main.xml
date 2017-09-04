@@ -47,6 +47,7 @@
                 android:layout_width="@dimen/dimen_50dp"
                 android:layout_height="@dimen/dimen_50dp"
                 android:id="@+id/iv_music_recommend"
+                android:visibility="gone"
                 android:src="@drawable/actionbar_discover_prs"/>
 
         </LinearLayout>
