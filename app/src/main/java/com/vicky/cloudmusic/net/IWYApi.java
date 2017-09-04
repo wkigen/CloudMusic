@@ -24,6 +24,11 @@ public interface IWYApi {
     @POSTENCRYPT("http://music.163.com/weapi/song/enhance/player/url?csrf_token=")
     RequestCall songRes(@PARAMS("ids")String ids,@PARAMS("br")String br,@PARAMS("csrf_token")String csrf_token);
 
+    @GET("http://music.163.com/api/song/lyric")
+    RequestCall lyric(@PARAMS("os")String os,@PARAMS("id")String id,@PARAMS("lv")String lv,@PARAMS("kv")String kv,@PARAMS("tv")String tv);
+
     @FILE("")
     RequestCall downFile(@PARAMS("url")String url);
+
+
 }
