@@ -7,8 +7,8 @@
     android:layout_height="50dp">
 
     <ImageView
-        android:layout_width="@dimen/dimen_26dp"
-        android:layout_height="@dimen/dimen_26dp"
+        android:layout_width="@dimen/dimen_20dp"
+        android:layout_height="@dimen/dimen_20dp"
         android:id="@+id/iv_ico_play"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/dimen_10dp"

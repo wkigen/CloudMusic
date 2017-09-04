@@ -89,6 +89,46 @@ public class CacheManager {
         return null;
     }
 
+    public synchronized MusicBean getPreDownMusic(int cloudType, String readId,int loopType){
+        if (downMusicList == null || downMusicList.size()==0)
+            return null;
+        MusicBean musicBean = null;
+        switch (loopType){
+            case Constant.Play_List_Loop:
+                for (MusicBean music : downMusicList){
+                    if (music.cloudType == cloudType && music.readId.equals(readId)){
+                        return musicBean;
+                    }
+                    musicBean = music;
+                }
+                break;
+        }
+        if (musicBean == null)
+            musicBean = downMusicList.get(downMusicList.size()-1);
+        return musicBean;
+    }
+
+
+    public synchronized MusicBean getNextDownMusic(int cloudType, String readId,int loopType){
+        if (downMusicList == null)
+            return null;
+        MusicBean musicBean = null;
+        switch (loopType){
+            case Constant.Play_List_Loop:
+                boolean flag = false;
+                for (MusicBean music : downMusicList){
+                    if (flag)
+                        return music;
+                    if (music.cloudType == cloudType && music.readId.equals(readId))
+                        flag = true;
+                }
+                break;
+        }
+        if (musicBean == null)
+            musicBean =  downMusicList.get(0);
+        return musicBean;
+    }
+
     public synchronized boolean hasDownMusic(int cloudType, String readId){
         if (downMusicList == null)
             return false;

@@ -1,28 +1,26 @@
 package com.vicky.cloudmusic.view.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.vicky.android.baselib.mvvm.IView;
-import com.vicky.android.baselib.utils.FastBlurUtil;
 import com.vicky.android.baselib.utils.StringUtils;
-import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.event.MessageEvent;
-import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.viewmodel.PlayVM;
 
@@ -30,9 +28,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.FileInputStream;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -61,10 +62,21 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     ImageView imPre;
     @Bind(R.id.im_next)
     ImageView imNext;
-
+    @Bind(R.id.tv_run_time)
+    TextView tvRunTime;
+    @Bind(R.id.tv_total_time)
+    TextView tvTotalTime;
+    @Bind(R.id.sb_music)
+    SeekBar sbMusic;
+    @Bind(R.id.rl_progress)
+    RelativeLayout rlProgress;
+    @Bind(R.id.rl_bottom)
+    RelativeLayout rlBottom;
 
     UpActivityTask upActivityTask;
 
+    Timer timer;
+    Animation rotateAnimation;
     @Override
     protected int tellMeLayout() {
         return R.layout.activity_play;
@@ -81,6 +93,39 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        sbMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.Id_REQUEST_SEEK_PROGRESS_MUSIC).Object1((float)seekBar.getProgress()/100));
+            }
+        });
+
+        rotateAnimation = AnimationUtils.loadAnimation(this,R.anim.anim_round_rotate);
+        rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     @Override
@@ -96,9 +141,27 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     @Override
     public void onResume() {
         super.onResume();
+        if (timer == null){
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.Id_REQUEST_PLAYING_PROGRESS_MUSIC));
+                }
+            },0,1000);
+        }
     }
 
-    @OnClick({R.id.iv_back, R.id.im_play})
+    @Override
+    public void onPause(){
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    @OnClick({R.id.iv_back, R.id.im_play, R.id.im_pre, R.id.im_next})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -108,6 +171,12 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             case R.id.im_play:
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC));
                 break;
+            case R.id.im_pre:
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PRE_MUSIC));
+                break;
+            case R.id.im_next:
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_NEXT_MUSIC));
+                break;
         }
     }
 
@@ -116,39 +185,57 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         switch (event.what) {
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
 
-                boolean isPlaying = (boolean) event.object2;
                 final MusicBean musicBean = (MusicBean) event.object1;
+                boolean isPlaying = (boolean) event.object2;
+                if (event.object3 != null){
+                    int duration = (int)event.object3;
+                    tvTotalTime.setText(StringUtils.getMinuteSecond(duration));
+                }
 
                 if (isPlaying) {
                     imPlay.setImageResource(R.drawable.note_btn_pause);
                     getViewModel().isPlaying = true;
+                    //rlDisc.startAnimation(rotateAnimation);
                 } else {
                     imPlay.setImageResource(R.drawable.note_btn_play);
                     getViewModel().isPlaying = false;
+                    //rlDisc.clearAnimation();
                 }
 
-                if (musicBean != null){
+                if (musicBean != null) {
                     tvMusicName.setText(musicBean.name);
                     tvArtist.setText(musicBean.artist);
                     upActivityTask = new UpActivityTask();
                     upActivityTask.execute(musicBean.picture);
                 }
+
+                break;
+            case MessageEvent.ID_RESPONSE_DOWN_PROGRESS_MUSIC:
+                float downProgress = (float)event.object2;
+                sbMusic.setSecondaryProgress((int) (downProgress * 100));
+                break;
+            case MessageEvent.Id_RESPONSE_PLAYING_PROGRESS_MUSIC:
+                float playProgress = (int)event.object1;
+                float totalProgress = (int)event.object2;
+                int progress = (int)(playProgress/totalProgress*100);
+                tvRunTime.setText(StringUtils.getMinuteSecond((int)playProgress));
+                sbMusic.setProgress(progress);
                 break;
         }
     }
 
-    private class UpActivityTask extends AsyncTask<String,Object,Bitmap[]>{
+    private class UpActivityTask extends AsyncTask<String, Object, Bitmap[]> {
 
         @Override
         protected Bitmap[] doInBackground(String... strings) {
             Bitmap bitmap = null;
             Bitmap blur = null;
-            if (strings[0] != null && !StringUtils.hasHttpPrefix(strings[0])){
+            if (strings[0] != null && !StringUtils.hasHttpPrefix(strings[0])) {
                 bitmap = BitmapManager.getInstance().getBitmap(strings[0]);
                 if (bitmap != null)
                     blur = BitmapManager.getInstance().getBitmapBlur(strings[0]);
             }
-            return  new Bitmap[]{bitmap,blur};
+            return new Bitmap[]{bitmap, blur};
         }
 
         @Override

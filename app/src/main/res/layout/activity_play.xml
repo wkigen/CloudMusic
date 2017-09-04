@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dimen_13sp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_2"
                 android:layout_marginLeft="@dimen/dimen_10dp"
                 android:layout_marginTop="@dimen/dimen_2dp"
                 android:layout_toRightOf="@id/iv_back"
@@ -67,11 +67,54 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/rl_bottom"
-                android:layout_marginBottom="@dimen/dimen_20dp">
+                android:layout_marginBottom="@dimen/dimen_30dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:paddingRight="@dimen/dimen_20dp"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:id="@+id/rl_progress">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/dimen_12sp"
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_run_time"
+                        android:text="00:00"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/dimen_12sp"
+                        android:id="@+id/tv_total_time"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/text_color_2"
+                        android:text="00:00"/>
+
+                    <SeekBar
+                        android:id="@+id/sb_music"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progressDrawable="@drawable/seekbar_music"
+                        android:thumb="@drawable/seekbar_music_thumb"
+                        android:max="100"
+                        android:progress="0"
+                        android:layout_centerVertical="true"
+                        android:maxHeight="@dimen/dimen_1dp"
+                        android:layout_toLeftOf="@id/tv_total_time"
+                        android:layout_toRightOf="@id/tv_run_time" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_centerHorizontal="true"
+                    android:layout_below="@id/rl_progress"
                     android:layout_height="@dimen/dimen_50dp">
 
                     <RelativeLayout
@@ -87,8 +130,8 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_40dp"
-                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
                             android:id="@+id/im_pre"
                             android:layout_marginLeft="20dp"
                             android:src="@drawable/note_btn_pre"
@@ -116,12 +159,11 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_40dp"
-                            android:layout_height="@dimen/dimen_40dp"
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
                             android:id="@+id/im_next"
                             android:layout_marginLeft="20dp"
                             android:src="@drawable/note_btn_next"
-                            android:layout_centerInParent="true"/>
                             android:layout_centerInParent="true"/>
 
                     </RelativeLayout>
@@ -166,12 +208,8 @@
 
             </RelativeLayout>
 
-
         </RelativeLayout>
 
-
     </LinearLayout>
-
-
 
 </RelativeLayout>

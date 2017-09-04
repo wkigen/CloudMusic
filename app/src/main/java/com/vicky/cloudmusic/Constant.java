@@ -15,4 +15,10 @@ public class Constant {
     public static final int MaxHistroy = 10;
     public static final String SreachHistroy = "Sreach_histroy";
     public static final String PlayingSong = "Playing_song";
+
+    public static final int Play_List_Loop = 0;
+    public static final int Play_Random_Play = 1;
+    public static final int Play_Single_Loop= 2;
+
+
 }

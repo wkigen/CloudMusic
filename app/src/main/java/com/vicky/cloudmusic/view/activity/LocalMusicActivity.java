@@ -115,7 +115,8 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
                 boolean isPlaying = (boolean) event.object2;
                 final MusicBean musicBean = (MusicBean) event.object1;
-                getViewModel().setPlayIco(musicBean.cloudType,musicBean.readId);
+                if (musicBean!=null )
+                    getViewModel().setPlayIco(musicBean.cloudType,musicBean.readId);
                 setBottomMusic(isPlaying,musicBean);
                 break;
         }

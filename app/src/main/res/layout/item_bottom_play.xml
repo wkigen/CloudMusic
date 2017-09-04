@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="@dimen/dimen_40dp"
             android:layout_height="@dimen/dimen_40dp"
-            android:src="@drawable/lay_icn_manage"
+            android:src="@drawable/playbar_btn_playlist"
             android:layout_alignParentRight="true"
             android:id="@+id/iv_bottom_music_list"
             android:layout_marginRight="@dimen/dimen_10dp"
@@ -35,7 +35,7 @@
             android:src="@drawable/playbar_btn_play"
             android:layout_toLeftOf="@id/iv_bottom_music_list"
             android:id="@+id/iv_bottom_music_play"
-            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_5dp"
             android:layout_centerVertical="true"/>
 
         <TextView

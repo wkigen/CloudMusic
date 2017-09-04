@@ -5,6 +5,7 @@ import android.database.Cursor;
 import com.vicky.cloudmusic.Application;
 import com.vicky.cloudmusic.bean.MusicBean;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class MusicDataBase {
 
     public List<MusicBean> getAllMusic(){
         Cursor cursor = musicDBHelper.getAll(null,null);
-        List<MusicBean> musicBeanList = new LinkedList<>();
+        List<MusicBean> musicBeanList = new ArrayList<>();
         for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
         {
             MusicBean musicBean = new MusicBean();

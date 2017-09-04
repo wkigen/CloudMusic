@@ -22,14 +22,22 @@ public class MessageEvent {
 
     public static final int ID_REQUEST_PLAY_PAUSE_MUSIC = 7;  //请求当播放的时候暂停音乐 暂停的时候播放音乐
 
+    public static final int ID_REQUEST_NEXT_MUSIC = 8;  //请求当播放下一首
 
-    public static final int ID_RESPONSE_DOWN_LIST_MUSIC = 11;    //请求下载列表状态
+    public static final int ID_REQUEST_PRE_MUSIC = 10;  //请求当播放上一首
 
-    public static final int ID_REQUEST_PLAYING_INFO_MUSIC = 12; //请求当前音乐状态
-    public static final int ID_RESPONSE_PLAYING_INFO_MUSIC = 13; //回应当前音乐状态
+    public static final int ID_RESPONSE_DOWN_LIST_MUSIC = 21;    //请求下载列表状态
 
+    public static final int ID_REQUEST_PLAYING_INFO_MUSIC = 22; //请求当前音乐状态
+    public static final int ID_RESPONSE_PLAYING_INFO_MUSIC = 23; //回应当前音乐状态
 
-    public static final int ID_RESPONSE_DOWN_PROGRESS_MUSIC = 21;//请求音乐下载状态
+    public static final int Id_REQUEST_PLAYING_PROGRESS_MUSIC = 24; //请求当前音乐进度
+    public static final int Id_RESPONSE_PLAYING_PROGRESS_MUSIC = 25; //回应当前音乐进度
+
+    public static final int Id_REQUEST_SEEK_PROGRESS_MUSIC = 26; //请求音乐进度位置
+
+    public static final int ID_RESPONSE_DOWN_PROGRESS_MUSIC = 41;//回应音乐下载状态
+
 
 
     public int what;
