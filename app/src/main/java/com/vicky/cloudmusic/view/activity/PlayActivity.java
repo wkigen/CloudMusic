@@ -213,6 +213,10 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             case R.id.im_music_list:
                 showMusicList();
                 break;
+            case  R.id.rl_lyric:
+                rlDisc.setVisibility(View.VISIBLE);
+                rlLyric.setVisibility(View.GONE);
+                break;
         }
     }
 
