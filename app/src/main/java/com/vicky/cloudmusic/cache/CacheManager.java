@@ -148,6 +148,8 @@ public class CacheManager {
             if (!hasDownMusic(musicBean.cloudType,musicBean.readId)) {
                 downMusicList.add(musicBean);
                 MusicDataBase.getInstance().insertMusic(musicBean);
+                //// TODO: 2017/9/5     修改了数据库
+                playMusicStausBeanList = null;
             }
         }
     }
@@ -156,8 +158,13 @@ public class CacheManager {
         if (musicBean != null){
             for (MusicBean music : downMusicList){
                 if (music.cloudType == musicBean.cloudType && music.readId.equals(musicBean.readId)){
+                    FileUtils.deleteFile(music.path);
+                    FileUtils.deleteFile(music.lyr);
+                    FileUtils.deleteFile(music.picture);
                     downMusicList.remove(music);
                     MusicDataBase.getInstance().deleteMusic(musicBean);
+                    //// TODO: 2017/9/5     修改了数据库
+                    playMusicStausBeanList = null;
                     break;
                 }
             }

@@ -31,7 +31,7 @@ public class LyricView extends View {
 
 
     private float lastX,lastY;
-    private Lyric lyric;
+    private volatile Lyric lyric;
     private int playRow = 0;
     private boolean isManualSeek = false;  //是否手动滚动
     private ISeekCallback iSeekCallback;
@@ -47,6 +47,7 @@ public class LyricView extends View {
 
     public void setLyric(Lyric lyric){
         this.lyric = lyric;
+        playRow = 0;
         invalidate();
     }
 

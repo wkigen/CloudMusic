@@ -20,8 +20,8 @@
             android:layout_centerVertical="true"/>
 
         <ImageView
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:src="@drawable/playbar_btn_playlist"
             android:layout_alignParentRight="true"
             android:id="@+id/iv_bottom_music_list"

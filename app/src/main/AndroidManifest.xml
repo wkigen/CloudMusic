@@ -27,7 +27,8 @@
 
         <service android:name=".service.MusicService" />
 
-        <activity android:name=".view.activity.LocalMusicActivity"></activity>
+        <activity android:name=".view.activity.LocalMusicActivity" />
+        <activity android:name=".view.activity.DownMusicActivity"></activity>
     </application>
 
 </manifest>

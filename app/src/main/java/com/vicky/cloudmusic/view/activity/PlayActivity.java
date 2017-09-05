@@ -16,13 +16,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.vicky.android.baselib.mvvm.IView;
+import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.lyric.Lyric;
-import com.vicky.cloudmusic.utils.SFileUtils;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.view.LyricView;
 import com.vicky.cloudmusic.viewmodel.PlayVM;
@@ -35,7 +35,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -175,8 +174,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (getViewModel().isPlaying)
-                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_PROGRESS_MUSIC));
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_PROGRESS_MUSIC));
                 }
             }, 0, 1000);
         }
@@ -296,7 +294,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         @Override
         protected Lyric doInBackground(String... params) {
             if (!TextUtils.isEmpty(params[0])) {
-                String lyc = SFileUtils.getStringFromFile(params[0]);
+                String lyc = FileUtils.getStringFromFile(params[0]);
                 if (!TextUtils.isEmpty(lyc)) {
                     Lyric lyric = new Lyric(lyc);
                     return lyric;

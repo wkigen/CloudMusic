@@ -13,6 +13,7 @@ import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
+import com.vicky.cloudmusic.view.activity.DownMusicActivity;
 import com.vicky.cloudmusic.view.activity.LocalMusicActivity;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
 import com.vicky.cloudmusic.viewmodel.MusicListVM;
@@ -103,6 +104,14 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
+        tvLocalMusicCount.setText("(" + musicBeanList.size() + ")");
+        tvDownMusicCount.setText("(" + musicBeanList.size() + ")");
+    }
+
     @Nullable
     @Override
     public Class<MusicListVM> getViewModelClass() {
@@ -112,22 +121,17 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-
-        switch (event.what) {
-            case MessageEvent.ID_RESPONSE_DOWN_LIST_MUSIC:
-                List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
-                tvLocalMusicCount.setText("(" + musicBeanList.size() + ")");
-                tvDownMusicCount.setText("(" + musicBeanList.size() + ")");
-                break;
-        }
     }
 
-    @OnClick({R.id.rl_local_music})
+    @OnClick({R.id.rl_local_music,R.id.rl_down_music})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_local_music:
                 readyGo(LocalMusicActivity.class);
+                break;
+            case R.id.rl_down_music:
+                readyGo(DownMusicActivity.class);
                 break;
         }
     }

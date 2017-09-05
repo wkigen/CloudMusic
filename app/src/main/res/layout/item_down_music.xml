@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimen_16sp"
+        android:singleLine="true"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/dimen_6dp"
+        android:textColor="@color/text_color_main"
+        android:id="@+id/tv_name"
+        android:text="" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimen_12sp"
+        android:text=""
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:layout_below="@id/tv_name"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:id="@+id/tv_des"
+        android:textColor="@color/text_color_4"/>
+
+    <RelativeLayout
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="@dimen/dimen_50dp"
+        android:id="@+id/rl_delete">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_26dp"
+            android:layout_height="@dimen/dimen_26dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/btmlay_icn_dlt"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        style="@style/DivideLineHorizontal"></View>
+
+</RelativeLayout>

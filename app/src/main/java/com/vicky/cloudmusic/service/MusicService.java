@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.http.callback.FileCallBack;
+import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.WYLyricBean;
@@ -17,7 +18,6 @@ import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.net.callback.WYCallback;
-import com.vicky.cloudmusic.utils.SFileUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,6 +58,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         super.onCreate();
         mediaPlayer = new MediaPlayer();
         mediaPlayer.reset();
+        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.setOnErrorListener(this);
         EventBus.getDefault().register(this);
 
         List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();
@@ -109,7 +111,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     pre();
                     break;
                 case MessageEvent.ID_REQUEST_PLAYING_PROGRESS_MUSIC:
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_PROGRESS_MUSIC).Object1(mediaPlayer.getCurrentPosition()).Object2(mediaPlayer.getDuration()));
+                    playProgress();
                     break;
                 case MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC:
                     seek((int)event.object1,(float)event.object2);
@@ -127,6 +129,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }else {
             readyPlay(cloudType,songId,play);
         }
+    }
+
+    public synchronized void playProgress(){
+        if (mediaPlayer.isPlaying())
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_PROGRESS_MUSIC).Object1(mediaPlayer.getCurrentPosition()).Object2(mediaPlayer.getDuration()));
     }
 
     public synchronized void seek(int type,float progress){
@@ -182,12 +189,16 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 mediaPlayer.setDataSource(musicBean.path);
                 mediaPlayer.prepare();
             }
+
             if (play)
                 mediaPlayer.start();
+
             if (musicBean != null)
                 CacheManager.getImstance().selectPlayMusicList(musicBean.cloudType,musicBean.readId);
+
             EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC)
                     .Object1(playingMusic).Object2(mediaPlayer.isPlaying()).Object3(mediaPlayer.getDuration()));
+
         }catch (Exception e){
         }
     }
@@ -229,7 +240,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                         @Override
                         public void onRequestSuccess(String result) {
                             WYSongUrlBean songUrlBean = JSON.parseObject(result, WYSongUrlBean.class);
-                            if ( songUrlBean.getData().size() > 0){
+                            if ( songUrlBean != null && songUrlBean.getData()!= null && songUrlBean.getData().size() > 0){
                                 WYSongDetailBean.SongsBean songsBean = wySongDetailBean.getSongs().get(0);
 
                                 StringBuilder art = new StringBuilder();
@@ -334,7 +345,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 @Override
                 public void onRequestSuccess(String result) {
                     WYLyricBean bean = JSON.parseObject(result, WYLyricBean.class);
-                    SFileUtils.saveStringToFile(bean.getLrc().getLyric(), downMusicBean.lyr);
+                    FileUtils.saveStringToFile(bean.getLrc().getLyric(), downMusicBean.lyr);
                     if (downMusicBean.cloudType == playingMusic.cloudType &&
                             downMusicBean.readId.equals(playingMusic.readId)){
                         playingMusic.lyr = downMusicBean.lyr;
@@ -350,13 +361,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-        mediaPlayer.reset();
+        //mediaPlayer.reset();
         return true;
     }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-
+        next();
     }
 
 }
