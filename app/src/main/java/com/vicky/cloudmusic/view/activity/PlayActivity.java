@@ -78,12 +78,15 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     LyricView lvLyric;
     @Bind(R.id.rl_lyric)
     RelativeLayout rlLyric;
+    @Bind(R.id.im_music_list)
+    ImageView imMusicList;
 
     UpActivityTask upActivityTask;
     LycTask lycTask;
 
     Timer timer;
     Animation rotateAnimation;
+
 
     @Override
     protected int tellMeLayout() {
@@ -139,8 +142,9 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         lvLyric.setSeekCallback(new LyricView.ISeekCallback() {
             @Override
             public void callback(long time) {
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
-                        Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_TIME).Object2((float) time));
+                if (getViewModel().isPlaying)
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
+                            Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_TIME).Object2((float) time));
             }
         });
 
@@ -188,7 +192,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     }
 
     @OnClick({R.id.iv_back, R.id.im_play, R.id.im_pre, R.id.im_next,
-            R.id.rl_disc, R.id.rl_lyric})
+            R.id.rl_disc, R.id.rl_lyric,R.id.im_music_list})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -208,8 +212,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 rlDisc.setVisibility(View.GONE);
                 rlLyric.setVisibility(View.VISIBLE);
                 break;
-            case R.id.rl_lyric:
-
+            case R.id.im_music_list:
+                showMusicList();
                 break;
         }
     }
@@ -259,13 +263,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 lvLyric.seekTime((int) playProgress);
                 break;
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     private class UpActivityTask extends AsyncTask<String, Object, Bitmap[]> {

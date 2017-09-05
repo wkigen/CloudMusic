@@ -94,41 +94,7 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
             ivBottomMusicList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     if (popupWindowEx == null){
-                         popupView = getLayoutInflater().inflate(R.layout.popup_muisc_list, null);
-                         popupWindowEx = new PopupWindowEx((Activity)context, popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                         popupWindowEx.setFocusable(true);
-
-                         ListView listView = (ListView)popupView.findViewById(R.id.ls_music_list);
-                         musicPlayListAdapter = new MusicPlayListAdapter(context);
-                         listView.setAdapter(musicPlayListAdapter);
-                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                             @Override
-                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                 if (position < 0 || position >= CacheManager.getImstance().getPlayMusicList().size())
-                                     return;
-                                 PlayMusicStausBean playMusicStausBean = CacheManager.getImstance().getPlayMusicList().get(position);
-                                 if (!playMusicStausBean.isSelect)
-                                     EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).
-                                             Object1(playMusicStausBean.musicBean.cloudType).Object2(playMusicStausBean.musicBean.readId).Object3(true));
-                             }
-                         });
-
-                         RelativeLayout rlMain = (RelativeLayout)popupView.findViewById(R.id.rl_main);
-                         rlMain.setOnClickListener(new View.OnClickListener() {
-                             @Override
-                             public void onClick(View v) {
-                                 popupWindowEx.dismiss();
-                             }
-                         });
-
-                         popupWindowEx.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                         popupWindowEx.setOutsideTouchable(true);
-                         popupWindowEx.setAnimationStyle(R.style.popwin_anim_style_bottom);
-                     }
-
-                    popupWindowEx.showAtLocation(popupView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                    musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
+                    showMusicList();
                 }
             });
         }
@@ -166,4 +132,44 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
         }
     }
 
+
+    protected void showMusicList(){
+        if (popupWindowEx == null){
+            popupView = getLayoutInflater().inflate(R.layout.popup_muisc_list, null);
+            popupWindowEx = new PopupWindowEx((Activity)context, popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            popupWindowEx.setFocusable(true);
+
+            ListView listView = (ListView)popupView.findViewById(R.id.ls_music_list);
+            musicPlayListAdapter = new MusicPlayListAdapter(context);
+            listView.setAdapter(musicPlayListAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position < 0 || position >= CacheManager.getImstance().getPlayMusicList().size())
+                        return;
+                    PlayMusicStausBean playMusicStausBean = CacheManager.getImstance().getPlayMusicList().get(position);
+                    if (!playMusicStausBean.isSelect)
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).
+                                Object1(playMusicStausBean.musicBean.cloudType).Object2(playMusicStausBean.musicBean.readId).Object3(true));
+
+                    popupWindowEx.dismiss();
+                }
+            });
+
+            RelativeLayout rlMain = (RelativeLayout)popupView.findViewById(R.id.rl_main);
+            rlMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindowEx.dismiss();
+                }
+            });
+
+            popupWindowEx.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            popupWindowEx.setOutsideTouchable(true);
+            popupWindowEx.setAnimationStyle(R.style.popwin_anim_style_bottom);
+        }
+
+        popupWindowEx.showAtLocation(popupView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
+    }
 }

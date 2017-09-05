@@ -173,6 +173,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
+                        <ImageView
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:id="@+id/im_music_list"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/play_icn_src_prs"
+                            android:layout_centerInParent="true"/>
+
+
                     </RelativeLayout>
 
                 </LinearLayout>
