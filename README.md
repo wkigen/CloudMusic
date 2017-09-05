@@ -1,5 +1,5 @@
 # CloudMusic
-网易云音乐界面
+仿网易云音乐界面
 
 # API：  
 网易api：https://github.com/darknessomi/musicbox  
