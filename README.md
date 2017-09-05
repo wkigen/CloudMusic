@@ -5,7 +5,8 @@
 网易api：https://github.com/darknessomi/musicbox  
   
 # build:  
-1.build AndroidBaseLib
+1.build AndroidBaseLib  
+2.build the project
 
 # screenshot：  
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_1.png) 
