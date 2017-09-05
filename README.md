@@ -10,3 +10,4 @@
 # screenshot：  
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_1.png) 
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_2.png) 
+![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_3.png) 
