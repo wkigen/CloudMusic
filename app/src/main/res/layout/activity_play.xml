@@ -206,6 +206,20 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/rl_lyric"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+
+                    <com.vicky.cloudmusic.view.view.LyricView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lv_lyric"/>
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
         </RelativeLayout>

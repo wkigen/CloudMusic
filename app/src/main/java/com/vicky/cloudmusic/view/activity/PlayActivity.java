@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,14 +21,16 @@ import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.event.MessageEvent;
+import com.vicky.cloudmusic.lyric.Lyric;
+import com.vicky.cloudmusic.utils.SFileUtils;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
+import com.vicky.cloudmusic.view.view.LyricView;
 import com.vicky.cloudmusic.viewmodel.PlayVM;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,11 +74,17 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     RelativeLayout rlProgress;
     @Bind(R.id.rl_bottom)
     RelativeLayout rlBottom;
+    @Bind(R.id.lv_lyric)
+    LyricView lvLyric;
+    @Bind(R.id.rl_lyric)
+    RelativeLayout rlLyric;
 
     UpActivityTask upActivityTask;
+    LycTask lycTask;
 
     Timer timer;
     Animation rotateAnimation;
+
     @Override
     protected int tellMeLayout() {
         return R.layout.activity_play;
@@ -105,11 +113,12 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.Id_REQUEST_SEEK_PROGRESS_MUSIC).Object1((float)seekBar.getProgress()/100));
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
+                        Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_PERCENTAGE).Object2((float) seekBar.getProgress() / 100));
             }
         });
 
-        rotateAnimation = AnimationUtils.loadAnimation(this,R.anim.anim_round_rotate);
+        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_round_rotate);
         rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -124,6 +133,22 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             @Override
             public void onAnimationRepeat(Animation animation) {
 
+            }
+        });
+
+        lvLyric.setSeekCallback(new LyricView.ISeekCallback() {
+            @Override
+            public void callback(long time) {
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
+                        Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_TIME).Object2((float) time));
+            }
+        });
+
+        lvLyric.setTouchOnceCallback(new LyricView.ITouchOnceCallback() {
+            @Override
+            public void onTouchOnce() {
+                rlDisc.setVisibility(View.VISIBLE);
+                rlLyric.setVisibility(View.GONE);
             }
         });
     }
@@ -141,19 +166,20 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     @Override
     public void onResume() {
         super.onResume();
-        if (timer == null){
+        if (timer == null) {
             timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.Id_REQUEST_PLAYING_PROGRESS_MUSIC));
+                    if (getViewModel().isPlaying)
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAYING_PROGRESS_MUSIC));
                 }
-            },0,1000);
+            }, 0, 1000);
         }
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         if (timer != null) {
             timer.cancel();
@@ -161,7 +187,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.im_play, R.id.im_pre, R.id.im_next})
+    @OnClick({R.id.iv_back, R.id.im_play, R.id.im_pre, R.id.im_next,
+            R.id.rl_disc, R.id.rl_lyric})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -177,6 +204,13 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             case R.id.im_next:
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_NEXT_MUSIC));
                 break;
+            case R.id.rl_disc:
+                rlDisc.setVisibility(View.GONE);
+                rlLyric.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rl_lyric:
+
+                break;
         }
     }
 
@@ -187,8 +221,8 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
                 final MusicBean musicBean = (MusicBean) event.object1;
                 boolean isPlaying = (boolean) event.object2;
-                if (event.object3 != null){
-                    int duration = (int)event.object3;
+                if (event.object3 != null) {
+                    int duration = (int) event.object3;
                     tvTotalTime.setText(StringUtils.getMinuteSecond(duration));
                 }
 
@@ -207,21 +241,31 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                     tvArtist.setText(musicBean.artist);
                     upActivityTask = new UpActivityTask();
                     upActivityTask.execute(musicBean.picture);
+                    lycTask = new LycTask();
+                    lycTask.execute(musicBean.lyr);
                 }
 
                 break;
             case MessageEvent.ID_RESPONSE_DOWN_PROGRESS_MUSIC:
-                float downProgress = (float)event.object2;
+                float downProgress = (float) event.object2;
                 sbMusic.setSecondaryProgress((int) (downProgress * 100));
                 break;
-            case MessageEvent.Id_RESPONSE_PLAYING_PROGRESS_MUSIC:
-                float playProgress = (int)event.object1;
-                float totalProgress = (int)event.object2;
-                int progress = (int)(playProgress/totalProgress*100);
-                tvRunTime.setText(StringUtils.getMinuteSecond((int)playProgress));
+            case MessageEvent.ID_RESPONSE_PLAYING_PROGRESS_MUSIC:
+                float playProgress = (int) event.object1;
+                float totalProgress = (int) event.object2;
+                int progress = (int) (playProgress / totalProgress * 100);
+                tvRunTime.setText(StringUtils.getMinuteSecond((int) playProgress));
                 sbMusic.setProgress(progress);
+                lvLyric.seekTime((int) playProgress);
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     private class UpActivityTask extends AsyncTask<String, Object, Bitmap[]> {
@@ -247,6 +291,27 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                     ivBackground.setImageBitmap(result[1]);
             }
             upActivityTask = null;
+        }
+    }
+
+    private class LycTask extends AsyncTask<String, Object, Lyric> {
+
+        @Override
+        protected Lyric doInBackground(String... params) {
+            if (!TextUtils.isEmpty(params[0])) {
+                String lyc = SFileUtils.getStringFromFile(params[0]);
+                if (!TextUtils.isEmpty(lyc)) {
+                    Lyric lyric = new Lyric(lyc);
+                    return lyric;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Lyric lyric) {
+            if (lvLyric != null)
+                lvLyric.setLyric(lyric);
         }
     }
 

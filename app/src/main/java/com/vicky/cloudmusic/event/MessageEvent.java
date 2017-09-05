@@ -31,10 +31,14 @@ public class MessageEvent {
     public static final int ID_REQUEST_PLAYING_INFO_MUSIC = 22; //请求当前音乐状态
     public static final int ID_RESPONSE_PLAYING_INFO_MUSIC = 23; //回应当前音乐状态
 
-    public static final int Id_REQUEST_PLAYING_PROGRESS_MUSIC = 24; //请求当前音乐进度
-    public static final int Id_RESPONSE_PLAYING_PROGRESS_MUSIC = 25; //回应当前音乐进度
+    public static final int ID_REQUEST_PLAYING_PROGRESS_MUSIC = 24; //请求当前音乐进度
+    public static final int ID_RESPONSE_PLAYING_PROGRESS_MUSIC = 25; //回应当前音乐进度
 
-    public static final int Id_REQUEST_SEEK_PROGRESS_MUSIC = 26; //请求音乐进度位置
+    public static final int ID_REQUEST_SEEK_PROGRESS_MUSIC = 26; //请求音乐进度位置
+    //进度位置类型
+    public static final int ID_REQUEST_SEEK_PROGRESS_MUSIC_TIME = 261; //直接时间
+    public static final int ID_REQUEST_SEEK_PROGRESS_MUSIC_PERCENTAGE = 262; //百分比
+
 
     public static final int ID_RESPONSE_DOWN_PROGRESS_MUSIC = 41;//回应音乐下载状态
 

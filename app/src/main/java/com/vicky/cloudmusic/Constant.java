@@ -7,6 +7,9 @@ public class Constant {
 
     public static final String dir_name = "CloudMusic";
 
+    public static final int g_Second = 1000;
+    public static final int g_Minute = 60000;
+
     public static final int CloudType_NULL = -1;
     public static final int CloudType_WANGYI = 0;
     public static final int CloudType_QQ = 1;
