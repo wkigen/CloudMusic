@@ -6,9 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 
 import com.vicky.android.baselib.mvvm.IView;
+import com.vicky.android.baselib.utils.FileUtils;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
@@ -39,6 +43,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     ViewPager vpMain;
     FragmentAdapter fragmentAdapter;
     FragmentManager fragmentManager;
+    @Bind(R.id.dr_main)
+    DrawerLayout drMain;
 
     @Override
     protected int tellMeLayout() {
@@ -77,8 +83,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
         return null;
     }
 
-    public void setFragments(List<Fragment> fragmentList){
-        fragmentAdapter = new FragmentAdapter(fragmentManager,fragmentList);
+    public void setFragments(List<Fragment> fragmentList) {
+        fragmentAdapter = new FragmentAdapter(fragmentManager, fragmentList);
         vpMain.setAdapter(fragmentAdapter);
         vpMain.setOffscreenPageLimit(3);
         vpMain.setCurrentItem(0);
@@ -101,7 +107,7 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     }
 
 
-    @OnClick({R.id.iv_sreach, R.id.iv_music_list})
+    @OnClick({R.id.iv_sreach, R.id.iv_music_list, R.id.rl_menu,R.id.rl_clear_cache})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -110,6 +116,14 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
                 break;
             case R.id.iv_music_list:
 
+                break;
+            case R.id.rl_menu:
+                drMain.openDrawer(Gravity.LEFT);
+                break;
+            case R.id.rl_clear_cache:
+                String path = CacheManager.getImstance().getDirPath();
+                FileUtils.deleteAllFiles(path+"/"+ Constant.temp_dir_name);
+                drMain.closeDrawer(Gravity.LEFT);
                 break;
         }
     }
@@ -132,7 +146,7 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
                 boolean isPlaying = (boolean) event.object2;
                 final MusicBean musicBean = (MusicBean) event.object1;
-                setBottomMusic(isPlaying,musicBean);
+                setBottomMusic(isPlaying, musicBean);
                 break;
         }
     }
