@@ -95,20 +95,20 @@ public class CacheManager {
     public synchronized MusicBean getPreDownMusic(int cloudType, String readId,int loopType){
         if (downMusicList == null || downMusicList.size()==0)
             return null;
-        MusicBean musicBean = null;
+        MusicBean preMusicBean = null;
         switch (loopType){
             case Constant.Play_List_Loop:
                 for (MusicBean music : downMusicList){
                     if (music.cloudType == cloudType && music.readId.equals(readId)){
-                        return musicBean;
+                        break;
                     }
-                    musicBean = music;
+                    preMusicBean = music;
                 }
                 break;
         }
-        if (musicBean == null)
-            musicBean = downMusicList.get(downMusicList.size()-1);
-        return musicBean;
+        if (preMusicBean == null)
+            preMusicBean = downMusicList.get(downMusicList.size()-1);
+        return preMusicBean;
     }
 
 
@@ -186,6 +186,7 @@ public class CacheManager {
     }
 
     public synchronized void selectPlayMusicList(int cludeType,String readId){
+        getPlayMusicList();
         if (playMusicStausBeanList == null && cludeType >0 && !TextUtils.isEmpty(readId))
             return;
         for (PlayMusicStausBean playMusicStausBean : playMusicStausBeanList){

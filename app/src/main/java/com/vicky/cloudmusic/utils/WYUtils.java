@@ -69,7 +69,7 @@ public class WYUtils {
     }
 
     public static String getRandomString() {
-        String base = "0123456789abcde";
+        String base = "0123456789abcdefghijklmnopqrstuvwsyz";
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
 

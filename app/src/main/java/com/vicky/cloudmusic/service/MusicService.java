@@ -196,8 +196,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             if (musicBean != null)
                 CacheManager.getImstance().selectPlayMusicList(musicBean.cloudType,musicBean.readId);
 
-            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC)
-                    .Object1(playingMusic).Object2(mediaPlayer.isPlaying()).Object3(mediaPlayer.getDuration()));
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC).Object1(playingMusic).Object2(mediaPlayer.isPlaying()).Object3(mediaPlayer.getDuration()));
 
         }catch (Exception e){
         }
