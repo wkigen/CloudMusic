@@ -198,7 +198,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 onBackPressed();
                 break;
             case R.id.im_play:
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC));
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_OR_PAUSE_MUSIC));
                 break;
             case R.id.im_pre:
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PRE_MUSIC));

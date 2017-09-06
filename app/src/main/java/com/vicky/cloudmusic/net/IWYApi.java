@@ -2,6 +2,7 @@ package com.vicky.cloudmusic.net;
 
 import com.vicky.android.baselib.http.annotation.FILE;
 import com.vicky.android.baselib.http.annotation.GET;
+import com.vicky.android.baselib.http.annotation.HEADPARAMS;
 import com.vicky.android.baselib.http.annotation.PARAMS;
 import com.vicky.android.baselib.http.annotation.POST;
 import com.vicky.android.baselib.http.annotation.POSTENCRYPT;
@@ -30,5 +31,7 @@ public interface IWYApi {
     @FILE("")
     RequestCall downFile(@PARAMS("url")String url);
 
+    @FILE("")
+    RequestCall downFile(@HEADPARAMS("Range") String Range,@PARAMS("url")String url);
 
 }

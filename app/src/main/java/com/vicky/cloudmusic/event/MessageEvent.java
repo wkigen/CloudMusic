@@ -20,7 +20,7 @@ public class MessageEvent {
     public static final int ID_REQUEST_STOP_MUSIC = 5;       //请求停止音乐
     public static final int ID_RESPONSE_STOP_MUSIC = 6;     //回应停止音乐
 
-    public static final int ID_REQUEST_PLAY_PAUSE_MUSIC = 7;  //请求当播放的时候暂停音乐 暂停的时候播放音乐
+    public static final int ID_REQUEST_PLAY_OR_PAUSE_MUSIC = 7;  //请求当播放的时候暂停音乐 暂停的时候播放音乐
 
     public static final int ID_REQUEST_NEXT_MUSIC = 8;  //请求当播放下一首
 

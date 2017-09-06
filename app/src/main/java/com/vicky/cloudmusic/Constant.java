@@ -6,6 +6,7 @@ package com.vicky.cloudmusic;
 public class Constant {
 
     public static final String dir_name = "CloudMusic";
+    public static final String temp_dir_name = "temp";
 
     public static final int g_Second = 1000;
     public static final int g_Minute = 60000;

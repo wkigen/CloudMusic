@@ -44,7 +44,7 @@ public class BitmapManager {
     }
 
     public synchronized  Bitmap getBitmapBlur(String key){
-        Bitmap bm = getBitmap(BlurPre+key);
+        Bitmap bm = mBitapCache.get(BlurPre+key);
         if (bm == null){
             bm = getBitmap(key);
             if (bm != null) {

@@ -1,8 +1,6 @@
 package com.vicky.cloudmusic.view.activity.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,12 +8,9 @@ import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +25,6 @@ import com.vicky.cloudmusic.bean.PlayMusicStausBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
-import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.view.activity.PlayActivity;
 import com.vicky.cloudmusic.view.adapter.MusicPlayListAdapter;
 
@@ -86,7 +80,7 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
             ivBottomMusicPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_PAUSE_MUSIC));
+                    EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_OR_PAUSE_MUSIC));
                 }
             });
         }
