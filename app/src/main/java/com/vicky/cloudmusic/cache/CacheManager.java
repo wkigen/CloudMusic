@@ -154,6 +154,19 @@ public class CacheManager {
         }
     }
 
+    public synchronized void deleteAllDownMusic(){
+        if (downMusicList == null)
+            return;
+        for (MusicBean music : downMusicList){
+            FileUtils.deleteFile(music.path);
+            FileUtils.deleteFile(music.lyr);
+            FileUtils.deleteFile(music.picture);
+            MusicDataBase.getInstance().deleteMusic(music);
+        }
+        playMusicStausBeanList = null;
+        downMusicList.clear();
+    }
+
     public synchronized void deleteDownMusic(MusicBean musicBean){
         if (musicBean != null){
             for (MusicBean music : downMusicList){

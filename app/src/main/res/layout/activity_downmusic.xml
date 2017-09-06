@@ -28,6 +28,23 @@
             android:layout_centerVertical="true"
             android:text="@string/down_manager"/>
 
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_60dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:id="@+id/rl_clear"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear_all"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/dimen_16sp"
+                android:layout_marginRight="@dimen/dimen_13dp"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout

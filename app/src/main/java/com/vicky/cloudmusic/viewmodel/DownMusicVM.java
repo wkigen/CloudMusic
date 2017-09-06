@@ -2,6 +2,7 @@ package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
 
+import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.view.activity.DownMusicActivity;
@@ -16,14 +17,13 @@ import com.vicky.cloudmusic.view.view.DialogEx;
  ************************************************************/
 public class DownMusicVM extends AbstractViewModel<DownMusicActivity> {
 
-    public void select(final int position){
-
+    public void delete(final int position){
         if (position <0 || position >= CacheManager.getImstance().getDownMusicList().size())
             return;
 
         if (getView() != null){
             final DialogEx dialogEx = new DialogEx(getView());
-            dialogEx.setText("确定要删除该音乐？","取消","确定");
+            dialogEx.setText(getView().getString(R.string.sure_delete_the_music),getView().getString(R.string.cancel),getView().getString(R.string.sure));
             dialogEx.setDialogButtonCallback(new DialogEx.OnDialogButtonCallback() {
                 @Override
                 public void leftClick() {
@@ -40,7 +40,27 @@ public class DownMusicVM extends AbstractViewModel<DownMusicActivity> {
             });
             dialogEx.show();
         }
+    }
 
+    public void deleteAll(){
+        if (getView() != null){
+            final DialogEx dialogEx = new DialogEx(getView());
+            dialogEx.setText(getView().getString(R.string.sure_delete_all_music),getView().getString(R.string.cancel),getView().getString(R.string.sure));
+            dialogEx.setDialogButtonCallback(new DialogEx.OnDialogButtonCallback() {
+                @Override
+                public void leftClick() {
+                    dialogEx.dismiss();
+                }
+
+                @Override
+                public void rightClick() {
+                    CacheManager.getImstance().deleteAllDownMusic();
+                    getView().refresh();
+                    dialogEx.dismiss();
+                }
+            });
+            dialogEx.show();
+        }
     }
 
 }

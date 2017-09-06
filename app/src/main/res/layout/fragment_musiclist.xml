@@ -56,6 +56,7 @@
         android:layout_height="@dimen/dimen_50dp"
         android:paddingLeft="@dimen/dimen_13dp"
         android:paddingRight="@dimen/dimen_13dp"
+        android:visibility="gone"
         android:id="@+id/rl_lately_play">
 
         <ImageView
