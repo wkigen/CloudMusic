@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
         fragmentAdapter = new FragmentAdapter(fragmentManager, fragmentList);
         vpMain.setAdapter(fragmentAdapter);
         vpMain.setOffscreenPageLimit(3);
-        vpMain.setCurrentItem(0);
+        vpMain.setCurrentItem(1);
         vpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -50,13 +50,13 @@
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:id="@+id/iv_music_list"
-                    android:src="@drawable/actionbar_music_selected"/>
+                    android:src="@drawable/actionbar_music_prs"/>
 
                 <ImageView
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:id="@+id/iv_music_recommend"
-                    android:src="@drawable/actionbar_discover_prs"/>
+                    android:src="@drawable/actionbar_discover_selected"/>
 
             </LinearLayout>
 
