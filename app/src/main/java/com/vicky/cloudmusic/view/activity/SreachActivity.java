@@ -40,7 +40,7 @@ import butterknife.OnClick;
  * Description:
  * Date:
  */
-public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView, View.OnClickListener {
+public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView {
 
     @Bind(R.id.lv_listview)
     ListView mListview;
@@ -155,16 +155,6 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     public void goPlay(SreachBean sreachBean){
         readyGo(PlayActivity.class);
         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id).Object3(true));
-    }
-
-    @OnClick({R.id.iv_back})
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_back:
-                onBackPressed();
-                break;
-        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

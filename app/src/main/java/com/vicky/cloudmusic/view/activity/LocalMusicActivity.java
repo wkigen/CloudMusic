@@ -30,12 +30,10 @@ import butterknife.OnClick;
  * Description:
  * Date:
  */
-public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMusicVM> implements IView,View.OnClickListener {
+public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMusicVM> implements IView{
 
     @Bind(R.id.lv_listview)
     ListView mListview;
-    @Bind(R.id.iv_back)
-    ImageView ivBack;
     @Bind(R.id.tv_music_name)
     TextView tvMusicName;
 
@@ -95,16 +93,6 @@ public class LocalMusicActivity extends BaseActivity<LocalMusicActivity, LocalMu
 
     public void refresh(){
         mAdapter.notifyDataSetChanged();
-    }
-
-    @OnClick({R.id.iv_back})
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.iv_back:
-                onBackPressed();
-                break;
-        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -30,7 +30,7 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
     public int reachType = Constant.CloudType_WANGYI;
 
     //网易参数
-    public String limit = "20";
+    public String limit = "60";
     public String offest ="0";
     public String type = "1";// 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002)
 

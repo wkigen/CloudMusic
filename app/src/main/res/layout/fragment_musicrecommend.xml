@@ -1,0 +1,152 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_main"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp">
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_52dp"
+                    android:layout_height="@dimen/dimen_52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/iv_fm"
+                    android:src="@drawable/fm_thumb"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_6dp"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/self_fm"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dimen_52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="@dimen/dimen_52dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_52dp"
+                        android:layout_height="@dimen/dimen_52dp"
+                        android:id="@+id/iv_day"
+                        android:src="@drawable/day_thumb"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/tv_day"
+                        android:textSize="@dimen/dimen_18sp"
+                        android:textColor="@color/red_main"
+                        android:text="10"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_6dp"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/day_recommend"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_52dp"
+                    android:layout_height="@dimen/dimen_52dp"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/iv_hot"
+                    android:src="@drawable/upbill_thumb"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_6dp"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/cloud_hot_song"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_alignParentBottom="true"
+        style="@style/DivideLineHorizontal"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp">
+
+        <View
+            android:layout_width="@dimen/dimen_5dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_centerVertical="true"
+            android:background="@color/red_main"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recommend_music_list"
+            android:textColor="@color/text_color_main"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_18sp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_recommend_list">
+
+    </LinearLayout>
+
+</LinearLayout>

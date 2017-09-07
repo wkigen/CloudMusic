@@ -104,13 +104,10 @@ public class DownMusicActivity extends BaseActivity<DownMusicActivity, DownMusic
         }
     }
 
-    @OnClick({R.id.iv_back,R.id.rl_clear})
+    @OnClick({R.id.rl_clear})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                onBackPressed();
-                break;
             case R.id.rl_clear:
                 getViewModel().deleteAll();
                 break;

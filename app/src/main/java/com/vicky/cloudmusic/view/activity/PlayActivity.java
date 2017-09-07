@@ -49,8 +49,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     TextView tvMusicName;
     @Bind(R.id.tv_artist)
     TextView tvArtist;
-    @Bind(R.id.iv_back)
-    ImageView ivBack;
     @Bind(R.id.iv_song_picture)
     ImageView ivSongPicture;
     @Bind(R.id.rl_disc)
@@ -189,14 +187,11 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.im_play, R.id.im_pre, R.id.im_next,
+    @OnClick({R.id.im_play, R.id.im_pre, R.id.im_next,
             R.id.rl_disc, R.id.rl_lyric,R.id.im_music_list})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_back:
-                onBackPressed();
-                break;
             case R.id.im_play:
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_OR_PAUSE_MUSIC));
                 break;

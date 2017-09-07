@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import com.vicky.cloudmusic.view.activity.MainActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.cloudmusic.view.fragment.MusicListFragment;
+import com.vicky.cloudmusic.view.fragment.MusicRecommendFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class MainVM extends AbstractViewModel<MainActivity> {
 
     private void init(){
         fragmentList.add(new MusicListFragment());
-
+        fragmentList.add(new MusicRecommendFragment());
         if (getView() != null)
             getView().setFragments(fragmentList);
     }

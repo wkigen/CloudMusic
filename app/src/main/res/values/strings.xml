@@ -19,4 +19,11 @@
 
     <string name="clear_cache">清除缓存</string>
 
+    <string name="self_fm">私人FM</string>
+    <string name="day_recommend">每日歌曲推荐</string>
+    <string name="cloud_hot_song">云音乐热歌榜</string>
+
+    <string name="recommend_music_list">推荐歌单</string>
+
+    <string name="no_recommond">暂无推荐</string>
 </resources>

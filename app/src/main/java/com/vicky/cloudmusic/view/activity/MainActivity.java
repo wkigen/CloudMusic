@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.FileUtils;
@@ -41,10 +42,15 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
 
     @Bind(R.id.vp_main)
     ViewPager vpMain;
-    FragmentAdapter fragmentAdapter;
-    FragmentManager fragmentManager;
     @Bind(R.id.dr_main)
     DrawerLayout drMain;
+    @Bind(R.id.iv_music_list)
+    ImageView ivMusicList;
+    @Bind(R.id.iv_music_recommend)
+    ImageView ivMusicRecommend;
+
+    FragmentAdapter fragmentAdapter;
+    FragmentManager fragmentManager;
 
     @Override
     protected int tellMeLayout() {
@@ -96,7 +102,13 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
 
             @Override
             public void onPageSelected(int position) {
-
+                if (position == 0) {
+                    ivMusicList.setImageResource(R.drawable.actionbar_music_selected);
+                    ivMusicRecommend.setImageResource(R.drawable.actionbar_discover_prs);
+                } else {
+                    ivMusicList.setImageResource(R.drawable.actionbar_music_prs);
+                    ivMusicRecommend.setImageResource(R.drawable.actionbar_discover_selected);
+                }
             }
 
             @Override
@@ -107,7 +119,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     }
 
 
-    @OnClick({R.id.iv_sreach, R.id.iv_music_list, R.id.rl_menu,R.id.rl_clear_cache})
+    @OnClick({R.id.iv_sreach, R.id.iv_music_list, R.id.rl_menu, R.id.rl_clear_cache,
+            R.id.iv_music_recommend})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -115,14 +128,17 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
                 readyGo(SreachActivity.class);
                 break;
             case R.id.iv_music_list:
-
+                vpMain.setCurrentItem(0);
+                break;
+            case R.id.iv_music_recommend:
+                vpMain.setCurrentItem(1);
                 break;
             case R.id.rl_menu:
                 drMain.openDrawer(Gravity.LEFT);
                 break;
             case R.id.rl_clear_cache:
                 String path = CacheManager.getImstance().getDirPath();
-                FileUtils.deleteAllFiles(path+"/"+ Constant.temp_dir_name);
+                FileUtils.deleteAllFiles(path + "/" + Constant.temp_dir_name);
                 drMain.closeDrawer(Gravity.LEFT);
                 break;
         }

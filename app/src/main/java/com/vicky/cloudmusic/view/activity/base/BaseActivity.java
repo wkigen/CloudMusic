@@ -55,6 +55,9 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
     @Nullable
     @Bind(R.id.iv_bottom_music_list)
     ImageView ivBottomMusicList;
+    @Nullable
+    @Bind(R.id.iv_back)
+    ImageView ivBack;
 
     protected MusicPlayListAdapter musicPlayListAdapter;
     protected PopupWindowEx  popupWindowEx;
@@ -89,6 +92,14 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
                 @Override
                 public void onClick(View v) {
                     showMusicList();
+                }
+            });
+        }
+        if (ivBack != null){
+            ivBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
                 }
             });
         }
