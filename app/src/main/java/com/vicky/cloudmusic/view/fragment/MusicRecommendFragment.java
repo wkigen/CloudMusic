@@ -10,9 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vicky.cloudmusic.R;
+import com.vicky.cloudmusic.bean.WYPersonalizedPlaylistBean;
+import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.view.activity.FMActivity;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
 import com.vicky.cloudmusic.viewmodel.MusicRecommendVM;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +41,7 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
     @Bind(R.id.ll_recommend_list)
     LinearLayout llRecommendList;
 
+    List<PersonalizedPlaylistLayout> personalizedPlaylistLayouts = new ArrayList<>();
     @Override
     protected int tellMeLayout() {
         return R.layout.fragment_musicrecommend;
@@ -43,6 +49,7 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
     }
 
     @Override
@@ -80,5 +87,43 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
                 readyGo(FMActivity.class);
                 break;
         }
+    }
+
+    public void addPersonalizedPlaylistLayout(){
+        if (personalizedPlaylistLayouts.size() > 0)
+            return;
+        for (int jj = 0;jj<2;jj++){
+            View threeView = getActivity().getLayoutInflater().inflate(R.layout.item_three_music_list,null);
+            for (int ii = 1;ii<= 3;ii++){
+                int picResId = getResources().getIdentifier("iv_picture_"+ii, "id" , getActivity().getPackageName());
+                int nameResId = getResources().getIdentifier("tv_name_"+ii, "id" , getActivity().getPackageName());
+                ImageView imageView = (ImageView)threeView.findViewById(picResId);
+                TextView textView = (TextView)threeView.findViewById(nameResId);
+
+                PersonalizedPlaylistLayout playlistLayout = new PersonalizedPlaylistLayout();
+                playlistLayout.tv_name = textView;
+                playlistLayout.iv_pic = imageView;
+
+                personalizedPlaylistLayouts.add(playlistLayout);
+            }
+            llRecommendList.addView(threeView);
+        }
+    }
+
+    public void setPersonalizedPlaylist(WYPersonalizedPlaylistBean personalizedPlaylist){
+        addPersonalizedPlaylistLayout();
+        int count = 0;
+        for (WYPersonalizedPlaylistBean.ResultBean playlistBean : personalizedPlaylist.getResult()){
+            if (count >= personalizedPlaylistLayouts.size())
+                break;
+            personalizedPlaylistLayouts.get(count).tv_name.setText(playlistBean.getName());
+            Net.imageLoader(getActivity(),playlistBean.getPicUrl(),personalizedPlaylistLayouts.get(count).iv_pic,R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
+            count++;
+        }
+    }
+
+    class PersonalizedPlaylistLayout{
+        public TextView tv_name;
+        public ImageView iv_pic;
     }
 }

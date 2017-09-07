@@ -28,9 +28,28 @@ public interface IWYApi {
     @GET("http://music.163.com/api/song/lyric")
     RequestCall lyric(@PARAMS("os")String os,@PARAMS("id")String id,@PARAMS("lv")String lv,@PARAMS("kv")String kv,@PARAMS("tv")String tv);
 
+    //重定向了？
     @POSTENCRYPT("http://music.163.com/weapi/v1/discovery/recommend/songs")
     RequestCall recommend(@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
 
+    //节目推荐
+    @POSTENCRYPT("http://music.163.com/weapi/program/recommend/v1")
+    RequestCall recommend(@PARAMS("cateId")String cateId);
+
+    //个人歌单推荐
+    @POSTENCRYPT("http://music.163.com/weapi/personalized/playlist")
+    RequestCall personalizedPlaylist();
+
+    //热门歌单
+    @POSTENCRYPT("http://music.163.com/weapi/playlist/hottags")
+    RequestCall hottagsPlaylist();
+
+    //全部歌单
+    @POSTENCRYPT("http://music.163.com/weapi/playlist/catalogue")
+    RequestCall cataloguePlaylist();
+
+    @POSTENCRYPT("http://music.163.com/weapi/v3/playlist/detail")
+    RequestCall detailPlaylist(@PARAMS("id")String id,@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
 
     @GET("http://music.163.com/api/radio/get")
     RequestCall radio();
