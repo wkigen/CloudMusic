@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vicky.android.baselib.refreshlayout.RefreshHolderUtil;
+import com.vicky.android.baselib.refreshlayout.RefreshLayout;
 import com.vicky.android.baselib.utils.MMCQ;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
@@ -46,6 +48,8 @@ public class MusicPlayListActivity extends BaseActivity<MusicPlayListActivity, M
 
     public final static String MUSICPLAYLISTID = "music_play_list";
 
+    @Bind(R.id.rl_refresh)
+    RefreshLayout mRefreshLayout;
     @Bind(R.id.lv_listview)
     ListView mListview;
 
@@ -95,6 +99,21 @@ public class MusicPlayListActivity extends BaseActivity<MusicPlayListActivity, M
                 }
             }
         });
+
+        mRefreshLayout.setRefreshViewHolder(RefreshHolderUtil.getHolder(this));//getHolder(Context ctx, boolean loadMoreEnable)定制loadMore的话调用这个方法
+        mRefreshLayout.setDelegate(new RefreshLayout.RefreshLayoutDelegate() {
+            @Override
+            public void onRefreshLayoutBeginRefreshing(RefreshLayout refreshLayout) {
+                getViewModel().getPlayListDetail(true);
+            }
+
+            @Override
+            public boolean onRefreshLayoutBeginLoadingMore(RefreshLayout refreshLayout) {
+                getViewModel().getPlayListDetail(false);
+                return false;
+            }
+        });
+
         mListview.setAdapter(mAdapter);
 
         addHead();
@@ -136,8 +155,14 @@ public class MusicPlayListActivity extends BaseActivity<MusicPlayListActivity, M
         });
     }
 
+    public void addData(List<MusicBean> musicBeanList){
+        mAdapter.notifyDataSetChanged();
+        mRefreshLayout.endLoadingMore();
+    }
+
     public void setData(List<MusicBean> musicBeanList){
         mAdapter.setDatas(musicBeanList);
+        mRefreshLayout.endRefreshing();
     }
 
     private class BitmapTask extends AsyncTask<Bitmap, Object, List<int[]>> {

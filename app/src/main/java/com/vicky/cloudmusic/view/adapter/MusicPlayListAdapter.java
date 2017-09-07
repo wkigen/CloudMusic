@@ -20,7 +20,7 @@ public class MusicPlayListAdapter extends AdapterViewAdapter<MusicBean> {
 
     @Override
     protected void fillData(ViewHolderHelper viewHolderHelper, int position, MusicBean model) {
-        viewHolderHelper.setText(R.id.tv_order, position+"");
+        viewHolderHelper.setText(R.id.tv_order, (position+1)+"");
         viewHolderHelper.setText(R.id.tv_name, model.name);
         viewHolderHelper.setText(R.id.tv_des, model.artist);
     }

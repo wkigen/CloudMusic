@@ -28,14 +28,24 @@ public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
     public String playlistBlurPicture;
     public List<MusicBean> musicBeans = new ArrayList<>();
 
+    public int offest = 0;
+    public int total = 0;
+
     public void onBindView(@NonNull MusicPlayListActivity view) {
         super.onBindView(view);
 
-        getPlayListDetail();
+        getPlayListDetail(true);
     }
 
-    public void getPlayListDetail(){
-        Net.getWyApi().getApi().detailPlaylist(playlistId,"0","true","20","").execute(new WYCallback() {
+    public void getPlayListDetail(final boolean isRefresh){
+        if (isRefresh){
+            offest = 0;
+            musicBeans.clear();
+        }else {
+            if (offest >= total)
+                return;
+        }
+        Net.getWyApi().getApi().detailPlaylist(playlistId,offest,"false","100","").execute(new WYCallback() {
             @Override
             public void onRequestSuccess(String result) {
                 WYMusicPlayListBean wyMusicPlayListBean = JSON.parseObject(result, WYMusicPlayListBean.class);
@@ -44,6 +54,11 @@ public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
                     playlistAuthor = wyMusicPlayListBean.getPlaylist().getCreator().getNickname();
                     playlistPicture = wyMusicPlayListBean.getPlaylist().getCoverImgUrl();
                     playlistBlurPicture = wyMusicPlayListBean.getPlaylist().getCoverImgId_str();
+                    total = wyMusicPlayListBean.getPlaylist().getTrackCount();
+                    if (isRefresh)
+                        offest = wyMusicPlayListBean.getPlaylist().getTracks().size();
+                    else
+                        offest += wyMusicPlayListBean.getPlaylist().getTracks().size();
 
                     for (WYMusicPlayListBean.PlaylistBean.TracksBean tracksBean : wyMusicPlayListBean.getPlaylist().getTracks()) {
                         MusicBean musicBean = new MusicBean();
@@ -61,7 +76,10 @@ public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
 
                     if (getView() != null) {
                         getView().setHead();
-                        getView().setData(musicBeans);
+                        if (isRefresh)
+                            getView().setData(musicBeans);
+                        else
+                            getView().addData(musicBeans);
                     }
                 }
             }

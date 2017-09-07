@@ -49,7 +49,7 @@ public interface IWYApi {
     RequestCall cataloguePlaylist();
 
     @POSTENCRYPT("http://music.163.com/weapi/v3/playlist/detail")
-    RequestCall detailPlaylist(@PARAMS("id")String id,@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+    RequestCall detailPlaylist(@PARAMS("id")String id,@PARAMS("offset")int offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
 
     @GET("http://music.163.com/api/radio/get")
     RequestCall radio();
