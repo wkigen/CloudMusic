@@ -21,7 +21,6 @@ import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.android.baselib.widget.PopupWindowEx;
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayMusicStausBean;
 import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
@@ -29,7 +28,7 @@ import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.FMActivity;
 import com.vicky.cloudmusic.view.activity.PlayActivity;
-import com.vicky.cloudmusic.view.adapter.MusicPlayListAdapter;
+import com.vicky.cloudmusic.view.adapter.BottomMusicPlayListAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -62,7 +61,7 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
     @Bind(R.id.iv_back)
     ImageView ivBack;
 
-    protected MusicPlayListAdapter musicPlayListAdapter;
+    protected BottomMusicPlayListAdapter bottomMusicPlayListAdapter;
     protected PopupWindowEx  popupWindowEx;
     protected View popupView;
 
@@ -138,8 +137,8 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
                 tvBottomMusicName.setText(playingMusicBean.musicBean.name);
             if (tvBottomMusicDes != null)
                 tvBottomMusicDes.setText(playingMusicBean.musicBean.artist);
-            if (musicPlayListAdapter != null)
-                musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
+            if (bottomMusicPlayListAdapter != null)
+                bottomMusicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
         }
     }
 
@@ -150,8 +149,8 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
             popupWindowEx.setFocusable(true);
 
             ListView listView = (ListView)popupView.findViewById(R.id.ls_music_list);
-            musicPlayListAdapter = new MusicPlayListAdapter(context);
-            listView.setAdapter(musicPlayListAdapter);
+            bottomMusicPlayListAdapter = new BottomMusicPlayListAdapter(context);
+            listView.setAdapter(bottomMusicPlayListAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -180,7 +179,7 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
         }
 
         popupWindowEx.showAtLocation(popupView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
+        bottomMusicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
     }
 
     public void goPlayActivity(){

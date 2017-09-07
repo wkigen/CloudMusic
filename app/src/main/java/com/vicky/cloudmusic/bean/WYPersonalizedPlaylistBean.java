@@ -64,7 +64,7 @@ public class WYPersonalizedPlaylistBean {
     }
 
     public static class ResultBean {
-        private int id;
+        private String id;
         private int type;
         private String name;
         private String copywriter;
@@ -75,11 +75,11 @@ public class WYPersonalizedPlaylistBean {
         private boolean highQuality;
         private String alg;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

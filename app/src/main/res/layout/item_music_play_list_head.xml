@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_225dp"
+        android:id="@+id/rl_mian">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_75dp"
+            android:paddingLeft="@dimen/dimen_13dp"
+            android:paddingRight="@dimen/dimen_13dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                android:id="@+id/tv_playlist_picture"
+                android:src="@drawable/img_one_bi_one"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_13dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/white"
+                    android:id="@+id/tv_playlist_name"
+                    android:text=""/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:layout_below="@id/tv_playlist_name"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:id="@+id/tv_author"
+                    android:textColor="@color/text_color_3"
+                    android:text=""/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

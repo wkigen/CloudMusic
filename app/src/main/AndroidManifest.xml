@@ -29,7 +29,8 @@
 
         <activity android:name=".view.activity.LocalMusicActivity" />
         <activity android:name=".view.activity.DownMusicActivity" />
-        <activity android:name=".view.activity.FMActivity"></activity>
+        <activity android:name=".view.activity.FMActivity" />
+        <activity android:name=".view.activity.MusicPlayListActivity"></activity>
     </application>
 
 </manifest>
