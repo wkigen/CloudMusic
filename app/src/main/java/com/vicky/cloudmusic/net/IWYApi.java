@@ -28,8 +28,9 @@ public interface IWYApi {
     @GET("http://music.163.com/api/song/lyric")
     RequestCall lyric(@PARAMS("os")String os,@PARAMS("id")String id,@PARAMS("lv")String lv,@PARAMS("kv")String kv,@PARAMS("tv")String tv);
 
-    @POSTENCRYPT("http://music.163.com/weapi/v2/discovery/recommend/songs")
+    @POSTENCRYPT("http://music.163.com/weapi/v1/discovery/recommend/songs")
     RequestCall recommend(@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+
 
     @GET("http://music.163.com/api/radio/get")
     RequestCall radio();

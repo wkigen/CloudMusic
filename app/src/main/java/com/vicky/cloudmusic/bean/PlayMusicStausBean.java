@@ -11,4 +11,5 @@ public class PlayMusicStausBean implements Serializable {
 
     public MusicBean musicBean;
     public boolean isSelect;
+
 }

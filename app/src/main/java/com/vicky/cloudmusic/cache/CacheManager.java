@@ -11,6 +11,7 @@ import com.vicky.cloudmusic.Application;
 import com.vicky.cloudmusic.batabase.MusicDataBase;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayMusicStausBean;
+import com.vicky.cloudmusic.bean.PlayingMusicBean;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,6 +28,7 @@ public class CacheManager {
 
     SharedPreferences sharedPreferences;
 
+    private PlayingMusicBean playingMusicBean = new PlayingMusicBean();
     private List<String> sreachHistroyBeens; //搜索历史
     private List<MusicBean> downMusicList;//下载歌曲列表
     private List<PlayMusicStausBean> playMusicStausBeanList;    //播放列表
@@ -45,6 +47,10 @@ public class CacheManager {
             }
         }
         return mInstance;
+    }
+
+    public PlayingMusicBean getPlayingMusicBean(){
+        return playingMusicBean;
     }
 
     //获取搜索历史

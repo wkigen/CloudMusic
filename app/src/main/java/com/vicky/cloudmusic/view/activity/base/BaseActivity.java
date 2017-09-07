@@ -22,6 +22,7 @@ import com.vicky.android.baselib.widget.PopupWindowEx;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayMusicStausBean;
+import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
@@ -117,21 +118,24 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
         super.onDestroy();
     }
 
-    protected void setBottomMusic(boolean isPlaying,MusicBean music){
+    protected void setBottomMusic(MessageEvent event){
+        boolean isRefresh = (boolean) event.object1;
+        boolean isPlaying = (boolean) event.object2;
         if (isPlaying){
             ivBottomMusicPlay.setImageResource(R.drawable.playbar_btn_pause);
         }else {
             ivBottomMusicPlay.setImageResource(R.drawable.playbar_btn_play);
         }
-        if (music != null){
-            if (music.picture != null &&!StringUtils.hasHttpPrefix(music.picture)){
+        PlayingMusicBean playingMusicBean = isRefresh ?CacheManager.getImstance().getPlayingMusicBean() : null;
+        if (playingMusicBean != null && playingMusicBean.musicBean!= null){
+            if (playingMusicBean.musicBean.picture != null &&!StringUtils.hasHttpPrefix(playingMusicBean.musicBean.picture)){
                 if (ivBottomMusicPicture != null)
-                    ivBottomMusicPicture.setImageBitmap(BitmapManager.getInstance().getBitmap(music.picture));
+                    ivBottomMusicPicture.setImageBitmap(BitmapManager.getInstance().getBitmap(playingMusicBean.musicBean.picture));
             }
             if (tvBottomMusicName != null)
-                tvBottomMusicName.setText(music.name);
+                tvBottomMusicName.setText(playingMusicBean.musicBean.name);
             if (tvBottomMusicDes != null)
-                tvBottomMusicDes.setText(music.artist);
+                tvBottomMusicDes.setText(playingMusicBean.musicBean.artist);
             if (musicPlayListAdapter != null)
                 musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
         }

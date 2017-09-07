@@ -25,12 +25,13 @@ public class MusicRecommendVM extends AbstractViewModel<MusicRecommendFragment> 
 
     public void recommend(){
 
-        Net.getWyApi().getApi().recommend("0","true","20","").execute(new WYCallback() {
+        Net.getWyApi().getApi().recommend("0","true","10","").execute(new WYCallback() {
             @Override
             public void onRequestSuccess(String result) {
                 ILog.e("fsdfsdf",result);
             }
         });
+
     }
 
 }

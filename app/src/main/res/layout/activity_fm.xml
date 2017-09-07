@@ -29,31 +29,6 @@
                 android:layout_marginLeft="@dimen/dimen_13dp"
                 android:src="@drawable/title_back"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_18sp"
-                android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_4dp"
-                android:singleLine="true"
-                android:layout_toRightOf="@id/iv_back"
-                android:id="@+id/tv_music_name"
-                android:text=""/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_13sp"
-                android:textColor="@color/text_color_2"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_2dp"
-                android:singleLine="true"
-                android:layout_toRightOf="@id/iv_back"
-                android:id="@+id/tv_artist"
-                android:layout_below="@id/tv_music_name"
-                android:text=""/>
-
             <View
                 android:layout_alignParentBottom="true"
                 style="@style/DivideLineHorizontal"></View>
@@ -69,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/rl_bottom"
-                android:layout_marginBottom="@dimen/dimen_30dp">
+                android:layout_marginBottom="@dimen/dimen_20dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -131,13 +106,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
-                        <ImageView
-                            android:layout_width="@dimen/dimen_30dp"
-                            android:layout_height="@dimen/dimen_30dp"
-                            android:id="@+id/im_pre"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/note_btn_pre"
-                            android:layout_centerInParent="true" />
 
                     </RelativeLayout>
 
@@ -175,15 +143,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
-                        <ImageView
-                            android:layout_width="@dimen/dimen_50dp"
-                            android:layout_height="@dimen/dimen_50dp"
-                            android:id="@+id/im_music_list"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/play_icn_src_prs"
-                            android:layout_centerInParent="true"/>
-
-
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -195,27 +154,54 @@
                 android:layout_height="match_parent"
                 android:layout_above="@id/rl_bottom">
 
-                <RelativeLayout
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_300dp"
-                    android:layout_marginTop="@dimen/dimen_20dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/rl_disc">
+                    android:orientation="vertical"
+                    android:id="@+id/ll_disc">
 
-                    <ImageView
-                        android:layout_width="@dimen/dimen_200dp"
-                        android:layout_height="@dimen/dimen_200dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/placeholder_disk_play_song"
-                        android:scaleType="fitXY"
-                        android:id="@+id/iv_song_picture" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <ImageView
+                        <ImageView
+                            android:layout_width="@dimen/dimen_300dp"
+                            android:layout_height="@dimen/dimen_300dp"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/placeholder_disk_play_song"
+                            android:scaleType="fitXY"
+                            android:id="@+id/iv_song_picture" />
+
+                    </RelativeLayout>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/play_disc"/>
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:textSize="@dimen/dimen_18sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:id="@+id/tv_name"
+                        android:textColor="@color/white"
+                        android:text=""/>
 
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:textSize="@dimen/dimen_16sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textColor="@color/text_color_2"
+                        android:id="@+id/tv_artist"
+                        android:text=""/>
+
+                </LinearLayout>
+
+
 
                 <RelativeLayout
                     android:layout_width="@dimen/dimen_300dp"

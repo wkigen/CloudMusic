@@ -20,7 +20,9 @@ import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
+import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
+import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.lyric.Lyric;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -219,8 +221,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     public void onMessageEvent(MessageEvent event) {
         switch (event.what) {
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
-
-                final MusicBean musicBean = (MusicBean) event.object1;
+                boolean isRefresh = (boolean) event.object1;
                 boolean isPlaying = (boolean) event.object2;
                 if (event.object3 != null) {
                     int duration = (int) event.object3;
@@ -236,14 +237,14 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                     getViewModel().isPlaying = false;
                     //rlDisc.clearAnimation();
                 }
-
-                if (musicBean != null) {
-                    tvMusicName.setText(musicBean.name);
-                    tvArtist.setText(musicBean.artist);
+                PlayingMusicBean playingMusicBean = isRefresh ? CacheManager.getImstance().getPlayingMusicBean() : null;
+                if (playingMusicBean != null) {
+                    tvMusicName.setText(playingMusicBean.musicBean.name);
+                    tvArtist.setText(playingMusicBean.musicBean.artist);
                     upActivityTask = new UpActivityTask();
-                    upActivityTask.execute(musicBean.picture);
+                    upActivityTask.execute(playingMusicBean.musicBean.picture);
                     lycTask = new LycTask();
-                    lycTask.execute(musicBean.lyr);
+                    lycTask.execute(playingMusicBean.musicBean.lyr);
                 }
 
                 break;

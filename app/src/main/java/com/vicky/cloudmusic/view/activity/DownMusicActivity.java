@@ -11,6 +11,7 @@ import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
+import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -96,10 +97,8 @@ public class DownMusicActivity extends BaseActivity<DownMusicActivity, DownMusic
     public void onMessageEvent(MessageEvent event) {
         switch (event.what) {
             case MessageEvent.ID_RESPONSE_PLAYING_INFO_MUSIC:
-                boolean isPlaying = (boolean) event.object2;
-                final MusicBean musicBean = (MusicBean) event.object1;
                 refresh();
-                setBottomMusic(isPlaying, musicBean);
+                setBottomMusic(event);
                 break;
         }
     }
