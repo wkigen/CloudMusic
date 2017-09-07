@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/rl_bottom"
-                android:layout_marginBottom="@dimen/dimen_20dp">
+                android:layout_marginBottom="@dimen/dimen_30dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

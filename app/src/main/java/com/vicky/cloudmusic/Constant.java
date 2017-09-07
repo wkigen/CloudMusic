@@ -20,9 +20,13 @@ public class Constant {
     public static final String SreachHistroy = "Sreach_histroy";
     public static final String PlayingSong = "Playing_song";
 
-    public static final int Play_List_Loop = 0;
-    public static final int Play_Random_Play = 1;
-    public static final int Play_Single_Loop= 2;
+    public static final int Play_List_Loop = 0;     //列表播放
+    public static final int Play_Random_Play = 1;   //随机播放
+    public static final int Play_Single_Loop= 2;    //单曲循环
+
+
+    public static final int NormalMusic = 0;        //普通歌曲
+    public static final int FMMusic = 1;            //FM歌曲
 
 
 }

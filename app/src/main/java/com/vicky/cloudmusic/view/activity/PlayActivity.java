@@ -104,22 +104,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
-        sbMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
-                        Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_PERCENTAGE).Object2((float) seekBar.getProgress() / 100));
-            }
-        });
-
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_round_rotate);
         rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -135,6 +119,22 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             @Override
             public void onAnimationRepeat(Animation animation) {
 
+            }
+        });
+
+        sbMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC).
+                        Object1(MessageEvent.ID_REQUEST_SEEK_PROGRESS_MUSIC_PERCENTAGE).Object2((float) seekBar.getProgress() / 100));
             }
         });
 
@@ -257,6 +257,7 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 float totalProgress = (int) event.object2;
                 int progress = (int) (playProgress / totalProgress * 100);
                 tvRunTime.setText(StringUtils.getMinuteSecond((int) playProgress));
+                tvTotalTime.setText(StringUtils.getMinuteSecond((int) totalProgress));
                 sbMusic.setProgress(progress);
                 lvLyric.seekTime((int) playProgress);
                 break;

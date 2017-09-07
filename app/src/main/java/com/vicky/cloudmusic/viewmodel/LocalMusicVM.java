@@ -27,7 +27,7 @@ public class LocalMusicVM extends AbstractViewModel<LocalMusicActivity> {
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(playMusicStausBean.musicBean.cloudType).Object2(playMusicStausBean.musicBean.readId).Object3(true));
             else{
                 if (getView() != null)
-                    getView().readyGo(PlayActivity.class);
+                    getView().goPlayActivity();
             }
         }
     }

@@ -53,7 +53,8 @@ public class MessageEvent {
     //1.文件名  2.进度  3.总长度
     public static final int ID_RESPONSE_DOWN_PROGRESS_MUSIC = 41;//回应音乐下载状态
 
-
+    //无参数
+    public static final int ID_RESPONSE_FM = 50;//请求播放FM
 
     /*参数定义*/
     //进度位置类型

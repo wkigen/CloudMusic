@@ -10,18 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vicky.cloudmusic.R;
+import com.vicky.cloudmusic.view.activity.FMActivity;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
 import com.vicky.cloudmusic.viewmodel.MusicRecommendVM;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Author:   vicky
  * Description:
  * Date:
  */
-public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment, MusicRecommendVM> {
+public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment, MusicRecommendVM> implements View.OnClickListener {
 
     @Bind(R.id.iv_fm)
     ImageView ivFm;
@@ -70,5 +72,13 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
     }
 
 
-
+    @OnClick({R.id.iv_fm})
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_fm:
+                readyGo(FMActivity.class);
+                break;
+        }
+    }
 }

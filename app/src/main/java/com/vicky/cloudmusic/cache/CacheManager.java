@@ -28,7 +28,7 @@ public class CacheManager {
 
     SharedPreferences sharedPreferences;
 
-    private PlayingMusicBean playingMusicBean = new PlayingMusicBean();
+    private volatile PlayingMusicBean playingMusicBean = new PlayingMusicBean();
     private List<String> sreachHistroyBeens; //搜索历史
     private List<MusicBean> downMusicList;//下载歌曲列表
     private List<PlayMusicStausBean> playMusicStausBeanList;    //播放列表

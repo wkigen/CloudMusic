@@ -82,7 +82,7 @@ public class WYFMBean {
 
     public static class DataBean {
         private String name;
-        private int id;
+        private String id;
         private int position;
         private int status;
         private int fee;
@@ -214,11 +214,11 @@ public class WYFMBean {
             this.name = name;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

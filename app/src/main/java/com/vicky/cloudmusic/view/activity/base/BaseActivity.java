@@ -19,6 +19,7 @@ import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.mvvm.base.BaseLibActivity;
 import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.android.baselib.widget.PopupWindowEx;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayMusicStausBean;
@@ -26,6 +27,7 @@ import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
+import com.vicky.cloudmusic.view.activity.FMActivity;
 import com.vicky.cloudmusic.view.activity.PlayActivity;
 import com.vicky.cloudmusic.view.adapter.MusicPlayListAdapter;
 
@@ -76,7 +78,7 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
             rlBottomMainPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    readyGo(PlayActivity.class);
+                    goPlayActivity();
                 }
             });
         }
@@ -141,7 +143,6 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
         }
     }
 
-
     protected void showMusicList(){
         if (popupWindowEx == null){
             popupView = getLayoutInflater().inflate(R.layout.popup_muisc_list, null);
@@ -181,4 +182,14 @@ public abstract class BaseActivity<T extends IView, RM extends AbstractViewModel
         popupWindowEx.showAtLocation(popupView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         musicPlayListAdapter.setDatas(CacheManager.getImstance().getPlayMusicList());
     }
+
+    public void goPlayActivity(){
+        PlayingMusicBean playingMusicBean = CacheManager.getImstance().getPlayingMusicBean();
+        if (playingMusicBean.musicType == Constant.NormalMusic){
+            readyGo(PlayActivity.class);
+        }else if (playingMusicBean.musicType ==Constant.FMMusic){
+            readyGo(FMActivity.class);
+        }
+    }
+
 }

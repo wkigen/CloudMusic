@@ -39,8 +39,8 @@ public class MediaPlayerProxy implements Runnable{
     }
 
     //返回本地url
-    public String getLoacalUrl(String url,String fileName){
-        return String.format("http://127.0.0.1:%d/%s/%s", port, url,fileName);
+    public String getLoacalUrl(String url,String fileName,int musicType){
+        return String.format("http://127.0.0.1:%d/%s/%s/%s", port, url,fileName,musicType);
     }
 
     @Override
@@ -78,10 +78,20 @@ public class MediaPlayerProxy implements Runnable{
         String[] st = requestParts[0].split(" ");
         String method = st[0];
         String tempUrl = st[1].substring(1);
+
+        //音乐类型
         int lastSlash = tempUrl.lastIndexOf("/");
+        final int musicType = Integer.parseInt(tempUrl.substring(lastSlash + 1, tempUrl.length()));
+
+        //文件名
+        tempUrl = tempUrl.substring(0, lastSlash);
+        lastSlash = tempUrl.lastIndexOf("/");
         final String fileName = tempUrl.substring(lastSlash+1,tempUrl.length());
+
+        //请求地址s
         String uri = tempUrl.substring(0, lastSlash);
-        //找到Range
+
+        //Range
         String[] allParams = requestParts[0].split("\r\n");
         String rangeStart = "0";
         String rangeEnd = "";
@@ -151,8 +161,8 @@ public class MediaPlayerProxy implements Runnable{
             @Override
             public void onResponse(File file, int i) {
                 try{
-                    //保存的文件是完整的,复制出来
-                    if (realRangeStart.equals("0")&&realRangeEnd.equals("")){
+                    //保存的文件是完整的,复制出来        普通歌曲才复制
+                    if (realRangeStart.equals("0")&&realRangeEnd.equals("")&&musicType == Constant.NormalMusic){
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
