@@ -30,7 +30,7 @@ public interface IWYApi {
 
     //重定向了？
     @POSTENCRYPT("http://music.163.com/weapi/v1/discovery/recommend/songs")
-    RequestCall recommend(@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+    RequestCall recommendSongs(@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
 
     //节目推荐
     @POSTENCRYPT("http://music.163.com/weapi/program/recommend/v1")
@@ -44,12 +44,20 @@ public interface IWYApi {
     @POSTENCRYPT("http://music.163.com/weapi/playlist/hottags")
     RequestCall hottagsPlaylist();
 
+    //排行榜详情
+    @POSTENCRYPT("http://music.163.com/weapi/toplist/detail")
+    RequestCall toplistDetail(@PARAMS("id")String id,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+
     //全部歌单
     @POSTENCRYPT("http://music.163.com/weapi/playlist/catalogue")
     RequestCall cataloguePlaylist();
 
     @POSTENCRYPT("http://music.163.com/weapi/v3/playlist/detail")
-    RequestCall detailPlaylist(@PARAMS("id")String id,@PARAMS("offset")int offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+    RequestCall detailPlaylist(@PARAMS("id")String id,@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("n")String n,@PARAMS("csrf_token")String csrf_token);
+
+    //独家内容
+    @POSTENCRYPT("http://music.163.com/weapi/personalized/privatecontent")
+    RequestCall privateContent();
 
     @GET("http://music.163.com/api/radio/get")
     RequestCall radio();

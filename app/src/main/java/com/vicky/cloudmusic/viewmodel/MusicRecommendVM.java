@@ -2,6 +2,7 @@ package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.utils.ILog;
@@ -12,6 +13,8 @@ import com.vicky.cloudmusic.view.activity.MusicPlayListActivity;
 import com.vicky.cloudmusic.view.fragment.MusicRecommendFragment;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
+
+import java.util.Calendar;
 
 /************************************************************
  * Author:  vicky
@@ -25,7 +28,6 @@ public class MusicRecommendVM extends AbstractViewModel<MusicRecommendFragment> 
 
     public void onBindView(@NonNull MusicRecommendFragment view) {
         super.onBindView(view);
-
         recommend();
     }
 
@@ -40,6 +42,13 @@ public class MusicRecommendVM extends AbstractViewModel<MusicRecommendFragment> 
                 }
             }
         });
+
+        Net.getWyApi().getApi().privateContent().execute(new WYCallback() {
+            @Override
+            public void onRequestSuccess(String result) {
+                Log.e("fdff",result);
+            }
+        });
     }
 
     public String getPlayListId(int position){
@@ -48,5 +57,9 @@ public class MusicRecommendVM extends AbstractViewModel<MusicRecommendFragment> 
         return personalizedPlaylistBean.getResult().get(position).getId();
     }
 
+    public int getDay(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
 
 }

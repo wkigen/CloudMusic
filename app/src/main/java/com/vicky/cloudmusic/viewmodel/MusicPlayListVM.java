@@ -21,11 +21,14 @@ import java.util.List;
  ************************************************************/
 public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
 
+    public List<int[]> pictureColor;
+
     public String playlistId;
     public String playlistName;
     public String playlistAuthor;
     public String playlistPicture;
     public String playlistBlurPicture;
+    public String playDes;
     public List<MusicBean> musicBeans = new ArrayList<>();
 
     public int offest = 0;
@@ -45,7 +48,7 @@ public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
             if (offest >= total)
                 return;
         }
-        Net.getWyApi().getApi().detailPlaylist(playlistId,offest,"false","100","").execute(new WYCallback() {
+        Net.getWyApi().getApi().detailPlaylist(playlistId,offest+"","true","1000","1000","").execute(new WYCallback() {
             @Override
             public void onRequestSuccess(String result) {
                 WYMusicPlayListBean wyMusicPlayListBean = JSON.parseObject(result, WYMusicPlayListBean.class);
@@ -54,6 +57,7 @@ public class MusicPlayListVM extends AbstractViewModel<MusicPlayListActivity> {
                     playlistAuthor = wyMusicPlayListBean.getPlaylist().getCreator().getNickname();
                     playlistPicture = wyMusicPlayListBean.getPlaylist().getCoverImgUrl();
                     playlistBlurPicture = wyMusicPlayListBean.getPlaylist().getCoverImgId_str();
+                    playDes = wyMusicPlayListBean.getPlaylist().getDescription();
                     total = wyMusicPlayListBean.getPlaylist().getTrackCount();
                     if (isRefresh)
                         offest = wyMusicPlayListBean.getPlaylist().getTracks().size();

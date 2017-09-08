@@ -103,7 +103,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_round_rotate);
         rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override

@@ -26,4 +26,6 @@
     <string name="recommend_music_list">推荐歌单</string>
 
     <string name="no_recommond">暂无推荐</string>
+
+    <string name="music_play_list">歌单</string>
 </resources>

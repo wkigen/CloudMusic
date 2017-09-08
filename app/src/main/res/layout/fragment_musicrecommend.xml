@@ -78,7 +78,7 @@
                                 android:id="@+id/tv_day"
                                 android:textSize="@dimen/dimen_18sp"
                                 android:textColor="@color/red_main"
-                                android:text="10"/>
+                                android:text="1"/>
 
                         </RelativeLayout>
 

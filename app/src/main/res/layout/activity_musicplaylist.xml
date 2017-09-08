@@ -26,41 +26,50 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dimen_25dp"
-            android:layout_height="@dimen/dimen_50dp">
+            android:id="@+id/rl_toolbar"
+            android:layout_height="@dimen/dimen_75dp">
 
-            <ImageView
-                android:layout_width="@dimen/dimen_26dp"
-                android:layout_height="@dimen/dimen_26dp"
-                android:layout_centerVertical="true"
-                android:id="@+id/iv_back"
-                android:layout_marginLeft="@dimen/dimen_13dp"
-                android:src="@drawable/title_back"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_18sp"
-                android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_4dp"
-                android:singleLine="true"
-                android:layout_toRightOf="@id/iv_back"
-                android:id="@+id/tv_music_name"
-                android:text=""/>
+                <ImageView
+                    android:layout_width="@dimen/dimen_26dp"
+                    android:layout_height="@dimen/dimen_26dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_back"
+                    android:layout_marginLeft="@dimen/dimen_13dp"
+                    android:src="@drawable/title_back"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_13sp"
-                android:textColor="@color/text_color_2"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_2dp"
-                android:singleLine="true"
-                android:layout_toRightOf="@id/iv_back"
-                android:id="@+id/tv_artist"
-                android:layout_below="@id/tv_music_name"
-                android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_4dp"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/iv_back"
+                    android:id="@+id/tv_music_name"
+                    android:text="@string/music_play_list"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_13sp"
+                    android:textColor="@color/text_color_2"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_2dp"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/iv_back"
+                    android:visibility="gone"
+                    android:id="@+id/tv_artist"
+                    android:layout_below="@id/tv_music_name"
+                    android:text=""/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

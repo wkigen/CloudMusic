@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.WYPersonalizedPlaylistBean;
 import com.vicky.cloudmusic.net.Net;
@@ -51,7 +52,7 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-
+        tvDay.setText(getViewModel().getDay()+"");
     }
 
     @Override
@@ -81,12 +82,17 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
     }
 
 
-    @OnClick({R.id.iv_fm})
+    @OnClick({R.id.iv_fm,R.id.iv_hot})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_fm:
                 readyGo(FMActivity.class);
+                break;
+            case R.id.iv_hot:
+                Bundle bundle = new Bundle();
+                bundle.putString(MusicPlayListActivity.MUSICPLAYLISTID, Constant.WY_ToplistHot);
+                readyGo(MusicPlayListActivity.class,bundle);
                 break;
         }
     }
