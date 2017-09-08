@@ -100,29 +100,30 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
     private void sreachQQ(String keyWord){
         Net.getQqApi().getApi().sreach("50",keyWord,"0","1","1","0","json","utf-8","utf-8","0","jqminiframe.json","0","1","0","sizer.newclient.next_song")
                 .showProgress(getView()).execute(new QQCallback() {
-                    @Override
-                    public void onRequestSuccess(String result) {
-                        QQSreachBean qqSreachBean = JSON.parseObject(result,QQSreachBean.class);
-                        if (qqSreachBean != null){
-                            for (QQSreachBean.DataBean.SongBean.ListBean song : qqSreachBean.getData().getSong().getList()){
-                                String[] songInfo = song.getF().split("\\|");
-                                if (songInfo.length < 6)
-                                    continue;
-                                SreachBean sreachBean = new SreachBean();
-                                sreachBean.cloudType = Constant.CloudType_QQ;
-                                sreachBean.name = songInfo[1];
-                                //sreachBean.id = songInfo[0];      //歌曲id
-                                sreachBean.id = songInfo[20];       //歌曲mid  拿着这个去取歌曲详情
-                                sreachBean.album = songInfo[5];
-                                sreachBean.artist = songInfo[3];
-                                sreachBeans.add(sreachBean);
-                            }
-                        }
-                        if (getView() != null) {
-                            getView().showSreachOrHistroy(true);
-                            getView().setData(sreachBeans);
-                        }
+            @Override
+            public void onRequestSuccess(String result) {
+                QQSreachBean qqSreachBean = JSON.parseObject(result, QQSreachBean.class);
+                if (qqSreachBean != null) {
+                    sreachBeans.clear();
+                    for (QQSreachBean.DataBean.SongBean.ListBean song : qqSreachBean.getData().getSong().getList()) {
+                        String[] songInfo = song.getF().split("\\|");
+                        if (songInfo.length < 6)
+                            continue;
+                        SreachBean sreachBean = new SreachBean();
+                        sreachBean.cloudType = Constant.CloudType_QQ;
+                        sreachBean.name = songInfo[1];
+                        //sreachBean.id = songInfo[0];      //歌曲id
+                        sreachBean.id = songInfo[20];       //歌曲mid  拿着这个去取歌曲详情
+                        sreachBean.album = songInfo[5];
+                        sreachBean.artist = songInfo[3];
+                        sreachBeans.add(sreachBean);
                     }
+                }
+                if (getView() != null) {
+                    getView().showSreachOrHistroy(true);
+                    getView().setData(sreachBeans);
+                }
+            }
                 });
     }
 
