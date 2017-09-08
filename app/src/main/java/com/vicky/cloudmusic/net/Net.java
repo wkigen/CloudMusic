@@ -21,13 +21,17 @@ public class Net {
         void getBitmap(Bitmap bitmap);
     }
     private static WYApi wyApi = new WYApi();
-
+    private static QQApi qqApi = new QQApi();
     public static void init(){
         NetBase.init();
     }
 
     public static WYApi getWyApi(){
         return wyApi;
+    }
+
+    public static QQApi getQqApi(){
+        return qqApi;
     }
 
     public static void imageLoader(Context context, final String imageurl, final ImageView view,

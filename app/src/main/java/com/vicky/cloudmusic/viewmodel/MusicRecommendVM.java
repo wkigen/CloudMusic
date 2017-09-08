@@ -42,13 +42,6 @@ public class MusicRecommendVM extends AbstractViewModel<MusicRecommendFragment> 
                 }
             }
         });
-
-        Net.getWyApi().getApi().privateContent().execute(new WYCallback() {
-            @Override
-            public void onRequestSuccess(String result) {
-                Log.e("fdff",result);
-            }
-        });
     }
 
     public String getPlayListId(int position){

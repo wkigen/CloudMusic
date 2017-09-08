@@ -111,7 +111,7 @@ public class MusicPlayListActivity extends BaseActivity<MusicPlayListActivity, M
             }
         });
 
-        mRefreshLayout.setRefreshViewHolder(RefreshHolderUtil.getHolder(this));//getHolder(Context ctx, boolean loadMoreEnable)定制loadMore的话调用这个方法
+        mRefreshLayout.setRefreshViewHolder(RefreshHolderUtil.getHolder(this));
         mRefreshLayout.setDelegate(new RefreshLayout.RefreshLayoutDelegate() {
             @Override
             public void onRefreshLayoutBeginRefreshing(RefreshLayout refreshLayout) {

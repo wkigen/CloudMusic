@@ -7,10 +7,12 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.cloudmusic.Constant;
+import com.vicky.cloudmusic.bean.QQSreachBean;
 import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.cloudmusic.bean.WYSreachBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.net.Net;
+import com.vicky.cloudmusic.net.callback.QQCallback;
 import com.vicky.cloudmusic.net.callback.WYCallback;
 import com.vicky.cloudmusic.view.activity.SreachActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
@@ -27,7 +29,7 @@ import okhttp3.Call;
  ************************************************************/
 public class SreachVM extends AbstractViewModel<SreachActivity> {
 
-    public int reachType = Constant.CloudType_WANGYI;
+    public int reachType = Constant.CloudType_QQ;
 
     //网易参数
     public String limit = "60";
@@ -52,13 +54,16 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
         switch (reachType){
             case Constant.CloudType_WANGYI:
-                sreachWY(keyWord);
+                //sreachWY(keyWord);
+                break;
+            case Constant.CloudType_QQ:
+                sreachQQ(keyWord);
                 break;
         }
     }
 
     private void sreachWY(String keyWord){
-        Net.getWyApi().getApi().sreach(keyWord,limit,offest,"true",type).showProgress(getView()).execute(new WYCallback() {
+        Net.getWyApi().getApi().sreach(keyWord, limit, offest, "true", type).showProgress(getView()).execute(new WYCallback() {
 
             @Override
             public void onRequestSuccess(String result) {
@@ -85,6 +90,35 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
                 }
             }
         });
+    }
+
+    private void sreachQQ(String keyWord){
+        Net.getQqApi().getApi().sreach("50",keyWord,"0","1","1","0","json","utf-8","utf-8","0","jqminiframe.json","0","1","0","sizer.newclient.next_song")
+                .execute(new QQCallback() {
+                    @Override
+                    public void onRequestSuccess(String result) {
+                        QQSreachBean qqSreachBean = JSON.parseObject(result,QQSreachBean.class);
+                        if (qqSreachBean != null){
+                            for (QQSreachBean.DataBean.SongBean.ListBean song : qqSreachBean.getData().getSong().getList()){
+                                String[] songInfo = song.getF().split("\\|");
+                                if (songInfo.length < 6)
+                                    continue;
+                                SreachBean sreachBean = new SreachBean();
+                                sreachBean.cloudType = Constant.CloudType_QQ;
+                                sreachBean.name = songInfo[1];
+                                //sreachBean.id = songInfo[0];      //歌曲id
+                                sreachBean.id = songInfo[20];       //歌曲mid  拿着这个去取歌曲详情
+                                sreachBean.album = songInfo[5];
+                                sreachBean.artist = songInfo[3];
+                                sreachBeans.add(sreachBean);
+                            }
+                        }
+                        if (getView() != null) {
+                            getView().showSreachOrHistroy(true);
+                            getView().setData(sreachBeans);
+                        }
+                    }
+                });
     }
 
     public void selectHistroy(int position){
