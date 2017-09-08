@@ -1,9 +1,6 @@
 package com.vicky.cloudmusic.viewmodel;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.cloudmusic.Constant;
@@ -20,8 +17,6 @@ import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import java.util.LinkedList;
 import java.util.List;
 
-import okhttp3.Call;
-
 /************************************************************
  * Author:  vicky
  * Description:
@@ -29,7 +24,7 @@ import okhttp3.Call;
  ************************************************************/
 public class SreachVM extends AbstractViewModel<SreachActivity> {
 
-    public int reachType = Constant.CloudType_QQ;
+    public int sreachType = Constant.CloudType_WANGYI;
 
     //网易参数
     public String limit = "60";
@@ -48,13 +43,23 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
         }
     }
 
+    public int changeSreachType(){
+        if (sreachType == Constant.CloudType_WANGYI){
+            sreachType = Constant.CloudType_QQ;
+
+        }else {
+            sreachType = Constant.CloudType_WANGYI;
+        }
+        return  sreachType;
+    }
+
     public void sreach(String keyWord){
 
         addHistroy(keyWord);
 
-        switch (reachType){
+        switch (sreachType){
             case Constant.CloudType_WANGYI:
-                //sreachWY(keyWord);
+                sreachWY(keyWord);
                 break;
             case Constant.CloudType_QQ:
                 sreachQQ(keyWord);
@@ -94,7 +99,7 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
     private void sreachQQ(String keyWord){
         Net.getQqApi().getApi().sreach("50",keyWord,"0","1","1","0","json","utf-8","utf-8","0","jqminiframe.json","0","1","0","sizer.newclient.next_song")
-                .execute(new QQCallback() {
+                .showProgress(getView()).execute(new QQCallback() {
                     @Override
                     public void onRequestSuccess(String result) {
                         QQSreachBean qqSreachBean = JSON.parseObject(result,QQSreachBean.class);

@@ -28,4 +28,8 @@
     <string name="no_recommond">暂无推荐</string>
 
     <string name="music_play_list">歌单</string>
+
+    <string name="wangyi">网易</string>
+    <string name="qq">腾讯</string>
+
 </resources>

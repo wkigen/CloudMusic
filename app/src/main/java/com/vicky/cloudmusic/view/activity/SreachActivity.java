@@ -17,9 +17,8 @@ import android.widget.Toast;
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.SystemTool;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.MusicBean;
-import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -34,6 +33,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -41,7 +41,7 @@ import butterknife.OnClick;
  * Description:
  * Date:
  */
-public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView {
+public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView, View.OnClickListener {
 
     @Bind(R.id.lv_listview)
     ListView mListview;
@@ -51,6 +51,10 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     RelativeLayout rlSreachToolbar;
     @Bind(R.id.lv_histroy_listview)
     ListView lvHistroyListview;
+    @Bind(R.id.tv_sreach_type)
+    TextView tvSreachType;
+    @Bind(R.id.rl_sreach_type)
+    RelativeLayout rlSreachType;
 
     private SreachAdapter mAdapter;
     private SreachHistroyAdapter mHistroyAdapter;
@@ -131,7 +135,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         return null;
     }
 
-    public void setSreachKeyWord(String keyWord){
+    public void setSreachKeyWord(String keyWord) {
         etKeyWord.setText(keyWord);
     }
 
@@ -139,21 +143,21 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mAdapter.setDatas(data);
     }
 
-    public void setHistroyData(List<String> data){
+    public void setHistroyData(List<String> data) {
         mHistroyAdapter.setDatas(data);
     }
 
-    public void showSreachOrHistroy(boolean isSreach){
-        if (isSreach){
+    public void showSreachOrHistroy(boolean isSreach) {
+        if (isSreach) {
             mListview.setVisibility(View.VISIBLE);
             lvHistroyListview.setVisibility(View.GONE);
-        }else {
+        } else {
             mListview.setVisibility(View.GONE);
             lvHistroyListview.setVisibility(View.VISIBLE);
         }
     }
 
-    public void goPlay(SreachBean sreachBean){
+    public void goPlay(SreachBean sreachBean) {
         readyGo(PlayActivity.class);
         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id).Object3(true));
     }
@@ -167,4 +171,18 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         }
     }
 
+    @OnClick({R.id.rl_sreach_type})
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_sreach_type:
+                int type = getViewModel().changeSreachType();
+                if (type == Constant.CloudType_WANGYI) {
+                    tvSreachType.setText(R.string.wangyi);
+                }else if (type == Constant.CloudType_QQ){
+                    tvSreachType.setText(R.string.qq);
+                }
+                break;
+        }
+    }
 }

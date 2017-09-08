@@ -18,6 +18,23 @@
             android:layout_marginLeft="@dimen/dimen_13dp"
             android:src="@drawable/title_back"/>
 
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:id="@+id/rl_sreach_type"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/wangyi"
+                android:textSize="@dimen/dimen_18sp"
+                android:layout_centerInParent="true"
+                android:id="@+id/tv_sreach_type"/>
+
+        </RelativeLayout>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +51,7 @@
             android:layout_marginRight="@dimen/dimen_10dp"
             android:textColorHint="@color/text_color_3"
             android:layout_toRightOf="@id/iv_back"
+            android:layout_toLeftOf="@id/rl_sreach_type"
             android:background="@null"
             android:textColor="@color/white"
             android:drawablePadding="@dimen/dimen_10dp"
