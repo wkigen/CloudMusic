@@ -3,7 +3,7 @@
 多平台音乐接口
 
 # API：  
-网易音乐api：https://github.com/darknessomi/musicbox  
+网易音乐api：https://github.com/darknessomi/musicbox    
 QQ音乐api：https://github.com/metowolf/TencentMusicApi
   
 # build:  
