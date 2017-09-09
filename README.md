@@ -17,4 +17,3 @@ QQ音乐api：https://github.com/metowolf/TencentMusicApi
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_4.png) 
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_5.png) 
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_6.png) 
-![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_7.png) 
