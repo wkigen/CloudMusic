@@ -19,13 +19,14 @@ import com.vicky.android.baselib.mvvm.IView;
 import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.android.baselib.utils.StringUtils;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
+import com.vicky.cloudmusic.callback.ITouchCallback;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.lyric.Lyric;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
+import com.vicky.cloudmusic.view.view.DiscView;
 import com.vicky.cloudmusic.view.view.LyricView;
 import com.vicky.cloudmusic.viewmodel.PlayVM;
 
@@ -37,6 +38,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -51,10 +53,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     TextView tvMusicName;
     @Bind(R.id.tv_artist)
     TextView tvArtist;
-    @Bind(R.id.iv_song_picture)
-    ImageView ivSongPicture;
-    @Bind(R.id.rl_disc)
-    RelativeLayout rlDisc;
     @Bind(R.id.im_play)
     ImageView imPlay;
     @Bind(R.id.iv_background)
@@ -79,12 +77,13 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
     RelativeLayout rlLyric;
     @Bind(R.id.im_music_list)
     ImageView imMusicList;
+    @Bind(R.id.dv_main)
+    DiscView dvMain;
 
     UpActivityTask upActivityTask;
     LycTask lycTask;
 
     Timer timer;
-    Animation rotateAnimation;
 
 
     @Override
@@ -103,23 +102,6 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_round_rotate);
-        rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
 
         sbMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -146,11 +128,19 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             }
         });
 
-        lvLyric.setTouchOnceCallback(new LyricView.ITouchOnceCallback() {
+        lvLyric.setTouchCallback(new ITouchCallback() {
             @Override
             public void onTouchOnce() {
-                rlDisc.setVisibility(View.VISIBLE);
+                dvMain.setVisibility(View.VISIBLE);
                 rlLyric.setVisibility(View.GONE);
+            }
+        });
+
+        dvMain.setTouchCallback(new ITouchCallback() {
+            @Override
+            public void onTouchOnce() {
+                dvMain.setVisibility(View.GONE);
+                rlLyric.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -188,8 +178,14 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
         }
     }
 
-    @OnClick({R.id.im_play, R.id.im_pre, R.id.im_next,
-            R.id.rl_disc, R.id.rl_lyric,R.id.im_music_list})
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (dvMain != null)
+            dvMain.stop();
+    }
+
+    @OnClick({R.id.im_play, R.id.im_pre, R.id.im_next, R.id.rl_lyric, R.id.im_music_list})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -202,15 +198,11 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             case R.id.im_next:
                 EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_NEXT_MUSIC));
                 break;
-            case R.id.rl_disc:
-                rlDisc.setVisibility(View.GONE);
-                rlLyric.setVisibility(View.VISIBLE);
-                break;
             case R.id.im_music_list:
                 showMusicList();
                 break;
-            case  R.id.rl_lyric:
-                rlDisc.setVisibility(View.VISIBLE);
+            case R.id.rl_lyric:
+                dvMain.setVisibility(View.VISIBLE);
                 rlLyric.setVisibility(View.GONE);
                 break;
         }
@@ -230,11 +222,11 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
                 if (isPlaying) {
                     imPlay.setImageResource(R.drawable.note_btn_pause);
                     getViewModel().isPlaying = true;
-                    //rlDisc.startAnimation(rotateAnimation);
+                    dvMain.start();
                 } else {
                     imPlay.setImageResource(R.drawable.note_btn_play);
                     getViewModel().isPlaying = false;
-                    //rlDisc.clearAnimation();
+                    dvMain.pause();
                 }
                 PlayingMusicBean playingMusicBean = isRefresh ? CacheManager.getImstance().getPlayingMusicBean() : null;
                 if (playingMusicBean != null) {
@@ -279,9 +271,9 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
 
         @Override
         protected void onPostExecute(Bitmap[] result) {
-            if (ivSongPicture != null && ivBackground != null) {
+            if (dvMain != null && ivBackground != null) {
                 if (result[0] != null)
-                    ivSongPicture.setImageBitmap(result[0]);
+                    dvMain.setBitmap(result[0]);
                 if (result[1] != null)
                     ivBackground.setImageBitmap(result[1]);
             }

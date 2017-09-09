@@ -22,6 +22,7 @@ import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
+import com.vicky.cloudmusic.callback.ITouchCallback;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.lyric.Lyric;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
@@ -122,7 +123,7 @@ public class FMActivity extends BaseActivity<FMActivity, FMVM> implements IView 
             }
         });
 
-        lvLyric.setTouchOnceCallback(new LyricView.ITouchOnceCallback() {
+        lvLyric.setTouchCallback(new ITouchCallback() {
             @Override
             public void onTouchOnce() {
                 llDisc.setVisibility(View.VISIBLE);

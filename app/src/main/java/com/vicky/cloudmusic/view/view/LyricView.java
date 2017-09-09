@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.vicky.android.baselib.utils.DensityUtils;
+import com.vicky.cloudmusic.callback.ITouchCallback;
 import com.vicky.cloudmusic.lyric.Lyric;
 import com.vicky.cloudmusic.lyric.LyricRow;
 
@@ -35,7 +36,7 @@ public class LyricView extends View {
     private int playRow = 0;
     private boolean isManualSeek = false;  //是否手动滚动
     private ISeekCallback iSeekCallback;
-    private ITouchOnceCallback iTouchOnceCallback;
+    private ITouchCallback iTouchCallback;
 
     private Paint mPaint;
 
@@ -55,8 +56,8 @@ public class LyricView extends View {
         this.iSeekCallback = callback;
     }
 
-    public void setTouchOnceCallback(ITouchOnceCallback callback){
-        this.iTouchOnceCallback = callback;
+    public void setTouchCallback(ITouchCallback callback){
+        this.iTouchCallback = callback;
     }
 
 
@@ -147,8 +148,8 @@ public class LyricView extends View {
                     if (lyric != null &&playRow >0 && playRow < lyric.getLyricRowList().size())
                         iSeekCallback.callback(lyric.getLyricRowList().get(playRow).time);
                 }else {
-                    if (iTouchOnceCallback != null)
-                        iTouchOnceCallback.onTouchOnce();
+                    if (iTouchCallback != null)
+                        iTouchCallback.onTouchOnce();
                 }
                 isManualSeek = false;
                 break;
@@ -203,9 +204,5 @@ public class LyricView extends View {
 
     public interface ISeekCallback{
         void callback(long time);
-    }
-
-    public interface ITouchOnceCallback{
-        void onTouchOnce();
     }
 }
