@@ -24,14 +24,14 @@
             android:id="@+id/rl_sreach_type"
             android:layout_alignParentRight="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/wangyi"
-                android:textSize="@dimen/dimen_18sp"
+
+            <ImageView
+                android:layout_width="@dimen/dimen_26dp"
+                android:layout_height="@dimen/dimen_26dp"
+                android:id="@+id/iv_sreach_type"
                 android:layout_centerInParent="true"
-                android:id="@+id/tv_sreach_type"/>
+                android:src="@drawable/wangyi"/>
+
 
         </RelativeLayout>
 

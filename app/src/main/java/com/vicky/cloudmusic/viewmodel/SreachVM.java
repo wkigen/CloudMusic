@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.vicky.cloudmusic.Constant;
+import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.QQSreachBean;
 import com.vicky.cloudmusic.bean.SreachBean;
 import com.vicky.cloudmusic.bean.WYSreachBean;
@@ -13,7 +14,10 @@ import com.vicky.cloudmusic.net.callback.QQCallback;
 import com.vicky.cloudmusic.net.callback.WYCallback;
 import com.vicky.cloudmusic.view.activity.SreachActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
+import com.yalantis.contextmenu.lib.MenuObject;
+import com.yalantis.contextmenu.lib.MenuParams;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,17 +44,31 @@ public class SreachVM extends AbstractViewModel<SreachActivity> {
 
         if (getView() != null){
             getView().setHistroyData(sreachHistroyBeanList);
+
+            settMenuParams();
         }
     }
 
-    public int changeSreachType(){
-        if (sreachType == Constant.CloudType_WANGYI){
-            sreachType = Constant.CloudType_QQ;
+    public void settMenuParams(){
+        List<MenuObject> menuObjectList = new ArrayList<>();
+        MenuObject wangyi = new MenuObject();
+        wangyi.setResource(R.drawable.wangyi);
 
-        }else {
-            sreachType = Constant.CloudType_WANGYI;
-        }
-        return  sreachType;
+        MenuObject qq = new MenuObject();
+        qq.setResource(R.drawable.qq);
+
+        menuObjectList.add(wangyi);
+        menuObjectList.add(qq);
+
+        MenuParams menuParams = new MenuParams();
+        menuParams.setActionBarSize((int) getView().getResources().getDimension(R.dimen.dimen_50dp));
+        menuParams.setMenuObjects(menuObjectList);
+        menuParams.setClosableOutside(true);
+        menuParams.setFitsSystemWindow(true);
+        menuParams.setClipToPadding(false);
+
+       if (getView() != null)
+           getView().setSreachType(menuParams);
     }
 
     public void sreach(String keyWord){

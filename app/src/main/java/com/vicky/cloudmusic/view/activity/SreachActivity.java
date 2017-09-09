@@ -2,6 +2,7 @@ package com.vicky.cloudmusic.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +27,10 @@ import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.SreachAdapter;
 import com.vicky.cloudmusic.view.adapter.SreachHistroyAdapter;
 import com.vicky.cloudmusic.viewmodel.SreachVM;
+import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
+import com.yalantis.contextmenu.lib.MenuParams;
+import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
+import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,7 +47,7 @@ import butterknife.OnClick;
  * Description:
  * Date:
  */
-public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView, View.OnClickListener {
+public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> implements IView, View.OnClickListener, OnMenuItemClickListener {
 
     @Bind(R.id.lv_listview)
     ListView mListview;
@@ -51,13 +57,16 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     RelativeLayout rlSreachToolbar;
     @Bind(R.id.lv_histroy_listview)
     ListView lvHistroyListview;
-    @Bind(R.id.tv_sreach_type)
-    TextView tvSreachType;
     @Bind(R.id.rl_sreach_type)
     RelativeLayout rlSreachType;
+    @Bind(R.id.iv_sreach_type)
+    ImageView ivSreachType;
 
     private SreachAdapter mAdapter;
     private SreachHistroyAdapter mHistroyAdapter;
+
+    private FragmentManager fragmentManager;
+    private ContextMenuDialogFragment menuDialogFragment;
 
     @Override
     protected int tellMeLayout() {
@@ -73,6 +82,9 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         setStatusBar();
+
+        fragmentManager = getSupportFragmentManager();
+
         mAdapter = new SreachAdapter(this);
         mHistroyAdapter = new SreachHistroyAdapter(this);
 
@@ -124,6 +136,7 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
                 return false;
             }
         });
+
     }
 
     @Override
@@ -147,6 +160,11 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
         mHistroyAdapter.setDatas(data);
     }
 
+    public void setSreachType(MenuParams menuParams) {
+        menuDialogFragment = ContextMenuDialogFragment.newInstance(menuParams);
+        menuDialogFragment.setItemClickListener(this);
+    }
+
     public void showSreachOrHistroy(boolean isSreach) {
         if (isSreach) {
             mListview.setVisibility(View.VISIBLE);
@@ -158,8 +176,8 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     }
 
     public void goPlay(SreachBean sreachBean) {
-        readyGo(PlayActivity.class);
         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PLAY_MUSIC).Object1(sreachBean.cloudType).Object2(sreachBean.id).Object3(true));
+        readyGo(PlayActivity.class);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -176,13 +194,24 @@ public class SreachActivity extends BaseActivity<SreachActivity, SreachVM> imple
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_sreach_type:
-                int type = getViewModel().changeSreachType();
-                if (type == Constant.CloudType_WANGYI) {
-                    tvSreachType.setText(R.string.wangyi);
-                }else if (type == Constant.CloudType_QQ){
-                    tvSreachType.setText(R.string.qq);
-                }
+                menuDialogFragment.show(fragmentManager, "ContextMenuDialogFragment");
                 break;
         }
     }
+
+
+    @Override
+    public void onMenuItemClick(View clickedView, int position) {
+        getViewModel().sreachType = position;
+        switch (position) {
+            case Constant.CloudType_WANGYI:
+                ivSreachType.setImageResource(R.drawable.wangyi);
+                break;
+            case Constant.CloudType_QQ:
+                ivSreachType.setImageResource(R.drawable.qq);
+                break;
+        }
+    }
+
+
 }

@@ -24,4 +24,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.vicky.android:baselib:0.0.1'
+    compile 'com.yalantis:contextmenu:1.0.7'
 }
