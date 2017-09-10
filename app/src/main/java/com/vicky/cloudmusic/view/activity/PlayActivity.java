@@ -22,6 +22,7 @@ import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.BitmapManager;
 import com.vicky.cloudmusic.cache.CacheManager;
+import com.vicky.cloudmusic.callback.IMoveCallback;
 import com.vicky.cloudmusic.callback.ITouchCallback;
 import com.vicky.cloudmusic.event.MessageEvent;
 import com.vicky.cloudmusic.lyric.Lyric;
@@ -141,6 +142,24 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             public void onTouchOnce() {
                 dvMain.setVisibility(View.GONE);
                 rlLyric.setVisibility(View.VISIBLE);
+            }
+        });
+
+        dvMain.setMoveCallback(new IMoveCallback() {
+            @Override
+            public void onMove(float offestX, float offestY, int width, int height) {
+
+            }
+
+            @Override
+            public void onUp(float offestX, float offestY, int width, int height) {
+                if (Math.abs(offestX) > width / 2){
+                    if (offestX < 0){
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PRE_MUSIC));
+                    }else {
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_NEXT_MUSIC));
+                    }
+                }
             }
         });
     }
