@@ -2,6 +2,7 @@ package com.vicky.cloudmusic.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -55,14 +56,20 @@ import okhttp3.Response;
 /**
  * Created by vicky on 2017/8/31.
  */
-public class MusicService extends Service implements MediaPlayer.OnCompletionListener,MediaPlayer.OnErrorListener {
+public class MusicService extends Service implements MediaPlayer.OnCompletionListener,MediaPlayer.OnErrorListener,AudioManager.OnAudioFocusChangeListener{
+
+    private static final int Sound_Coefficient = 3;
 
     private volatile MediaPlayer mediaPlayer;
     private MediaPlayerProxy mediaPlayerProxy;
+    private AudioManager audioManager;
 
     private volatile PlayingMusicBean playingMusic;
     private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+
     private int LoopType = Constant.Play_List_Loop;
+    private int lossVolume;
+    private boolean lossPlayStatus;
 
     @Nullable
     @Override
@@ -86,6 +93,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
 
+        audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+
         mediaPlayerProxy = new MediaPlayerProxy();
         mediaPlayerProxy.start();
 
@@ -106,6 +115,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onDestroy() {
         super.onDestroy();
+        audioManager.abandonAudioFocus(this);
         EventBus.getDefault().unregister(this);
     }
 
@@ -149,6 +159,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     public void play(int cloudType,String songId,boolean play){
+
+        audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
         if ( cloudType == Constant.CloudType_NULL
                 ||( cloudType == playingMusic.musicBean.cloudType && songId.equals(playingMusic.musicBean.readId))){
             if (!mediaPlayer.isPlaying()){
@@ -553,5 +566,41 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             fm();
     }
 
+    @Override
+    public void onAudioFocusChange(int i) {
+        int volume;
+        switch (i) {
+            // 获得焦点
+            case AudioManager.AUDIOFOCUS_GAIN:
+                if (lossPlayStatus) {
+                    play(Constant.CloudType_NULL,null,true);
+                }
+                if (lossVolume > 0 ) {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, lossVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                }
+                break;
+            // 永久丢失焦点
+            case AudioManager.AUDIOFOCUS_LOSS:
+                lossPlayStatus =mediaPlayer.isPlaying();
+                lossVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                pause();
+                break;
+            // 短暂丢失焦点
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                lossPlayStatus =mediaPlayer.isPlaying();
+                lossVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                pause();
+                break;
+            // 瞬间丢失焦点
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                lossPlayStatus =mediaPlayer.isPlaying();
+                lossVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                if (mediaPlayer.isPlaying() && volume > 0) {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,volume / Sound_Coefficient , AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                }
+                break;
+        }
+    }
 }
 

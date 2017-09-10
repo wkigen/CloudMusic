@@ -1,6 +1,8 @@
 package com.vicky.cloudmusic.view.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,7 @@ import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.bean.PlayingMusicBean;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.event.MessageEvent;
+import com.vicky.cloudmusic.receiver.AudioBecomingNoisyReceiver;
 import com.vicky.cloudmusic.service.MusicService;
 import com.vicky.cloudmusic.view.activity.base.BaseActivity;
 import com.vicky.cloudmusic.view.adapter.FragmentAdapter;
@@ -52,6 +55,8 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
 
     FragmentAdapter fragmentAdapter;
     FragmentManager fragmentManager;
+
+    AudioBecomingNoisyReceiver audioBecomingNoisyReceiver = new AudioBecomingNoisyReceiver();
 
     @Override
     protected int tellMeLayout() {
@@ -149,11 +154,14 @@ public class MainActivity extends BaseActivity<MainActivity, MainVM> implements 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(MainActivity.this, MusicService.class));
+        IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+        registerReceiver(audioBecomingNoisyReceiver, intentFilter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(audioBecomingNoisyReceiver);
         stopService(new Intent(MainActivity.this, MusicService.class));
     }
 
