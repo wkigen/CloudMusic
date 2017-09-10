@@ -1,5 +1,5 @@
 # CloudMusic
-仿网易云音乐界面
+仿网易云音乐界面  
 多平台音乐接口
 
 # API：  
@@ -17,3 +17,4 @@ QQ音乐api：https://github.com/metowolf/TencentMusicApi
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_4.png) 
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_5.png) 
 ![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_6.png) 
+![](https://github.com/wkigen/CloudMusic/blob/master/screenshot/Screenshot_7.png) 
