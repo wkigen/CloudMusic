@@ -416,7 +416,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
             //图片
             downPicture(downMusicBean,urlPicture,dirPath,tempMusicStr,pictureName);
-
             //歌词
             downLyric(downMusicBean,urlLyc,dirPath,tempMusicStr,lyricName);
 

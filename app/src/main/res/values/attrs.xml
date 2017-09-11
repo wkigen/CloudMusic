@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="LyricView">
+        <attr name="LycFontSize" format="dimension" />
+        <attr name="TimeFontSize" format="dimension" />
+        <attr name="LycPadding" format="dimension" />
+        <attr name="HighLightColor" format="color" />
+        <attr name="NormaltColor" format="color" />
+        <attr name="LineColor" format="color" />
+        <attr name="TimeColor" format="color" />
+        <attr name="HintLyric" format="color" />
+    </declare-styleable>
+
+
+</resources>

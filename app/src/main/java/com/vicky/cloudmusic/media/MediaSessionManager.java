@@ -28,6 +28,10 @@ public class MediaSessionManager {
     private MediaSessionCompat mediaSession;
 
     private MediaSessionManager(){
+
+    }
+
+    public void init(){
         mediaSession = new MediaSessionCompat(Application.getInstance(), TAG);
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS | MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS);
         mediaSession.setCallback(mediaSessionCallback);

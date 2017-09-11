@@ -10,28 +10,24 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ThemedSpinnerAdapter;
 
-import com.vicky.android.baselib.utils.ILog;
 import com.vicky.cloudmusic.R;
-import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.callback.IMoveCallback;
 import com.vicky.cloudmusic.callback.ITouchCallback;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * Created by vicky on 2017/9/1.
+ * 仿网易云音乐播放器控件
  */
+
 public class DiscView extends View implements ValueAnimator.AnimatorUpdateListener ,Animator.AnimatorListener{
 
     private static final float Move_Back_Speed = 1.0f;
     private static final float Min_Move_Offest = 25.0f;
     private static final long Roatation_Offest_Time = 50;
+    private static final long Heedle_Rotation_time = 300;
     private static final float Rotation_increase = 0.5f;
     private static final float Needle_Rotation_start = 0.0f;
     private static final float Needle_Rotation_send= -25.0f;
@@ -41,6 +37,7 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
     private Bitmap baseBitmap;
     private Bitmap playBitmap;
 
+    //起始点
     private Point needlePoint = new Point();
     private Point discPoint = new Point();
     private Point basePoint = new Point();
@@ -80,7 +77,7 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
 
     private ValueAnimator needlePlayAnimator;
     private ValueAnimator needlePauseAnimator;
-    ValueAnimator discBackAnimation;
+    private ValueAnimator discBackAnimation;
 
     private boolean isPlaying = false;
     private boolean isMove = false;
@@ -128,10 +125,10 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         baseBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder_disk_play_program);
 
         needlePlayAnimator = ValueAnimator.ofFloat(Needle_Rotation_send, Needle_Rotation_start);
-        needlePlayAnimator.setDuration(300);
+        needlePlayAnimator.setDuration(Heedle_Rotation_time);
         needlePlayAnimator.addUpdateListener(this);
         needlePauseAnimator = ValueAnimator.ofFloat(Needle_Rotation_start, Needle_Rotation_send);
-        needlePauseAnimator.setDuration(300);
+        needlePauseAnimator.setDuration(Heedle_Rotation_time);
         needlePauseAnimator.addUpdateListener(this);
 
     }
@@ -152,7 +149,6 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         needleCenterPoint.x = (int)(nedleScaleWidth / 6);
         needleCenterPoint.y = (int)(nedleScaleHeight/ 8);
 
-
         //计算 唱片
         discScale = (float)getHeight() / 1.5f / (float)discBitmap.getHeight();
         discScaleWidth = (float)discBitmap.getWidth()*discScale;
@@ -166,7 +162,6 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         float tempScale = (float)discScaleHeight * 0.69f / (float)baseBitmap.getHeight();
         baseScale = (float)discScaleWidth * 0.69f / (float)baseBitmap.getWidth();
         baseScale = Math.min(baseScale,tempScale);
-
         baseScaleWidth = (float)baseBitmap.getWidth()*baseScale;
         baseScaleHeight = (float)baseBitmap.getHeight()*baseScale;
         baseCenterPoint.x =(int)baseScaleWidth / 2;
@@ -181,7 +176,6 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         float tempScale = (float)discScaleHeight * 0.69f / (float)playBitmap.getHeight();
         playScale = (float)discScaleWidth * 0.69f / (float)playBitmap.getWidth();
         playScale = Math.min(playScale, tempScale);
-
         playScaleWidth = (float)playBitmap.getWidth()*playScale;
         playScaleHeight = (float)playBitmap.getHeight()*playScale;
         playCenterPoint.x =(int)playScaleWidth / 2;
@@ -215,25 +209,15 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         discMatrix.postTranslate(discPoint.x+MoveOffestX,discPoint.y);
         canvas.drawBitmap(discBitmap,discMatrix,null);
 
-
         //画下一个唱片
         if (isMove){
 
             int dirWigth = MoveOffestX > 0 ? -getWidth():getWidth();
-
+            //底片
             baseMatrix.setScale(baseScale,baseScale);
             baseMatrix.postRotate(discRatation,baseCenterPoint.x,baseCenterPoint.y);
             baseMatrix.postTranslate(dirWigth+ basePoint.x+MoveOffestX,basePoint.y);
             canvas.drawBitmap(baseBitmap,baseMatrix,null);
-
-//            if (playBitmap != null){
-//                //封面
-//                playMatrix.setScale(playScale,playScale);
-//                playMatrix.postRotate(discRatation,playCenterPoint.x,playCenterPoint.y);
-//                playMatrix.postTranslate(playPoint.x+MoveOffestX,playPoint.y);
-//                canvas.drawBitmap(playBitmap,playMatrix,null);
-//
-//            }
 
             //唱片
             discMatrix.setScale(discScale,discScale );
@@ -315,7 +299,6 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
             offest = Math.abs(MoveOffestX);
         }
 
-        Log.e("time",(long) (offest / Move_Back_Speed)+"");
         discBackAnimation.addListener(this);
         discBackAnimation.addUpdateListener(this);
         discBackAnimation.setDuration((long) (offest / Move_Back_Speed));
@@ -357,6 +340,9 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
             MoveOffestX = 0.0f;
             isMove = false;
             isPlayingAnimation = false;
+
+            if (isPlaying)
+                needlePlayAnimator.start();
         }
     }
 
