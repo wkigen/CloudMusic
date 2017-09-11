@@ -155,9 +155,9 @@ public class PlayActivity extends BaseActivity<PlayActivity, PlayVM> implements 
             public void onUp(float offestX, float offestY, int width, int height) {
                 if (Math.abs(offestX) > width / 2){
                     if (offestX < 0){
-                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PRE_MUSIC));
-                    }else {
                         EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_NEXT_MUSIC));
+                    }else {
+                        EventBus.getDefault().post(new MessageEvent(MessageEvent.ID_REQUEST_PRE_MUSIC));
                     }
                 }
             }

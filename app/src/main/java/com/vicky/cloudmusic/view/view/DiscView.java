@@ -1,5 +1,6 @@
 package com.vicky.cloudmusic.view.view;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ThemedSpinnerAdapter;
@@ -25,8 +27,9 @@ import java.util.TimerTask;
 /**
  * Created by vicky on 2017/9/1.
  */
-public class DiscView extends View implements ValueAnimator.AnimatorUpdateListener {
+public class DiscView extends View implements ValueAnimator.AnimatorUpdateListener ,Animator.AnimatorListener{
 
+    private static final float Move_Back_Speed = 1.0f;
     private static final float Min_Move_Offest = 25.0f;
     private static final long Roatation_Offest_Time = 50;
     private static final float Rotation_increase = 0.5f;
@@ -72,15 +75,17 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
     private float playScaleHeight;
 
     //旋转角度
-    private float needleRotation = 0.f;
+    private float needleRotation = -25.f;
     private float discRatation = 0.0f;
 
     private ValueAnimator needlePlayAnimator;
     private ValueAnimator needlePauseAnimator;
+    ValueAnimator discBackAnimation;
 
     private boolean isPlaying = false;
     private boolean isMove = false;
     private boolean isDown = false;
+    private boolean isPlayingAnimation = false;
 
     private float lastX,lastY;
     private float MoveOffestX,MoveOffestY;
@@ -120,7 +125,7 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
 
         needleBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.play_needle);
         discBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.play_disc);
-        baseBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.placeholder_disk_play_program);
+        baseBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder_disk_play_program);
 
         needlePlayAnimator = ValueAnimator.ofFloat(Needle_Rotation_send, Needle_Rotation_start);
         needlePlayAnimator.setDuration(300);
@@ -175,7 +180,7 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
 
         float tempScale = (float)discScaleHeight * 0.69f / (float)playBitmap.getHeight();
         playScale = (float)discScaleWidth * 0.69f / (float)playBitmap.getWidth();
-        playScale = Math.min(playScale,tempScale);
+        playScale = Math.min(playScale, tempScale);
 
         playScaleWidth = (float)playBitmap.getWidth()*playScale;
         playScaleHeight = (float)playBitmap.getHeight()*playScale;
@@ -238,68 +243,126 @@ public class DiscView extends View implements ValueAnimator.AnimatorUpdateListen
         }
 
         //把手
-        needleMatrix.setScale(needleScale,needleScale);
+        needleMatrix.setScale(needleScale, needleScale);
         needleMatrix.postRotate(needleRotation,needleCenterPoint.x,needleCenterPoint.y);
-        needleMatrix.postTranslate(needlePoint.x,needlePoint.y);
-        canvas.drawBitmap(needleBitmap,needleMatrix,null);
-
+        needleMatrix.postTranslate(needlePoint.x, needlePoint.y);
+        canvas.drawBitmap(needleBitmap, needleMatrix, null);
 
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                lastX = event.getX();
-                lastY = event.getY();
-                isDown = true;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float offestX = event.getX() - lastX;
-                float offestY = event.getY() - lastY;
-                if (Math.abs(offestX) > Min_Move_Offest || Math.abs(offestY) > Min_Move_Offest) {
-
-                    MoveOffestX += offestX;
-                    MoveOffestY += offestY;
-
-                    if (isPlaying && isDown)
-                        needlePauseAnimator.start();
-
-                    if (iMoveCallback != null)
-                        iMoveCallback.onMove(MoveOffestX,offestY,getWidth(),getHeight());
-
-                    isDown = false;
-                    isMove = true;
+        if (!isPlayingAnimation){
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
                     lastX = event.getX();
                     lastY = event.getY();
+                    isDown = true;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    float offestX = event.getX() - lastX;
+                    float offestY = event.getY() - lastY;
+                    if (Math.abs(offestX) > Min_Move_Offest || Math.abs(offestY) > Min_Move_Offest) {
 
-                    invalidate();
-                }
-                break;
-            case MotionEvent.ACTION_UP:
+                        MoveOffestX += offestX;
+                        MoveOffestY += offestY;
 
-                if (!isMove &&iTouchCallback != null)
-                    iTouchCallback.onTouchOnce();
+                        if (isPlaying && isDown)
+                            needlePauseAnimator.start();
 
-                if (isMove && isPlaying)
-                    needlePlayAnimator.start();
+                        if (iMoveCallback != null)
+                            iMoveCallback.onMove(MoveOffestX,offestY,getWidth(),getHeight());
 
-                if (iMoveCallback != null)
-                    iMoveCallback.onUp(MoveOffestX,MoveOffestY,getWidth(),getHeight());
+                        isDown = false;
+                        isMove = true;
+                        lastX = event.getX();
+                        lastY = event.getY();
 
-                MoveOffestX = 0.0f;
-                isMove = false;
-                invalidate();
+                        invalidate();
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
 
-                break;
+                    if (!isMove &&iTouchCallback != null)
+                        iTouchCallback.onTouchOnce();
+                    else {
+
+                        if (isMove && iMoveCallback != null)
+                            iMoveCallback.onUp(MoveOffestX,MoveOffestY,getWidth(),getHeight());
+
+                        calDiscBackAnimation();
+                        invalidate();
+                    }
+                    break;
+            }
         }
         return true;
     }
 
+    private void calDiscBackAnimation(){
+
+        float offest = 0;
+        if (Math.abs(MoveOffestX) >= getWidth() / 2){
+            if (MoveOffestX > 0 ) {
+                discBackAnimation = ValueAnimator.ofFloat(MoveOffestX, getWidth());
+                offest = getWidth() - MoveOffestX;
+            } else {
+                discBackAnimation = ValueAnimator.ofFloat(MoveOffestX, -getWidth());
+                offest = Math.abs(-getWidth()) - Math.abs(MoveOffestX);
+            }
+        }else {
+            discBackAnimation = ValueAnimator.ofFloat(MoveOffestX,0);
+            offest = Math.abs(MoveOffestX);
+        }
+
+        Log.e("time",(long) (offest / Move_Back_Speed)+"");
+        discBackAnimation.addListener(this);
+        discBackAnimation.addUpdateListener(this);
+        discBackAnimation.setDuration((long) (offest / Move_Back_Speed));
+        discBackAnimation.start();
+    }
+
     @Override
     public void onAnimationUpdate(ValueAnimator valueAnimator) {
-        needleRotation =( float) valueAnimator.getAnimatedValue();
+        if (valueAnimator == discBackAnimation){
+            MoveOffestX =( float) valueAnimator.getAnimatedValue();
+        }else if (valueAnimator == needlePlayAnimator || valueAnimator == needlePauseAnimator){
+            needleRotation =( float) valueAnimator.getAnimatedValue();
+        }
         invalidate();
+    }
+
+    @Override
+    public void onAnimationStart(Animator animation) {
+        if (animation == discBackAnimation){
+            isPlayingAnimation = true;
+        }
+    }
+
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        if (animation == discBackAnimation){
+            MoveOffestX = 0.0f;
+            isMove = false;
+            isPlayingAnimation = false;
+
+            if (isPlaying)
+                needlePlayAnimator.start();
+        }
+    }
+
+    @Override
+    public void onAnimationCancel(Animator animation) {
+        if (animation == discBackAnimation){
+            MoveOffestX = 0.0f;
+            isMove = false;
+            isPlayingAnimation = false;
+        }
+    }
+
+    @Override
+    public void onAnimationRepeat(Animator animation) {
+
     }
 
     public void setBitmap(Bitmap bitmap){

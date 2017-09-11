@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_200dp"
         android:scaleType="fitXY"
-        android:src="@drawable/homepage_header"/>
+        android:src="@color/red_main"/>
 
 
     <RelativeLayout
