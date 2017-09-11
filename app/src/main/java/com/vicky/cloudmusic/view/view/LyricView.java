@@ -157,8 +157,8 @@ public class LyricView extends View {
         //画出正在播放的歌词
         String hightLightlyc = lyric.getLyricRowList().get(playRow).content;
         int highLightY  = centreY - g_LycFontSize;
-        canvas.drawText(hightLightlyc, centreX, highLightY, highlightPaint);
-        //drawText(canvas,highlightPaint,hightLightlyc,centreX,highLightY,g_LycFontSize);
+        //canvas.drawText(hightLightlyc, centreX, highLightY, highlightPaint);
+        int highLightRows = drawText(canvas,highlightPaint,hightLightlyc,centreX,highLightY,g_LycFontSize,true);
 
         //拖动歌词的时候
         if (isManualSeek){
@@ -179,38 +179,53 @@ public class LyricView extends View {
         int drawY = highLightY - offRow; //要画的Y轴
         while(drawRow >= 0 && drawY - g_LycFontSize> 0){
             String text = lyric.getLyricRowList().get(drawRow).content;
-            canvas.drawText(text, centreX, drawY, normalPaint);
+            //canvas.drawText(text, centreX, drawY, normalPaint);
+            int tempRows = drawText(canvas,normalPaint,text,centreX,drawY,g_LycFontSize,false);
             drawRow--;
-            drawY -= offRow;
+            drawY = drawY - offRow - tempRows * g_LycFontSize;
         }
 
         //下面的歌词
         drawRow = playRow + 1;  //要画的歌词行数
-        drawY = highLightY + offRow; //要画的Y轴
+        drawY = highLightY + offRow + highLightRows * g_LycFontSize; //要画的Y轴 中心+行距+高亮歌词的换行占用的距离
         while (drawRow < lyric.getLyricRowList().size()&&
                 drawY + g_LycFontSize< height){
             String text = lyric.getLyricRowList().get(drawRow).content;
-            canvas.drawText(text, centreX, drawY, normalPaint);
+            //canvas.drawText(text, centreX, drawY, normalPaint);
+            int tempRows = drawText(canvas,normalPaint,text,centreX,drawY,g_LycFontSize,true);
             drawRow ++;
-            drawY += offRow;
+            drawY = drawY + offRow + tempRows * g_LycFontSize;
         }
     }
 
     //返回值 换行数
-    private int drawText(Canvas canvas,Paint paint,String text,int x,int y,int fontSize){
-
+    private int drawText(Canvas canvas,Paint paint,String text,int x,int y,int fontSize,boolean downward){
         float maxlen = paint.measureText(text);
-        int count = (int)(maxlen / (getWidth() - g_TimeFontSize * 3));
+        float maxWidth = getWidth() - g_TimeFontSize * 7;
+        int count = (int)(maxlen / maxWidth);  //行数
         if (count > 0){
-            count += 1;
-
-            int rowMax = text.length() / (count);
-            for (int ii = 0 ; ii < count ; ii++){
-                int realY = y + ii * fontSize;
-                String realText = text.substring(ii * rowMax,(ii+1)*rowMax);
+            float modCount = maxlen % maxWidth;//多余的 ？不足一行？
+            //全字符串的比例
+            float allRate = count;
+            if (modCount >0)
+                allRate = count  + modCount / maxWidth;
+            //算出一行多少个字
+            int rowCount = (int)(text.length() / allRate);
+            //高亮上面的歌词还是下面的歌词？
+            //算出第一行的Y轴
+            int firstY = y;
+            if (!downward)
+                firstY = y - count * fontSize;
+            for (int ii = 0 ; ii < count +1; ii++){
+                int realY = firstY + ii * fontSize;
+                String realText ="";
+                if (ii == count){
+                    realText = text.substring(ii * rowCount,text.length());
+                }else {
+                    realText = text.substring(ii * rowCount,ii * rowCount + rowCount);
+                }
                 canvas.drawText(realText,x,realY,paint);
             }
-
         }else {
             canvas.drawText(text,x,y,paint);
             return 0;
