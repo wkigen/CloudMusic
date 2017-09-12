@@ -28,9 +28,15 @@ public class BitmapManager {
 
     private LruCache<String, Bitmap> mBitapCache;
     private static final String BlurPre = "blur_";
+
     private BitmapManager(){
         int MAXMEMONRY = (int) (Runtime.getRuntime() .maxMemory() / 1024);
-        mBitapCache = new LruCache<>(MAXMEMONRY / 4);
+        mBitapCache = new LruCache<String, Bitmap>(MAXMEMONRY / 4){
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                return bitmap.getRowBytes() * bitmap.getHeight() / 1024;
+            }
+        };
     }
 
     public static BitmapManager getInstance(){

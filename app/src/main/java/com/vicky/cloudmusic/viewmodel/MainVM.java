@@ -1,21 +1,19 @@
 package com.vicky.cloudmusic.viewmodel;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.vicky.android.baselib.runtimepermission.PermissionsManager;
 import com.vicky.android.baselib.runtimepermission.PermissionsResultAction;
+import com.vicky.cloudmusic.bean.WYMVFirstBean;
 import com.vicky.cloudmusic.net.Net;
-import com.vicky.cloudmusic.net.callback.QQCallback;
 import com.vicky.cloudmusic.net.callback.WYCallback;
 import com.vicky.cloudmusic.view.activity.MainActivity;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.cloudmusic.view.fragment.MusicListFragment;
-import com.vicky.cloudmusic.view.fragment.MusicRecommendFragment;
+import com.vicky.cloudmusic.view.fragment.RecommendFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,7 @@ public class MainVM extends AbstractViewModel<MainActivity> {
 
     private void init(){
         fragmentList.add(new MusicListFragment());
-        fragmentList.add(new MusicRecommendFragment());
+        fragmentList.add(new RecommendFragment());
         if (getView() != null)
             getView().setFragments(fragmentList);
     }

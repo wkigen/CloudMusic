@@ -20,6 +20,21 @@ public abstract class BaseFragment<T extends IView, R extends AbstractViewModel<
 
     }
 
+    @Override
+    protected void onFirstUserVisible() {
+
+    }
+
+    @Override
+    protected void onUserVisible() {
+
+    }
+
+    @Override
+    protected void onUserInvisible() {
+
+    }
+
 
     @Override
     public boolean onBackPressed() {

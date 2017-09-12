@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_250dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_200dp"
+        android:id="@+id/rl_picture">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/rl_real">
+
+            <com.volokh.danylo.video_player_manager.ui.VideoPlayerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/vpv_main"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rl_fake">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_200dp"
+                android:scaleType="fitXY"
+                android:id="@+id/iv_picture"
+                android:src="@drawable/img_four_bi_three"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lock_btn_play"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_below="@id/rl_picture">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/text_color_main"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_13dp"
+            android:id="@+id/tv_name"
+            android:text=""/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

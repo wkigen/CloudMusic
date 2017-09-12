@@ -2,13 +2,14 @@ package com.vicky.cloudmusic.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
 
 import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
@@ -16,14 +17,14 @@ import com.vicky.cloudmusic.bean.WYPersonalizedPlaylistBean;
 import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.view.activity.FMActivity;
 import com.vicky.cloudmusic.view.activity.MusicPlayListActivity;
-import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
 import com.vicky.cloudmusic.viewmodel.MusicRecommendVM;
+import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
+import com.vicky.cloudmusic.viewmodel.RecommendVM;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -31,7 +32,7 @@ import butterknife.OnClick;
  * Description:
  * Date:
  */
-public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment, MusicRecommendVM> implements View.OnClickListener {
+public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment, MusicRecommendVM> implements View.OnClickListener{
 
     @Bind(R.id.iv_fm)
     ImageView ivFm;
@@ -60,20 +61,6 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
         return null;
     }
 
-    @Override
-    protected void onFirstUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserInvisible() {
-
-    }
 
     @Nullable
     @Override
@@ -141,7 +128,7 @@ public class MusicRecommendFragment extends BaseFragment<MusicRecommendFragment,
             if (count >= personalizedPlaylistLayouts.size())
                 break;
             personalizedPlaylistLayouts.get(count).tv_name.setText(playlistBean.getName());
-            Net.imageLoader(getActivity(),playlistBean.getPicUrl(),personalizedPlaylistLayouts.get(count).iv_pic,R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
+            Net.imageLoader(getActivity(), playlistBean.getPicUrl(), personalizedPlaylistLayouts.get(count).iv_pic, R.drawable.img_one_bi_one, R.drawable.img_one_bi_one);
             count++;
         }
     }

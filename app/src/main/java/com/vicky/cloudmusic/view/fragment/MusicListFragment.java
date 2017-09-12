@@ -90,21 +90,6 @@ public class MusicListFragment extends BaseFragment<MusicListFragment, MusicList
     }
 
     @Override
-    protected void onFirstUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserInvisible() {
-
-    }
-
-    @Override
     public void onResume(){
         super.onResume();
         List<MusicBean> musicBeanList = CacheManager.getImstance().getDownMusicList();

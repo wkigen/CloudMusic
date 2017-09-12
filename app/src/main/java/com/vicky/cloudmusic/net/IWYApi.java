@@ -62,6 +62,12 @@ public interface IWYApi {
     @GET("http://music.163.com/api/radio/get")
     RequestCall radio();
 
+    @POSTENCRYPT("http://music.163.com/weapi/mv/first")
+    RequestCall mvFirst(@PARAMS("offset")String offset,@PARAMS("total")String total,@PARAMS("limit")String limit,@PARAMS("csrf_token")String csrf_token);
+
+    @POSTENCRYPT("http://music.163.com/weapi/mv/detail")
+    RequestCall mvDetail(@PARAMS("id")String id);
+
     @FILE("")
     RequestCall downFile(@PARAMS("url")String url);
 

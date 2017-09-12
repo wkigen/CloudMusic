@@ -4,7 +4,8 @@
     <string name="sure">确定</string>
     <string name="cancel">取消</string>
 
-    <string name="request_error">请求错误</string>
+    <string name="music">音乐</string>
+    <string name="video">视频</string>
 
     <string name="input_key_word">请输入关键字</string>
     <string name="sreach_song">搜索歌曲</string>
@@ -13,21 +14,18 @@
     <string name="down_manager">下载管理</string>
     <string name="play_list">播放列表</string>
     <string name="no_lyric">暂无歌词</string>
-    <string name="clear_all">清空</string>
-    <string name="sure_delete_the_music">确定要删除该音乐？</string>
-    <string name="sure_delete_all_music">确定要删除全部音乐？</string>
-
-    <string name="clear_cache">清除缓存</string>
-
     <string name="self_fm">私人FM</string>
     <string name="day_recommend">每日歌曲推荐</string>
     <string name="cloud_hot_song">云音乐热歌榜</string>
-
     <string name="recommend_music_list">推荐歌单</string>
-
     <string name="no_recommond">暂无推荐</string>
-
     <string name="music_play_list">歌单</string>
+
+    <string name="request_error">请求错误</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="clear_all">清空</string>
+    <string name="sure_delete_the_music">确定要删除该音乐？</string>
+    <string name="sure_delete_all_music">确定要删除全部音乐？</string>
 
     <string name="wangyi">网易</string>
     <string name="qq">腾讯</string>

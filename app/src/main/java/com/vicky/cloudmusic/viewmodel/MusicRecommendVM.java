@@ -2,17 +2,15 @@ package com.vicky.cloudmusic.viewmodel;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
-import com.vicky.android.baselib.utils.ILog;
 import com.vicky.cloudmusic.bean.WYPersonalizedPlaylistBean;
 import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.net.callback.WYCallback;
-import com.vicky.cloudmusic.view.activity.MusicPlayListActivity;
 import com.vicky.cloudmusic.view.fragment.MusicRecommendFragment;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
+import com.vicky.cloudmusic.view.fragment.RecommendFragment;
 
 import java.util.Calendar;
 
