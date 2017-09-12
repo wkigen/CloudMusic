@@ -1,6 +1,7 @@
 package com.vicky.cloudmusic.utils;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -15,13 +16,19 @@ public class ViewHelper {
         Rect rect = new Rect();
         view.getLocalVisibleRect(rect);
 
+        Log.e("fsdfsdf",rect.top+"");
+        if (rect.top < 0)
+            return false;
+        else if (rect.top == 0)
+            return true;
+
         int offestY = height - rect.top;
 
         if (offestY == 0)
             return false;
 
-        int pre = offestY / height;
-
+        float pre = (float)offestY / (float)height;
+        Log.e("fsdfsdf",pre+"");
         return pre > needPre ? true : false;
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -62,10 +63,17 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
                 if (childView.getId() == R.id.rl_real) {
                     videoPlayerManager.stopAnyPlayback();
                 } else if (childView.getId() == R.id.rl_fake) {
-                    VideoPlayerView videoPlayerView = (VideoPlayerView) parent.findViewById(R.id.vpv_main);
+                    VideoPlayerView videoPlayerView = (VideoPlayerView) parent.getChildAt(position).findViewById(R.id.vpv_main);
                     mAdapter.play(position);
                     getViewModel().play(position, videoPlayerView);
                 }
+            }
+        });
+
+        lvListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
             }
         });
 
