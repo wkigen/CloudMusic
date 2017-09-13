@@ -60,6 +60,16 @@ public class MediaPlayerWrapperMainThreadListenerTest {
         public void onVideoStoppedMainThread() {
 
         }
+
+        @Override
+        public void onVideoStartedMainThread() {
+            
+        }
+
+        @Override
+        public void onVideoPausedMainThread() {
+
+        }
     };
 
     @Before

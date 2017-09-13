@@ -8,7 +8,7 @@ import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MVBean;
 import com.vicky.cloudmusic.net.Net;
-import com.vicky.cloudmusic.view.view.VideoView;
+import com.vicky.cloudmusic.view.view.ListVideoView;
 
 /**
  * Author:  vicky
@@ -26,14 +26,14 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
     @Override
     protected void fillData(ViewHolderHelper viewHolderHelper, int position, MVBean model) {
         viewHolderHelper.setText(R.id.tv_name, model.name);
-        VideoView videoView = viewHolderHelper.getView(R.id.vv_play);
-        Net.imageLoader(mContext, model.picture, videoView.getBackgroundImageView(), R.drawable.img_four_bi_three, R.drawable.img_four_bi_three);
+        ListVideoView listVideoView = viewHolderHelper.getView(R.id.vv_play);
+        Net.imageLoader(mContext, model.picture, listVideoView.getBackgroundImageView(), R.drawable.img_four_bi_three, R.drawable.img_four_bi_three);
 
         if (lastPlayingMVBean != null ){
             if (model.id == lastPlayingMVBean.id) {
-                videoView.setStatus(lastPlayingMVBean.playingStatus);
+                listVideoView.setStatus(lastPlayingMVBean.playingStatus);
             }else {
-                videoView.setStatus(Constant.Status_Stop);
+                listVideoView.setStatus(Constant.Status_Stop);
             }
 
         }
@@ -68,10 +68,11 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
                 } else if (lastPlayingMVBean.playingStatus == Constant.Status_Pause){
                     lastPlayingMVBean.playingStatus = Constant.Status_Resume;
                     return lastPlayingMVBean.playingStatus;
+                }else{
+                    lastPlayingMVBean.playingStatus = Constant.Status_Pause;
+                    return lastPlayingMVBean.playingStatus;
                 }
             }
-            lastPlayingMVBean.playingStatus = Constant.Status_Pause;
-            return lastPlayingMVBean.playingStatus;
         }
 
         lastPlayingMVBean = mvBean;

@@ -35,6 +35,7 @@ public class Constant {
     public static final int Status_Play = 1;
     public static final int Status_Resume = 2;
     public static final int Status_Pause = 3;
+    public static final int Status_Prepare = 4;
 
 
     //平台定义

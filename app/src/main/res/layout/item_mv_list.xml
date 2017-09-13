@@ -9,12 +9,12 @@
         android:layout_height="@dimen/dimen_200dp"
         android:id="@+id/rl_picture">
 
-        <com.vicky.cloudmusic.view.view.VideoView
+        <com.vicky.cloudmusic.view.view.ListVideoView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/vv_play">
 
-        </com.vicky.cloudmusic.view.view.VideoView>
+        </com.vicky.cloudmusic.view.view.ListVideoView>
 
     </RelativeLayout>
 

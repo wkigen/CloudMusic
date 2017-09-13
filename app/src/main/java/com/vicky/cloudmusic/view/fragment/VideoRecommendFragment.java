@@ -2,13 +2,11 @@ package com.vicky.cloudmusic.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
 import com.vicky.cloudmusic.Constant;
@@ -18,6 +16,7 @@ import com.vicky.cloudmusic.bean.MVBean;
 import com.vicky.cloudmusic.utils.ViewHelper;
 import com.vicky.cloudmusic.view.adapter.MVAdapter;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
+import com.vicky.cloudmusic.view.view.ListVideoView;
 import com.vicky.cloudmusic.view.view.VideoView;
 import com.vicky.cloudmusic.viewmodel.VideoRecommendVM;
 import com.volokh.danylo.video_player_manager.manager.PlayerItemChangeListener;
@@ -62,12 +61,12 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
         mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
-                if (childView.getId() == R.id.vv_play){
-                    VideoView videoView = (VideoView)childView;
-                    currVideoPlayerView = videoView.getVideoPlayerView();
-                    switch (mAdapter.playOrPause(position)){
+                if (childView.getId() == R.id.vv_play) {
+                    ListVideoView listVideoView = (ListVideoView) childView;
+                    currVideoPlayerView = listVideoView.getVideoPlayerView();
+                    switch (mAdapter.playOrPause(position)) {
                         case Constant.Status_Play:
-                            getViewModel().play(position, videoView.getVideoPlayerView());
+                            getViewModel().play(position, listVideoView.getVideoPlayerView());
                             break;
                         case Constant.Status_Resume:
                             videoPlayerManager.resumePlayer();
@@ -89,6 +88,7 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
 
         lvListview.setAdapter(mAdapter);
         lvListview.setOnScrollListener(this);
+
     }
 
     @Override
@@ -101,6 +101,11 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
     @Override
     public Class<VideoRecommendVM> getViewModelClass() {
         return VideoRecommendVM.class;
+    }
+
+    @Override
+    protected void onUserVisible() {
+        videoPlayerManager.pausePlayer();
     }
 
     @Override
