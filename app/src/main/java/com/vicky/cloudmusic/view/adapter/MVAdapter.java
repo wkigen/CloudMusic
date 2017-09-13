@@ -64,19 +64,20 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
             if ( lastPlayingMVBean.id == mvBean.id ) {
                 if (lastPlayingMVBean.playingStatus == Constant.Status_Play) {
                     lastPlayingMVBean.playingStatus = Constant.Status_Pause;
-                    return Constant.Status_Pause;
+                    return lastPlayingMVBean.playingStatus;
                 } else if (lastPlayingMVBean.playingStatus == Constant.Status_Pause){
                     lastPlayingMVBean.playingStatus = Constant.Status_Resume;
-                    return Constant.Status_Resume;
+                    return lastPlayingMVBean.playingStatus;
                 }
             }
-            lastPlayingMVBean.playingStatus = Constant.Status_Stop;
+            lastPlayingMVBean.playingStatus = Constant.Status_Pause;
+            return lastPlayingMVBean.playingStatus;
         }
 
         lastPlayingMVBean = mvBean;
         lastPlayingMVBean.playingStatus = Constant.Status_Play;
 
-        return Constant.Status_Play;
+        return lastPlayingMVBean.playingStatus;
     }
 
 

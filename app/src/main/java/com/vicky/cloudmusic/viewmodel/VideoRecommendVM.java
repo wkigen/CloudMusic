@@ -10,6 +10,7 @@ import com.vicky.cloudmusic.bean.WYMVFirstBean;
 import com.vicky.cloudmusic.bean.WYMVDetailBean;
 import com.vicky.cloudmusic.net.Net;
 import com.vicky.cloudmusic.net.callback.WYCallback;
+import com.vicky.cloudmusic.utils.SettingUtils;
 import com.vicky.cloudmusic.view.fragment.VideoRecommendFragment;
 import com.vicky.android.baselib.mvvm.AbstractViewModel;
 import com.volokh.danylo.video_player_manager.ui.VideoPlayerView;
@@ -54,22 +55,6 @@ public class VideoRecommendVM extends AbstractViewModel<VideoRecommendFragment> 
         });
     }
 
-    private String getBestUrl(Map<String,String> urls){
-//        int beatBr = 0;
-//        String url = "";
-//        for (Map.Entry<String,String> entry:urls.entrySet()){
-//            String key = entry.getKey();
-//            if (Integer.parseInt(key) > beatBr)
-//                beatBr = Integer.parseInt(key);
-//        }
-//        if (beatBr > 0)
-//            url = urls.get(beatBr+"");
-//
-//        return url;
-
-        return urls.get("240");
-    }
-
     public void play(int position,final VideoPlayerView videoPlayerView){
         if (position < 0 || position >= mvBeanList.size())
             return;
@@ -79,7 +64,7 @@ public class VideoRecommendVM extends AbstractViewModel<VideoRecommendFragment> 
                 @Override
                 public void onRequestSuccess(String result) {
                     WYMVDetailBean wymvDetailBean = JSON.parseObject(result,WYMVDetailBean.class);
-                    mvBean.url = getBestUrl(wymvDetailBean.getData().getBrs());
+                    mvBean.url = SettingUtils.getMVUrl(wymvDetailBean.getData().getBrs());
                     if (getView() != null)
                         getView().playMV(mvBean.url,videoPlayerView);
                 }

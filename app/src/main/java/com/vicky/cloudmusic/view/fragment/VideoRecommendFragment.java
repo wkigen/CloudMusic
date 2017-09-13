@@ -103,6 +103,11 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
         return VideoRecommendVM.class;
     }
 
+    @Override
+    protected void onUserInvisible() {
+        videoPlayerManager.pausePlayer();
+    }
+
     public void setData( List<MVBean> data){
         mAdapter.setDatas(data);
     }

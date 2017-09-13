@@ -109,7 +109,7 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
 
     @Override
     public void onErrorMainThread(int what, int extra) {
-
+        setStatus(Constant.Status_Stop);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.vicky.android.baselib.utils.FileUtils;
 import com.vicky.cloudmusic.cache.CacheManager;
 import com.vicky.cloudmusic.media.MediaSessionManager;
 import com.vicky.cloudmusic.net.Net;
+import com.vicky.cloudmusic.utils.SettingUtils;
 
 /**
  * Created by vicky on 2017/8/29.
@@ -22,5 +23,7 @@ public class Application extends BaseApplication {
         Net.init();
 
         MediaSessionManager.getInstance().init();
+
+        SettingUtils.init();
     }
 }
