@@ -16,7 +16,6 @@ public class ViewHelper {
         Rect rect = new Rect();
         view.getLocalVisibleRect(rect);
 
-        Log.e("fsdfsdf",rect.top+"");
         if (rect.top < 0)
             return false;
         else if (rect.top == 0)
@@ -28,7 +27,6 @@ public class ViewHelper {
             return false;
 
         float pre = (float)offestY / (float)height;
-        Log.e("fsdfsdf",pre+"");
         return pre > needPre ? true : false;
     }
 }

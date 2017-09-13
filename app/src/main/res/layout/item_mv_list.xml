@@ -9,38 +9,12 @@
         android:layout_height="@dimen/dimen_200dp"
         android:id="@+id/rl_picture">
 
-        <RelativeLayout
+        <com.vicky.cloudmusic.view.view.VideoView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:id="@+id/rl_real">
+            android:id="@+id/vv_play">
 
-            <com.volokh.danylo.video_player_manager.ui.VideoPlayerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/vpv_main"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rl_fake">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_200dp"
-                android:scaleType="fitXY"
-                android:id="@+id/iv_picture"
-                android:src="@drawable/img_four_bi_three"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/lock_btn_play"
-                android:layout_centerInParent="true"/>
-
-        </RelativeLayout>
+        </com.vicky.cloudmusic.view.view.VideoView>
 
     </RelativeLayout>
 

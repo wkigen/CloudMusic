@@ -316,6 +316,15 @@ public abstract class MediaPlayerWrapper
         mVideoStateListener = listener;
     }
 
+    private final Runnable mOnVideoStartMessage = new Runnable() {
+        @Override
+        public void run() {
+            if (SHOW_LOGS) Logger.v(TAG, ">> run, onVideoStartedMainThread");
+            mListener.onVideoStartedMainThread();
+            if (SHOW_LOGS) Logger.v(TAG, "<< run, onVideoStartedMainThread");
+        }
+    };
+
     /**
      * Play or resume video. Video will be played as soon as view is available and media player is
      * prepared.
@@ -345,6 +354,9 @@ public abstract class MediaPlayerWrapper
                     startPositionUpdateNotifier();
                     mState.set(State.STARTED);
 
+                    if (mListener != null) {
+                        mMainThreadHandler.post(mOnVideoStartMessage);
+                    }
                     break;
                 case ERROR:
                 case END:
@@ -353,6 +365,15 @@ public abstract class MediaPlayerWrapper
         }
         if (SHOW_LOGS) Logger.v(TAG, "<< start");
     }
+
+    private final Runnable mOnVideoPauseMessage = new Runnable() {
+        @Override
+        public void run() {
+            if (SHOW_LOGS) Logger.v(TAG, ">> run, onVideoStartedMainThread");
+            mListener.onVideoPausedMainThread();
+            if (SHOW_LOGS) Logger.v(TAG, "<< run, onVideoStartedMainThread");
+        }
+    };
 
     /**
      * Pause video. If video is already paused, stopped or ended nothing will happen.
@@ -379,6 +400,10 @@ public abstract class MediaPlayerWrapper
                 case STARTED:
                     mMediaPlayer.pause();
                     mState.set(State.PAUSED);
+
+                    if (mListener != null) {
+                        mMainThreadHandler.post(mOnVideoPauseMessage);
+                    }
                     break;
             }
         }
@@ -662,6 +687,10 @@ public abstract class MediaPlayerWrapper
         void onBufferingUpdateMainThread(int percent);
 
         void onVideoStoppedMainThread();
+
+        void onVideoStartedMainThread();
+
+        void onVideoPausedMainThread();
     }
 
     public interface VideoStateListener {

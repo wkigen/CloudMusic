@@ -6,6 +6,8 @@ import com.volokh.danylo.video_player_manager.Config;
 import com.volokh.danylo.video_player_manager.meta.MetaData;
 import com.volokh.danylo.video_player_manager.player_messages.ClearPlayerInstance;
 import com.volokh.danylo.video_player_manager.player_messages.CreateNewPlayerInstance;
+import com.volokh.danylo.video_player_manager.player_messages.Pause;
+import com.volokh.danylo.video_player_manager.player_messages.Resume;
 import com.volokh.danylo.video_player_manager.player_messages.SetAssetsDataSourceMessage;
 import com.volokh.danylo.video_player_manager.MessagesHandlerThread;
 import com.volokh.danylo.video_player_manager.PlayerMessageState;
@@ -203,6 +205,87 @@ public class SingleVideoPlayerManager implements VideoPlayerManager<MetaData>, V
         stopResetReleaseClearCurrentPlayer();
         setNewViewForPlayback(currentItemMetaData, videoPlayerView);
         startPlayback(videoPlayerView, videoUrl);
+    }
+
+    @Override
+    public void resumePlayer(){
+        if(SHOW_LOGS) Logger.v(TAG, ">> pausePlayer, mCurrentPlayerState " + mCurrentPlayerState);
+        resumePlayback();
+    }
+
+    private void resumePlayback(){
+        switch (mCurrentPlayerState){
+            case SETTING_NEW_PLAYER:
+            case IDLE:
+            case CREATING_PLAYER_INSTANCE:
+            case PLAYER_INSTANCE_CREATED:
+            case CLEARING_PLAYER_INSTANCE:
+            case PLAYER_INSTANCE_CLEARED:
+            case INITIALIZED:
+            case PREPARING:
+            case PREPARED:
+            case STARTING:
+            case PAUSING:
+            case SETTING_DATA_SOURCE:
+            case DATA_SOURCE_SET:
+            case STOPPING:
+            case STOPPED:
+            case ERROR:
+            case PLAYBACK_COMPLETED:
+            case RESETTING:
+            case RESET:
+            case RELEASING:
+            case RELEASED:
+            case STARTED:
+                break;
+            case END:
+                throw new RuntimeException("unhandled " + mCurrentPlayerState);
+            case PAUSED:
+                mPlayerHandler.addMessage(new Resume(mCurrentPlayer, this));
+                break;
+        }
+    }
+
+
+    @Override
+    public void pausePlayer(){
+        if(SHOW_LOGS) Logger.v(TAG, ">> pausePlayer, mCurrentPlayerState " + mCurrentPlayerState);
+
+        pausePlayback();
+    }
+
+    private void pausePlayback(){
+        switch (mCurrentPlayerState){
+            case SETTING_NEW_PLAYER:
+            case IDLE:
+            case CREATING_PLAYER_INSTANCE:
+            case PLAYER_INSTANCE_CREATED:
+            case CLEARING_PLAYER_INSTANCE:
+            case PLAYER_INSTANCE_CLEARED:
+            case INITIALIZED:
+            case PREPARING:
+            case PREPARED:
+            case STARTING:
+
+            case PAUSING:
+            case PAUSED:
+            case SETTING_DATA_SOURCE:
+            case DATA_SOURCE_SET:
+            case STOPPING:
+            case STOPPED:
+            case ERROR:
+            case PLAYBACK_COMPLETED:
+            case RESETTING:
+            case RESET:
+            case RELEASING:
+            case RELEASED:
+                break;
+            case END:
+                throw new RuntimeException("unhandled " + mCurrentPlayerState);
+            case STARTED:
+                mPlayerHandler.addMessage(new Pause(mCurrentPlayer, this));
+                break;
+        }
     }
 
     /**
@@ -440,6 +523,16 @@ public class SingleVideoPlayerManager implements VideoPlayerManager<MetaData>, V
 
     @Override
     public void onVideoStoppedMainThread() {
+
+    }
+
+    @Override
+    public void onVideoStartedMainThread(){
+
+    }
+
+    @Override
+    public void onVideoPausedMainThread(){
 
     }
 }

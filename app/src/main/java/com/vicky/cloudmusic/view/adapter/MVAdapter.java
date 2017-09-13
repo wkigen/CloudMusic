@@ -1,14 +1,14 @@
 package com.vicky.cloudmusic.view.adapter;
 
 import android.content.Context;
-import android.view.View;
 
 import com.vicky.android.baselib.adapter.core.AdapterViewAdapter;
 import com.vicky.android.baselib.adapter.core.ViewHolderHelper;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MVBean;
-import com.vicky.cloudmusic.bean.MusicBean;
 import com.vicky.cloudmusic.net.Net;
+import com.vicky.cloudmusic.view.view.VideoView;
 
 /**
  * Author:  vicky
@@ -25,14 +25,17 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
 
     @Override
     protected void fillData(ViewHolderHelper viewHolderHelper, int position, MVBean model) {
-        Net.imageLoader(mContext,model.picture,viewHolderHelper.getIamgeView(R.id.iv_picture),R.drawable.img_one_bi_one,R.drawable.img_one_bi_one);
         viewHolderHelper.setText(R.id.tv_name, model.name);
-        if (model.isPlaying) {
-            viewHolderHelper.setVisibility(R.id.rl_real, View.VISIBLE);
-            viewHolderHelper.setVisibility(R.id.rl_fake, View.GONE);
-        }else {
-            viewHolderHelper.setVisibility(R.id.rl_real, View.GONE);
-            viewHolderHelper.setVisibility(R.id.rl_fake, View.VISIBLE);
+        VideoView videoView = viewHolderHelper.getView(R.id.vv_play);
+        Net.imageLoader(mContext, model.picture, videoView.getBackgroundImageView(), R.drawable.img_four_bi_three, R.drawable.img_four_bi_three);
+
+        if (lastPlayingMVBean != null ){
+            if (model.id == lastPlayingMVBean.id) {
+                videoView.setStatus(lastPlayingMVBean.playingStatus);
+            }else {
+                videoView.setStatus(Constant.Status_Stop);
+            }
+
         }
     }
 
@@ -41,21 +44,39 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
      */
     @Override
     protected void setItemChildListener(ViewHolderHelper viewHolderHelper) {
-        viewHolderHelper.setItemChildClickListener(R.id.rl_fake);
-        viewHolderHelper.setItemChildClickListener(R.id.rl_real);
+        viewHolderHelper.setItemChildClickListener(R.id.vv_play);
     }
 
-    public void play(int position){
+    public void pause(){
+        if (lastPlayingMVBean != null){
+            lastPlayingMVBean.playingStatus = Constant.Status_Pause;
+        }
+    }
+
+    public int playOrPause(int position){
+
         if (position < 0 || position >= getCount())
-            return;
+            return Constant.Status_Stop;
 
-        if (lastPlayingMVBean != null)
-            lastPlayingMVBean.isPlaying = false;
+        MVBean mvBean = getDatas().get(position);
 
-        lastPlayingMVBean = getDatas().get(position);
-        lastPlayingMVBean.isPlaying = true;
+        if (lastPlayingMVBean != null) {
+            if ( lastPlayingMVBean.id == mvBean.id ) {
+                if (lastPlayingMVBean.playingStatus == Constant.Status_Play) {
+                    lastPlayingMVBean.playingStatus = Constant.Status_Pause;
+                    return Constant.Status_Pause;
+                } else if (lastPlayingMVBean.playingStatus == Constant.Status_Pause){
+                    lastPlayingMVBean.playingStatus = Constant.Status_Resume;
+                    return Constant.Status_Resume;
+                }
+            }
+            lastPlayingMVBean.playingStatus = Constant.Status_Stop;
+        }
 
-        notifyDataSetChanged();
+        lastPlayingMVBean = mvBean;
+        lastPlayingMVBean.playingStatus = Constant.Status_Play;
+
+        return Constant.Status_Play;
     }
 
 

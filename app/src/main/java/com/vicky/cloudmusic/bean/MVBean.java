@@ -8,5 +8,5 @@ public class MVBean {
     public String picture;
     public String name;
     public String url;
-    public boolean isPlaying;
+    public int playingStatus;
 }

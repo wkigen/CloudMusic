@@ -453,6 +453,39 @@ public class VideoPlayerView extends ScalableTextureView
         }
     }
 
+    @Override
+    public void onVideoStartedMainThread(){
+        notifyOnVideoStartedMainThread();
+    }
+
+    private void notifyOnVideoStartedMainThread(){
+        if (SHOW_LOGS) Logger.v(TAG, "notifyOnVideoStartedMainThread");
+        List<MediaPlayerWrapper.MainThreadMediaPlayerListener> listCopy;
+        synchronized (mMediaPlayerMainThreadListeners){
+            listCopy = new ArrayList<>(mMediaPlayerMainThreadListeners);
+        }
+        for (MediaPlayerWrapper.MainThreadMediaPlayerListener listener : listCopy) {
+            listener.onVideoStartedMainThread();
+        }
+    }
+
+    @Override
+    public void onVideoPausedMainThread(){
+        notifyOnVideoPausedMainThread();
+    }
+
+    private void notifyOnVideoPausedMainThread(){
+        if (SHOW_LOGS) Logger.v(TAG, "notifyOnVideoPausedMainThread");
+        List<MediaPlayerWrapper.MainThreadMediaPlayerListener> listCopy;
+        synchronized (mMediaPlayerMainThreadListeners){
+            listCopy = new ArrayList<>(mMediaPlayerMainThreadListeners);
+        }
+        for (MediaPlayerWrapper.MainThreadMediaPlayerListener listener : listCopy) {
+            listener.onVideoPausedMainThread();
+        }
+    }
+
+
     private final Runnable mVideoSizeAvailableRunnable = new Runnable() {
         @Override
         public void run() {

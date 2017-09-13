@@ -31,6 +31,11 @@ public class Constant {
     public static final int FMMusic = 1;            //FM歌曲
 
 
+    public static final int Status_Stop = 0;
+    public static final int Status_Play = 1;
+    public static final int Status_Resume = 2;
+    public static final int Status_Pause = 3;
+
 
     //平台定义
     public static final String WY_ToplistHot = "3778678";//热歌榜id

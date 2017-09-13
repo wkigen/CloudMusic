@@ -11,12 +11,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.vicky.android.baselib.adapter.core.OnItemChildClickListener;
+import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MVBean;
 
 import com.vicky.cloudmusic.utils.ViewHelper;
 import com.vicky.cloudmusic.view.adapter.MVAdapter;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
+import com.vicky.cloudmusic.view.view.VideoView;
 import com.vicky.cloudmusic.viewmodel.VideoRecommendVM;
 import com.volokh.danylo.video_player_manager.manager.PlayerItemChangeListener;
 import com.volokh.danylo.video_player_manager.manager.SingleVideoPlayerManager;
@@ -60,12 +62,20 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
         mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
-                if (childView.getId() == R.id.rl_real) {
-                    videoPlayerManager.stopAnyPlayback();
-                } else if (childView.getId() == R.id.rl_fake) {
-                    VideoPlayerView videoPlayerView = (VideoPlayerView) parent.getChildAt(position).findViewById(R.id.vpv_main);
-                    mAdapter.play(position);
-                    getViewModel().play(position, videoPlayerView);
+                if (childView.getId() == R.id.vv_play){
+                    VideoView videoView = (VideoView)childView;
+                    currVideoPlayerView = videoView.getVideoPlayerView();
+                    switch (mAdapter.playOrPause(position)){
+                        case Constant.Status_Play:
+                            getViewModel().play(position, videoView.getVideoPlayerView());
+                            break;
+                        case Constant.Status_Resume:
+                            videoPlayerManager.resumePlayer();
+                            return;
+                        case Constant.Status_Pause:
+                            videoPlayerManager.pausePlayer();
+                            return;
+                    }
                 }
             }
         });
@@ -98,7 +108,6 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
     }
 
     public void playMV(String url,VideoPlayerView videoPlayerView){
-        currVideoPlayerView = videoPlayerView;
         videoPlayerManager.playNewVideo(null, videoPlayerView,url);
     }
 
@@ -111,8 +120,9 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (currVideoPlayerView != null){
             if (!ViewHelper.isHalfVisibility(currVideoPlayerView,0.5f)){
+                videoPlayerManager.pausePlayer();
+                mAdapter.pause();
                 currVideoPlayerView = null;
-                videoPlayerManager.stopAnyPlayback();
             }
         }
     }
