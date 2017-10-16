@@ -72,16 +72,18 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
                     switch (mAdapter.playOrPause(position)) {
                         case Constant.Status_Play:
                             getViewModel().play(position);
+                            viewFollow.followView(videoView).attachView(listVideoView).attach().show();
                             break;
                         case Constant.Status_Resume:
                             videoPlayerManager.resumePlayer();
+                            viewFollow.show();
                             return;
                         case Constant.Status_Pause:
                             videoPlayerManager.pausePlayer();
+                            viewFollow.show();
                             return;
                     }
                     mAdapter.notifyDataSetChanged();
-                    viewFollow.followView(videoView).attachView(listVideoView).attach().show();
                 }
             }
         });

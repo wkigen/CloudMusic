@@ -32,6 +32,7 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
     private VideoPlayerView videoPlayerView;
     private ImageView backgroundImageView;
     private ImageView playStatusImageView;
+    private ImageView maxVideoImageView;
 
     private int playState;
     private Handler handler = new Handler();
@@ -62,6 +63,7 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
         videoPlayerView = new VideoPlayerView(getContext());
         backgroundImageView= new ImageView(getContext());
         playStatusImageView = new ImageView(getContext());
+        maxVideoImageView = new ImageView(getContext());
 
         videoPlayerView.addMediaPlayerListener(this);
 
@@ -70,6 +72,9 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
         playStatusImageView.setImageResource(R.drawable.lock_btn_play);
         playStatusImageView.setOnClickListener(this);
 
+        maxVideoImageView.setImageResource(R.drawable.titlebar_menu);
+        maxVideoImageView.setOnClickListener(this);
+
         LayoutParams lp = new LayoutParams(
                 LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
 
@@ -77,10 +82,15 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
                 LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
         lp2.addRule(RelativeLayout.CENTER_IN_PARENT);
 
+        LayoutParams lp3 = new LayoutParams(
+                LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        lp3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        lp3.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
         addView(videoPlayerView, lp);
         addView(backgroundImageView, lp);
         addView(playStatusImageView, lp2);
-
+        addView(maxVideoImageView, lp3);
     }
 
     public void setVideoPlayerManager(VideoPlayerManager<MetaData> videoPlayerManager){
@@ -105,30 +115,35 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
                 playState = Constant.Status_Stop;
                 backgroundImageView.setVisibility(VISIBLE);
                 playStatusImageView.setVisibility(VISIBLE);
+                maxVideoImageView.setVisibility(VISIBLE);
                 playStatusImageView.setImageResource(R.drawable.lock_btn_play);
                 break;
             case Constant.Status_Resume:
                 playState = Constant.Status_Resume;
                 backgroundImageView.setVisibility(GONE);
                 playStatusImageView.setVisibility(GONE);
+                maxVideoImageView.setVisibility(GONE);
                 playStatusImageView.setImageResource(R.drawable.lock_btn_pause);
                 break;
             case Constant.Status_Play:
                 playState = Constant.Status_Play;
                 backgroundImageView.setVisibility(GONE);
                 playStatusImageView.setVisibility(GONE);
+                maxVideoImageView.setVisibility(GONE);
                 playStatusImageView.setImageResource(R.drawable.lock_btn_pause);
                 break;
             case Constant.Status_Pause:
                 playState = Constant.Status_Pause;
                 backgroundImageView.setVisibility(VISIBLE);
                 playStatusImageView.setVisibility(VISIBLE);
+                maxVideoImageView.setVisibility(VISIBLE);
                 playStatusImageView.setImageResource(R.drawable.lock_btn_play);
                 break;
             case Constant.Status_Prepare:
                 playState = Constant.Status_Prepare;
                 backgroundImageView.setVisibility(GONE);
                 playStatusImageView.setVisibility(GONE);
+                maxVideoImageView.setVisibility(GONE);
                 break;
         }
     }
@@ -216,6 +231,8 @@ public class VideoView extends RelativeLayout implements MediaPlayerWrapper.Main
                     videoPlayerManager.resumePlayer();
                     break;
             }
+        }else if (v == maxVideoImageView){
+
         }
     }
 }
