@@ -17,7 +17,6 @@ import com.volokh.danylo.video_player_manager.ui.VideoPlayerView;
  */
 public class ListVideoView extends RelativeLayout implements MediaPlayerWrapper.MainThreadMediaPlayerListener{
 
-    VideoPlayerView videoPlayerView;
     ImageView backgroundImageView;
     ImageView playStatusImageView;
 
@@ -35,11 +34,8 @@ public class ListVideoView extends RelativeLayout implements MediaPlayerWrapper.
 
         setBackgroundColor(getContext().getResources().getColor(R.color.black));
 
-        videoPlayerView = new VideoPlayerView(getContext());
         backgroundImageView= new ImageView(getContext());
         playStatusImageView = new ImageView(getContext());
-
-        videoPlayerView.addMediaPlayerListener(this);
 
         backgroundImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -52,7 +48,6 @@ public class ListVideoView extends RelativeLayout implements MediaPlayerWrapper.
                 LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
         lp2.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        addView(videoPlayerView, lp);
         addView(backgroundImageView, lp);
         addView(playStatusImageView, lp2);
 
@@ -64,10 +59,6 @@ public class ListVideoView extends RelativeLayout implements MediaPlayerWrapper.
 
     public void setBackground(Bitmap bitmap){
         backgroundImageView.setImageBitmap(bitmap);
-    }
-
-    public VideoPlayerView getVideoPlayerView(){
-        return videoPlayerView;
     }
 
     public void setStatus(int status){
@@ -86,7 +77,7 @@ public class ListVideoView extends RelativeLayout implements MediaPlayerWrapper.
                 playStatusImageView.setVisibility(GONE);
                 break;
             case Constant.Status_Pause:
-                backgroundImageView.setVisibility(GONE);
+                backgroundImageView.setVisibility(VISIBLE);
                 playStatusImageView.setVisibility(VISIBLE);
                 playStatusImageView.setImageResource(R.drawable.lock_btn_play);
                 break;

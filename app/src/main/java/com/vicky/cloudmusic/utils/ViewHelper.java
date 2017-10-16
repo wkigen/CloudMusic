@@ -27,6 +27,7 @@ public class ViewHelper {
             return false;
 
         float pre = (float)offestY / (float)height;
+        Log.e("fffff",pre+"");
         return pre > needPre ? true : false;
     }
 }

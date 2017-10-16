@@ -13,6 +13,7 @@ import com.vicky.cloudmusic.Constant;
 import com.vicky.cloudmusic.R;
 import com.vicky.cloudmusic.bean.MVBean;
 
+import com.vicky.cloudmusic.follow.ViewFollow;
 import com.vicky.cloudmusic.utils.ViewHelper;
 import com.vicky.cloudmusic.view.adapter.MVAdapter;
 import com.vicky.cloudmusic.view.fragment.base.BaseFragment;
@@ -23,6 +24,7 @@ import com.volokh.danylo.video_player_manager.manager.PlayerItemChangeListener;
 import com.volokh.danylo.video_player_manager.manager.SingleVideoPlayerManager;
 import com.volokh.danylo.video_player_manager.manager.VideoPlayerManager;
 import com.volokh.danylo.video_player_manager.meta.MetaData;
+import com.volokh.danylo.video_player_manager.player_messages.Pause;
 import com.volokh.danylo.video_player_manager.ui.VideoPlayerView;
 
 import java.util.List;
@@ -40,7 +42,10 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
     ListView lvListview;
 
     MVAdapter mAdapter;
-    VideoPlayerView currVideoPlayerView;
+    ListVideoView currPlayerView;
+
+    ViewFollow viewFollow;
+    VideoView videoView;
 
     private VideoPlayerManager<MetaData> videoPlayerManager = new SingleVideoPlayerManager(new PlayerItemChangeListener() {
         @Override
@@ -63,10 +68,10 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
             public void onItemChildClick(ViewGroup parent, View childView, int position) {
                 if (childView.getId() == R.id.vv_play) {
                     ListVideoView listVideoView = (ListVideoView) childView;
-                    currVideoPlayerView = listVideoView.getVideoPlayerView();
+                    currPlayerView = listVideoView;
                     switch (mAdapter.playOrPause(position)) {
                         case Constant.Status_Play:
-                            getViewModel().play(position, listVideoView.getVideoPlayerView());
+                            getViewModel().play(position);
                             break;
                         case Constant.Status_Resume:
                             videoPlayerManager.resumePlayer();
@@ -75,6 +80,8 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
                             videoPlayerManager.pausePlayer();
                             return;
                     }
+                    mAdapter.notifyDataSetChanged();
+                    viewFollow.followView(videoView).attachView(listVideoView).attach().show();
                 }
             }
         });
@@ -88,6 +95,10 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
 
         lvListview.setAdapter(mAdapter);
         lvListview.setOnScrollListener(this);
+
+        videoView = new VideoView(getActivity());
+        videoView.setVideoPlayerManager(videoPlayerManager);
+        viewFollow = new ViewFollow(getActivity());
 
     }
 
@@ -104,6 +115,11 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
     }
 
     @Override
+    protected void onFirstUserVisible() {
+        viewFollow.attachScrollView(lvListview);
+    }
+
+    @Override
     protected void onUserVisible() {
         videoPlayerManager.pausePlayer();
     }
@@ -117,8 +133,8 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
         mAdapter.setDatas(data);
     }
 
-    public void playMV(String url,VideoPlayerView videoPlayerView){
-        videoPlayerManager.playNewVideo(null, videoPlayerView,url);
+    public void playMV(String url){
+        videoPlayerManager.playNewVideo(null, videoView.getVideoPlayerView(),url);
     }
 
     @Override
@@ -128,11 +144,13 @@ public class VideoRecommendFragment extends BaseFragment<VideoRecommendFragment,
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        if (currVideoPlayerView != null){
-            if (!ViewHelper.isHalfVisibility(currVideoPlayerView,0.5f)){
-                videoPlayerManager.pausePlayer();
+        if (currPlayerView != null){
+            if (!ViewHelper.isHalfVisibility(currPlayerView,0.5f)){
                 mAdapter.pause();
-                currVideoPlayerView = null;
+                currPlayerView = null;
+                videoPlayerManager.pausePlayer();
+                videoView.setStatus(Constant.Status_Pause);
+                viewFollow.hide();
             }
         }
     }

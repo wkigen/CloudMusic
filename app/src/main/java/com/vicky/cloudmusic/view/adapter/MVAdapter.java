@@ -29,14 +29,15 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
         ListVideoView listVideoView = viewHolderHelper.getView(R.id.vv_play);
         Net.imageLoader(mContext, model.picture, listVideoView.getBackgroundImageView(), R.drawable.img_four_bi_three, R.drawable.img_four_bi_three);
 
-        if (lastPlayingMVBean != null ){
-            if (model.id == lastPlayingMVBean.id) {
-                listVideoView.setStatus(lastPlayingMVBean.playingStatus);
-            }else {
-                listVideoView.setStatus(Constant.Status_Stop);
-            }
+//        if (lastPlayingMVBean != null ){
+//            if (model.id == lastPlayingMVBean.id) {
+//                listVideoView.setStatus(lastPlayingMVBean.playingStatus);
+//            }else {
+//                listVideoView.setStatus(Constant.Status_Stop);
+//            }
+//        }
 
-        }
+        listVideoView.setStatus(model.playingStatus);
     }
 
     /**
@@ -51,6 +52,7 @@ public class MVAdapter extends AdapterViewAdapter<MVBean> {
         if (lastPlayingMVBean != null){
             lastPlayingMVBean.playingStatus = Constant.Status_Pause;
         }
+        notifyDataSetChanged();
     }
 
     public int playOrPause(int position){

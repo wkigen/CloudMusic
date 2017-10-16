@@ -48,14 +48,14 @@ public class VideoRecommendVM extends AbstractViewModel<VideoRecommendFragment> 
                     bean.name = mvBean.getName();
                     bean.picture = mvBean.getCover();
                     mvBeanList.add(bean);
-                    if (getView() != null)
-                        getView().setData(mvBeanList);
                 }
+                if (getView() != null)
+                    getView().setData(mvBeanList);
             }
         });
     }
 
-    public void play(int position,final VideoPlayerView videoPlayerView){
+    public void play(int position){
         if (position < 0 || position >= mvBeanList.size())
             return;
         final MVBean mvBean = mvBeanList.get(position);
@@ -66,12 +66,12 @@ public class VideoRecommendVM extends AbstractViewModel<VideoRecommendFragment> 
                     WYMVDetailBean wymvDetailBean = JSON.parseObject(result,WYMVDetailBean.class);
                     mvBean.url = SettingUtils.getMVUrl(wymvDetailBean.getData().getBrs());
                     if (getView() != null)
-                        getView().playMV(mvBean.url,videoPlayerView);
+                        getView().playMV(mvBean.url);
                 }
             });
         }else {
             if (getView() != null)
-                getView().playMV(mvBean.url,videoPlayerView);
+                getView().playMV(mvBean.url);
         }
     }
 
